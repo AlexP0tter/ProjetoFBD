@@ -23,9 +23,9 @@ public class ConnectionFactory {
     public static final String LOGIN_POSTGRES = "postgres";
     public static final String SENHA_POSTGRES = "postgres";
     
-    public static final String URL_MYSQL = "jdbc:mysql://127.0.0.1/sgac";
+    public static final String URL_MYSQL = "jdbc:mysql://localhost/sgac";
     public static final String LOGIN_MYSQL = "root";
-    public static final String SENHA_MYSQL = "root";
+    public static final String SENHA_MYSQL = "";
     
     private static Connection connection;
     

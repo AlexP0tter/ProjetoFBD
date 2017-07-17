@@ -12,7 +12,7 @@ package br.com.util;
 public class SqlUtil {
     
      
-    public static final String SQL_INSERT_CLIENTE_ALL = "INSERT INTO aluno(id, nome, cpf, contato, endereco) values(?,?,?)";
+    public static final String SQL_INSERT_CLIENTE_ALL = "INSERT INTO aluno(id, nome, cpf,endereco,contato,) values(?,?,?)";
     public static final String SQL_INSERT_CARRO_ALL = "INSERT INTO aluno(id, nome, placa, modelo) values(?,?,?)";
     public static final String SQL_INSERT_FUNCIONARIO_ALL = "INSERT INTO aluno(id, nome,cargo, endereco,contato,cpf) values(?,?,?)";
 }
