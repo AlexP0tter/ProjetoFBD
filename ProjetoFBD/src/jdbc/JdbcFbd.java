@@ -29,6 +29,10 @@ public class JdbcFbd {
         Cliente cliente = new Cliente();
         cliente.setId(1);
         cliente.setNome("Ant2");
+        cliente.setCPF("12345677");
+        cliente.setEndereco("12345677");
+        cliente.setContato("12345677");
+        
 
         Fachada coreFachada = new Fachada();
         coreFachada.salvarCliente(cliente);
