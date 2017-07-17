@@ -17,7 +17,7 @@ import java.sql.SQLException;
  */
 public class CadastrarCliente extends javax.swing.JFrame {
     
-    public static final String inserirCliente = "INSERT INTO cliente (id, cpf, nome, endereco, contato) values(?,?,?,?,?)";
+    public static final String inserirCliente = "INSERT INTO cliente (cpf, nome, endereco, contato) values(?,?,?,?)";
     Connection con;
     PreparedStatement statement;
 
