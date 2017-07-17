@@ -17,7 +17,7 @@ import java.sql.SQLException;
  */
 public class CadastrarCliente extends javax.swing.JFrame {
     
-    public static final String inserirCliente = "INSERT INTO cliente (id, cpf, nome, rg, endereco, numero) values(?,?,?,?,?,?)";
+    public static final String inserirCliente = "INSERT INTO cliente (id, cpf, nome, endereco, contato) values(?,?,?,?,?)";
     Connection con;
     PreparedStatement statement;
 
@@ -48,7 +48,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         nomeCliente = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        contatoCliente = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -118,7 +118,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1))
                     .addComponent(cpfCliente)
-                    .addComponent(jTextField1))
+                    .addComponent(contatoCliente))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -139,7 +139,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(contatoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
@@ -203,13 +203,10 @@ public class CadastrarCliente extends javax.swing.JFrame {
         
         try {
             statement = con.prepareStatement(CadastrarCliente.inserirCliente);
-            int valor = Integer.parseInt(idCliente.getText());
-            statement.setInt(1, valor);
             statement.setString(2, cpfCliente.getText());
             statement.setString(3, nomeCliente.getText());
-            statement.setString(4, rgCliente.getText());
-            statement.setString(5, enderecoCliente.getText());
-            statement.setInt(6, Integer.parseInt(numeroCasaCliente.getText()));
+            statement.setString(4, enderecoCliente.getText());
+            statement.setString(5,contatoCliente.getText());
             statement.execute();
             
         } catch (SQLException ex) {
@@ -222,6 +219,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField contatoCliente;
     private javax.swing.JFormattedTextField cpfCliente;
     private javax.swing.JTextField enderecoCliente;
     private javax.swing.JButton jButton1;
@@ -234,7 +232,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField nomeCliente;
     // End of variables declaration//GEN-END:variables
 }
