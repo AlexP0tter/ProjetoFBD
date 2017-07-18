@@ -38,7 +38,9 @@ public class CarrosDao {
         try {
             statement = con.prepareStatement(SqlUtil.SQL_INSERT_CARRO_ALL);
             statement.setInt(1, carro.getId());
-            statement.setString(2, carro.getNome());
+            statement.setString(2, carro.getModelo());
+            statement.setString(3, carro.getNome());
+            statement.setString(4, carro.getPlaca());
             statement.execute();
             return true;
         } catch (SQLException ex) {

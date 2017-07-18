@@ -27,8 +27,8 @@ public class Fachada {
 
     public Fachada() {
         clienteBusiness = new ClienteBusiness();
-        //carroBusiness = new CarroBusiness();
-        //funcionarioBusiness = new FuncionarioBusiness();
+        carroBusiness = new CarroBusiness();
+        funcionarioBusiness = new FuncionarioBusiness();
         
         
     }
