@@ -14,7 +14,7 @@ public class Cliente {
     private int id;
     private String Nome, CPF, endereco,contato;
     
-    public Cliente(int id, String Nome, String CPF, String endereco, String contato) {
+    public Cliente( int id,String Nome, String CPF, String endereco, String contato) {
         this.id = id;
         this.Nome = Nome;
         this.CPF = CPF;

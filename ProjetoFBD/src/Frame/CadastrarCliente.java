@@ -1,6 +1,8 @@
 package Frame;
 
 
+import br.com.fachada.Fachada;
+import br.com.model.Cliente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -200,14 +202,36 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+            
+        Cliente cliente = new Cliente();
         
+        cliente.setNome(nomeCliente.getText());
+        cliente.setCPF(cpfCliente.getText());
+        cliente.setEndereco(enderecoCliente.getText());
+        cliente.setContato(contatoCliente.getText());
+        
+
+        Fachada coreFachada = new Fachada();
+        coreFachada.salvarCliente(cliente);
+        
+        nomeCliente.setText("");
+        cpfCliente.setText("");
+        enderecoCliente.setText("");
+        contatoCliente.setText("");
+            
+        
+        
+        /*
         try {
+            
             statement = con.prepareStatement(CadastrarCliente.inserirCliente);
             statement.setString(2, cpfCliente.getText());
             statement.setString(3, nomeCliente.getText());
             statement.setString(4, enderecoCliente.getText());
             statement.setString(5,contatoCliente.getText());
             statement.execute();
+
             
         } catch (SQLException ex) {
             try {
@@ -215,6 +239,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
             } catch (SQLException ex1) {
             }
         }
+*/
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
