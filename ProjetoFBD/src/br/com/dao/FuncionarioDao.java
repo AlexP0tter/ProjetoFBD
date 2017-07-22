@@ -24,7 +24,9 @@ public class FuncionarioDao {
 
     public FuncionarioDao() {
         try {
-            con = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
+            //con = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
+            con = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_POSTGRES);
+            
         } catch (Exception ex) {
             ex.printStackTrace();
             try {
