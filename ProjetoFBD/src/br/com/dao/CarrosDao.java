@@ -23,8 +23,8 @@ public class CarrosDao {
 
     public CarrosDao() {
         try {
-            //con = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
-            con = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_POSTGRES);
+            con = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
+            
         } catch (Exception ex) {
             ex.printStackTrace();
             try {
