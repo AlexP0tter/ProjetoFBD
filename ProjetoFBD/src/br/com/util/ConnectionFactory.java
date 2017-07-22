@@ -19,9 +19,9 @@ public class ConnectionFactory {
     public static final String NOME_DATABASE_MYSQL = "MYSQL";
     public static final String FIREBASE_GOOGLE = "FIREBASE_GOOGLE";
 
-    public static final String URL_POSTGRES = "jdbc:postgresql://localhost:5432/fbd";
+    public static final String URL_POSTGRES = "jdbc:postgresql://localhost:5432/sgac2";
     public static final String LOGIN_POSTGRES = "postgres";
-    public static final String SENHA_POSTGRES = "postgres";
+    public static final String SENHA_POSTGRES = "jjdc1992";
     
     public static final String URL_MYSQL = "jdbc:mysql://localhost:3306/sgac";
     public static final String LOGIN_MYSQL = "root";

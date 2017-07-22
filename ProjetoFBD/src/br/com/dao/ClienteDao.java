@@ -24,6 +24,7 @@ public class ClienteDao {
 
     public ClienteDao() {
         try {
+            //con = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
             con = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
             
         } catch (Exception ex) {
@@ -46,6 +47,7 @@ public class ClienteDao {
             statement.setString(5, cliente.getContato());
             
             statement.execute();
+            
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace();

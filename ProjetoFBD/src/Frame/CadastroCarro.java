@@ -37,7 +37,7 @@ public class CadastroCarro extends javax.swing.JFrame{
         jFrame2 = new javax.swing.JFrame();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        Salvar = new javax.swing.JButton();
         placaL = new javax.swing.JFormattedTextField();
         jLabel3 = new javax.swing.JLabel();
         modeloL = new javax.swing.JTextField();
@@ -46,7 +46,7 @@ public class CadastroCarro extends javax.swing.JFrame{
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         categoriaL = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        voltarBt = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
 
@@ -87,10 +87,10 @@ public class CadastroCarro extends javax.swing.JFrame{
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Carro"));
 
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Salvar.setText("Salvar");
+        Salvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                SalvarActionPerformed(evt);
             }
         });
 
@@ -125,10 +125,10 @@ public class CadastroCarro extends javax.swing.JFrame{
             }
         });
 
-        jButton1.setText("voltar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        voltarBt.setText("voltar");
+        voltarBt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                voltarBtActionPerformed(evt);
             }
         });
 
@@ -141,9 +141,9 @@ public class CadastroCarro extends javax.swing.JFrame{
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(62, 62, 62)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                        .addComponent(jButton2))
+                        .addComponent(voltarBt)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addComponent(Salvar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -186,8 +186,8 @@ public class CadastroCarro extends javax.swing.JFrame{
                     .addComponent(categoriaL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(voltarBt)
+                    .addComponent(Salvar))
                 .addContainerGap())
         );
 
@@ -237,13 +237,13 @@ public class CadastroCarro extends javax.swing.JFrame{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void voltarBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarBtActionPerformed
         setVisible(false);
         TelaInicial telaInicial = new TelaInicial();
         telaInicial.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_voltarBtActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarActionPerformed
         
         Carro carro = new Carro();
         
@@ -262,7 +262,7 @@ public class CadastroCarro extends javax.swing.JFrame{
         placaL.setText("");
         categoriaL.setText("");
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_SalvarActionPerformed
 
     private void modeloLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modeloLActionPerformed
         // TODO add your handling code here:
@@ -281,9 +281,8 @@ public class CadastroCarro extends javax.swing.JFrame{
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Salvar;
     private javax.swing.JTextField categoriaL;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
     private javax.swing.JLabel jLabel1;
@@ -297,6 +296,7 @@ public class CadastroCarro extends javax.swing.JFrame{
     private javax.swing.JTextField marcaL;
     private javax.swing.JTextField modeloL;
     private javax.swing.JFormattedTextField placaL;
+    private javax.swing.JButton voltarBt;
     // End of variables declaration//GEN-END:variables
 
 }

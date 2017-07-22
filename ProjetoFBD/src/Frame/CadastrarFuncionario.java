@@ -197,7 +197,8 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarActionPerformed
+
+    private void SalvarActionPerformed(java.awt.event.ActionEvent evt) {                                       
 
         Funcionario fun = new Funcionario();
         
@@ -207,7 +208,6 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         fun.setContato(contatoFun.getText());
         fun.setCargo(cargoFun.getText());
         
-
         Fachada coreFachada = new Fachada();
         coreFachada.salvarFuncionario(fun);
         
@@ -216,8 +216,9 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         enderecoFun.setText("");
         contatoFun.setText("");
         cargoFun.setText("");
-        
-    }//GEN-LAST:event_SalvarActionPerformed
+
+    }                                        
+
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
         setVisible(false);
