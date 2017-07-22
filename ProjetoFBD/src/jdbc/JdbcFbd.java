@@ -26,16 +26,16 @@ public class JdbcFbd {
      */
     public static void main(String[] args) throws SQLException, Exception {
 
-        Cliente cliente = new Cliente();
-        cliente.setId(1);
-        cliente.setNome("Ant2");
-        cliente.setCPF("12345677");
-        cliente.setEndereco("12345677");
-        cliente.setContato("12345677");
-        
-
-        Fachada coreFachada = new Fachada();
-        coreFachada.salvarCliente(cliente);
+//        Cliente cliente = new Cliente();
+//        cliente.setId(1);
+//        cliente.setNome("Ant2");
+//        cliente.setCPF("12345677");
+//        cliente.setEndereco("12345677");
+//        cliente.setContato("12345677");
+//        
+//
+//        Fachada coreFachada = new Fachada();
+//        coreFachada.salvarCliente(cliente);
         
        // coreFachada.salvarProfessor(professor);
        // coreFachada.matricularAluno(aluno, curso);
