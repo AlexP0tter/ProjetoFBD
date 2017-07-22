@@ -12,18 +12,29 @@ package br.com.model;
 public class Carro {
     
     private int id;
-    private String nome, placa, modelo;
+    private String nome, placa, modelo, categoria;
 
-    public Carro(int id, String modelo, String placa, String Marca) {
+    public Carro(int id, String modelo, String placa, String Marca, String categoria) {
         this.id = id;
         this.nome = modelo;
         this.placa = placa;
         this.modelo = Marca;
+        this.categoria = categoria;
     }
     
     public Carro(){
         
     }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+    
+    
 
     public int getId() {
         return id;

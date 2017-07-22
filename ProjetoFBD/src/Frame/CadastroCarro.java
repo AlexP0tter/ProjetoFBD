@@ -247,9 +247,11 @@ public class CadastroCarro extends javax.swing.JFrame{
         
         Carro carro = new Carro();
         
-        carro.getModelo(modeloL.getText());
-        carro.getNome(marcaL.getText());//marca
-        carro.getPlaca(placaL.getText());
+        carro.setModelo(modeloL.getText());
+        carro.setNome(marcaL.getText());//marca
+        carro.setPlaca(placaL.getText());
+        carro.setCategoria(categoriaL.getText());
+       
         
         Fachada coreFachada = new Fachada();
         
@@ -258,6 +260,7 @@ public class CadastroCarro extends javax.swing.JFrame{
         modeloL.setText("");
         marcaL.setText("");
         placaL.setText("");
+        categoriaL.setText("");
         
     }//GEN-LAST:event_jButton2ActionPerformed
 

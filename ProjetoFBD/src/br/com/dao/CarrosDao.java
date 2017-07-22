@@ -41,6 +41,7 @@ public class CarrosDao {
             statement.setString(2, carro.getModelo());
             statement.setString(3, carro.getNome());
             statement.setString(4, carro.getPlaca());
+            statement.setString(5, carro.getCategoria());
             statement.execute();
             return true;
         } catch (SQLException ex) {
