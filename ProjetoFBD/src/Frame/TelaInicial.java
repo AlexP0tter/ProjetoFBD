@@ -205,8 +205,8 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         setVisible(false);
-        ExibirCarro exibirCarro = new ExibirCarro();
-        exibirCarro.setVisible(true);
+        ExibirCarros exibirCarros = new ExibirCarros();
+        exibirCarros.setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
