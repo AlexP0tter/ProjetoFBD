@@ -49,6 +49,7 @@ public class FuncionarioDao {
             
             
             statement.execute();
+            
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
