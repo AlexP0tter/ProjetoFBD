@@ -11,6 +11,7 @@ import br.com.busines.FuncionarioBusiness;
 import br.com.model.Carro;
 import br.com.model.Cliente;
 import br.com.model.Funcionario;
+import java.util.List;
 
 /**
  *
@@ -50,6 +51,11 @@ public class Fachada {
     
     public boolean salvarFuncionario(Funcionario funcionario) {
         return funcionarioBusiness.salvar(funcionario);
+    }
+    
+    public List<Carro> buscarCarro(String busca){
+        
+        return carroBusiness.buscarCarro(busca);
     }
     
 }

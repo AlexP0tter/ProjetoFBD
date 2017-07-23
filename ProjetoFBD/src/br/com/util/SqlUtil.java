@@ -17,4 +17,5 @@ public class SqlUtil {
     //public static final String SQL_INSERT_FUNCIONARIO_ALL = "INSERT INTO funcionário(id, cpf, cargo, nome, contato, endereco) values(?,?,?,?,?,?)";
     public static final String SQL_INSERT_FUNCIONARIO_ALL = "INSERT INTO funcionario(id, cpf, cargo, nome, contato, endereco) values(?,?,?,?,?,?)";
     
+    public static final String SQL_SELECT_CARRO = "SELECT * FROM carro where modelo LIKE ? OR marca LIKE ? OR placa LIKE ?";
 }

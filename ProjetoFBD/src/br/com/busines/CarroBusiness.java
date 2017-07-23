@@ -7,6 +7,7 @@ package br.com.busines;
 
 import br.com.dao.CarrosDao;
 import br.com.model.Carro;
+import java.util.List;
 
 /**
  *
@@ -25,6 +26,16 @@ public class CarroBusiness {
     public boolean salvar(Carro carro){
         
         return carroDao.salvar(carro);
+    }
+    
+    public List<Carro> buscarCarro(String busca){
+        
+        List<Carro> carros = null;
+        
+        carros = carroDao.buscarPorCarro(busca);
+        
+        return carros;
+        
     }
     
 }

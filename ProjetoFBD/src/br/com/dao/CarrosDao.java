@@ -10,7 +10,12 @@ import br.com.util.ConnectionFactory;
 import br.com.util.SqlUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -55,5 +60,32 @@ public class CarrosDao {
         }
         return false;
     }
+    
+    public List<Carro> buscarPorCarro(String busca){
+        
+        List<Carro> carros = new ArrayList<Carro>();
+        try {
+            statement = con.prepareStatement(SqlUtil.SQL_SELECT_CARRO);
+            statement.setString(1,"%" + busca + "%");
+            statement.setString(2,"%" + busca + "%");
+            statement.setString(3,"%" + busca + "%");
+            ResultSet result = statement.executeQuery();
+            
+            while(result.next()){
+                Carro carro = new Carro(Integer.parseInt(result.getString("id")), 
+                        result.getString("modelo"), 
+                        result.getString("marca"), 
+                        result.getString("placa"), 
+                        result.getString("categoria"));
+                carros.add(carro);
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CarrosDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return carros;
+    }
+    
     
 }
