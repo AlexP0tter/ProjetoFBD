@@ -41,11 +41,12 @@ public class FuncionarioDao {
         try {
             statement = con.prepareStatement(SqlUtil.SQL_INSERT_FUNCIONARIO_ALL);
             statement.setInt(1, funcionario.getId());
-            statement.setString(2, funcionario.getNome());
-            statement.setString(3, funcionario.getCpf());
-            statement.setString(4, funcionario.getContato());
-            statement.setString(5, funcionario.getEndereco());
-            statement.setString(6, funcionario.getCargo());
+            statement.setString(2, funcionario.getCpf());
+            statement.setString(3, funcionario.getCargo());
+            statement.setString(4, funcionario.getNome());
+            statement.setString(5, funcionario.getContato());
+            statement.setString(6, funcionario.getEndereco());
+            
             
             statement.execute();
             return true;
