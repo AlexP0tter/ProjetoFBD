@@ -1,5 +1,16 @@
 package Frame;
 
+import br.com.fachada.Fachada;
+import br.com.util.ConnectionFactory;
+import br.com.util.SqlUtil;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,8 +26,28 @@ public class ExibirClientes extends javax.swing.JFrame {
     /**
      * Creates new form ExibirClientes
      */
+    
+    PreparedStatement statement;
+    ResultSet result;
+    Connection con;
+        
     public ExibirClientes() {
         initComponents();
+        setVisible(true);
+        
+        try {
+            con = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            try {
+                con.rollback();
+            } catch (SQLException ex1) {
+                ex.printStackTrace();
+            }
+        }
+        
+        preecherTabela();
     }
 
     /**
@@ -28,21 +59,13 @@ public class ExibirClientes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-        jScrollPane1.setToolTipText("");
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
 
         jButton1.setText("voltar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -60,6 +83,21 @@ public class ExibirClientes extends javax.swing.JFrame {
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -67,26 +105,26 @@ public class ExibirClientes extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addGap(68, 68, 68)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1)))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -102,6 +140,50 @@ public class ExibirClientes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    public void preecherTabela(){
+        ArrayList dados = new ArrayList();
+        
+        String[] colunas = new String[]{"ID","NOME","CPF","ENDEREÇO","CONTATO"};        
+    
+       // Fachada coreFachada = new Fachada();        
+       // coreFachada.getClientes();
+       try{
+            statement = con.prepareStatement(SqlUtil.SELECT);
+            result = statement.executeQuery();
+            result.first();
+            //result = statement.executeQuery();
+            do{
+            //lista.add(new Cliente(result.getInt("id"),result.getString("nome"),result.getString("cpf"),result.getString("endereco"),result.getString("contato")));
+            dados.add(new Object[]{result.getInt("id"),result.getString("nome"),result.getString("cpf"),result.getString("endereco"),result.getString("contato")});
+            }
+            while(result.next());
+       }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "ERRO");
+       }
+        
+        
+        
+        ModeloTabela modelo = new ModeloTabela(dados, colunas);
+        
+        jTable1.setModel(modelo);
+        jTable1.getColumnModel().getColumn(0).setPreferredWidth(80);
+        jTable1.getColumnModel().getColumn(0).setResizable(false);
+        jTable1.getColumnModel().getColumn(1).setPreferredWidth(180);
+        jTable1.getColumnModel().getColumn(1).setResizable(false);
+        jTable1.getColumnModel().getColumn(2).setPreferredWidth(80);
+        jTable1.getColumnModel().getColumn(2).setResizable(false);
+        jTable1.getColumnModel().getColumn(3).setPreferredWidth(80);
+        jTable1.getColumnModel().getColumn(3).setResizable(false);
+        jTable1.getColumnModel().getColumn(4).setPreferredWidth(80);
+        jTable1.getColumnModel().getColumn(4).setResizable(false);
+        
+        
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable1.setAutoResizeMode(jTable1.AUTO_RESIZE_OFF);        
+        jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -140,8 +222,8 @@ public class ExibirClientes extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

@@ -211,6 +211,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         Fachada coreFachada = new Fachada();
         coreFachada.salvarFuncionario(fun);
         
+        
         nomeFun.setText("");
         cpfFun.setText("");
         enderecoFun.setText("");
