@@ -11,12 +11,13 @@ import br.com.util.SqlUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
  * @author Alexp0tter
  */
-public class CarrosDao {
+public class CarrosDao implements IaCarroDao {
     
     Connection con;
     PreparedStatement statement;
@@ -35,7 +36,7 @@ public class CarrosDao {
         }
 
     }
-    public boolean salvar(Carro carro) {
+    public Carro salvar(Carro carro) throws Exception{
         try {
             statement = con.prepareStatement(SqlUtil.SQL_INSERT_CARRO_ALL);
             statement.setInt(1, carro.getId());
@@ -44,7 +45,7 @@ public class CarrosDao {
             statement.setString(4, carro.getPlaca());
             statement.setString(5, carro.getCategoria());
             statement.execute();
-            return true;
+            return carro;
         } catch (SQLException ex) {
             ex.printStackTrace();
             try {
@@ -53,7 +54,22 @@ public class CarrosDao {
                 ex1.printStackTrace();
             }
         }
-        return false;
+        throw new Exception("Erro....");
+    }
+
+    @Override
+    public boolean editar(Carro carro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Carro buscarPorid(Carro carro) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Carro> getAllI() throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

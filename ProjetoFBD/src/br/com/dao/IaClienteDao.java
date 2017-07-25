@@ -16,12 +16,6 @@ public interface IaClienteDao {
     
     public Cliente salvar(Cliente cliente)throws Exception;
     public boolean editar(Cliente aluno);
-    
-    /**
-     *
-     * @param cliente
-     * @return
-     */
     public Cliente buscarPorid(Cliente cliente)throws Exception;
     public List<Cliente> getAllI()throws Exception;
     

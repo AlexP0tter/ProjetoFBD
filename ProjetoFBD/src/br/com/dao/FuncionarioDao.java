@@ -12,12 +12,13 @@ import br.com.util.SqlUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
  * @author Alexp0tter
  */
-public class FuncionarioDao {
+public class FuncionarioDao implements IaFuncionarioDao{
     
     Connection con;
     PreparedStatement statement;
@@ -37,7 +38,7 @@ public class FuncionarioDao {
         }
 
     }
-    public boolean salvar(Funcionario funcionario) {
+    public Funcionario salvar(Funcionario funcionario)throws Exception {
         try {
             statement = con.prepareStatement(SqlUtil.SQL_INSERT_FUNCIONARIO_ALL);
             statement.setInt(1, funcionario.getId());
@@ -48,7 +49,7 @@ public class FuncionarioDao {
             statement.setString(6, funcionario.getCargo());
             
             statement.execute();
-            return true;
+            return funcionario;
         } catch (SQLException ex) {
             ex.printStackTrace();
             try {
@@ -57,7 +58,22 @@ public class FuncionarioDao {
                 ex1.printStackTrace();
             }
         }
-        return false;
+        throw new Exception("Erro....");
+    }
+
+    @Override
+    public boolean editar(Funcionario fun) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Funcionario buscarPorid(Funcionario fun) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Funcionario> getAllI() throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

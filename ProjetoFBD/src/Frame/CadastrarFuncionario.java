@@ -209,7 +209,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         fun.setCargo(cargoFun.getText());
         
         Fachada coreFachada = new Fachada();
-        coreFachada.salvarFuncionario(fun);
+        coreFachada.salvarOuEditarFuncionario(fun);
         
         
         nomeFun.setText("");

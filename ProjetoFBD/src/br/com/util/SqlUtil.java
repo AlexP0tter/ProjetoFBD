@@ -17,7 +17,10 @@ public class SqlUtil {
     public static final String SQL_INSERT_FUNCIONARIO_ALL = "INSERT INTO funcionário(id, nome,cargo, cpf,contato,endereco) values(?,?,?,?,?,?)";
 
     public static final String SELECT_CLIENTE_ULTIMO_REGISTRO = "SELECT * FROM cliente ORDER BY id DESC LIMIT 1";
-    public static final String SELECT = "SELECT id ,nome,cpf,endereco,contato FROM cliente";
+    
+    public static final String SELECT_CLIENTE = "SELECT id ,nome,cpf,endereco,contato FROM cliente";
+    public static final String SELECT_FUNCIONARIO = "SELECT id, nome,cargo, cpf,contato,endereco FROM funcionário ";
+    public static final String SELECT_CARROS = "SELECT id, modelo, marca, placa, categoria FROM carro ";
     
     private SqlUtil() {
     }

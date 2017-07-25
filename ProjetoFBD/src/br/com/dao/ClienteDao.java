@@ -53,12 +53,13 @@ public class ClienteDao implements IaClienteDao{
             statement.setString(5, cliente.getContato());            
             statement.execute();
             
-            
+            /*
             statement = con.prepareStatement(SqlUtil.SELECT_CLIENTE_ULTIMO_REGISTRO);        
             result = statement.executeQuery();            
             result.next();
             
-            cliente.setId(new Integer(result.getInt("id")));                 
+            cliente.setId(new Integer(result.getInt("id")));  
+            */
             
             return cliente;
             
@@ -109,7 +110,7 @@ public class ClienteDao implements IaClienteDao{
         ArrayList dados = new ArrayList();
         
         try{
-            statement = con.prepareStatement(SqlUtil.SELECT);
+            statement = con.prepareStatement(SqlUtil.SELECT_CLIENTE);
             result.first();
             //result = statement.executeQuery();
             do{

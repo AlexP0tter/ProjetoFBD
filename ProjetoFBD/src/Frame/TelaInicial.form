@@ -58,9 +58,10 @@
                       <Component id="jButton7" max="32767" attributes="0"/>
                       <Component id="jButton8" max="32767" attributes="0"/>
                       <Component id="jButton9" max="32767" attributes="0"/>
-                      <Component id="jButton10" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
+                      <Component id="jButton10" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jButton11" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="391" max="32767" attributes="0"/>
+                  <EmptySpace pref="461" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -75,7 +76,7 @@
                   <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButton8" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButton4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButton5" min="-2" max="-2" attributes="0"/>
@@ -83,7 +84,9 @@
                   <Component id="jButton6" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButton9" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jButton11" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="jButton10" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButton7" min="-2" max="-2" attributes="0"/>
@@ -160,6 +163,14 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Exibir Alugueis"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton11">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Exibir Funcion&#xe1;rios"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton11ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

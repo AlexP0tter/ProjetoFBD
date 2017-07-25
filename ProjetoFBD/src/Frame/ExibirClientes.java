@@ -148,7 +148,7 @@ public class ExibirClientes extends javax.swing.JFrame {
        // Fachada coreFachada = new Fachada();        
        // coreFachada.getClientes();
        try{
-            statement = con.prepareStatement(SqlUtil.SELECT);
+            statement = con.prepareStatement(SqlUtil.SELECT_CLIENTE);
             result = statement.executeQuery();
             result.first();
             //result = statement.executeQuery();

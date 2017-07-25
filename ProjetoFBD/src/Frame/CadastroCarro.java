@@ -255,7 +255,7 @@ public class CadastroCarro extends javax.swing.JFrame{
         
         Fachada coreFachada = new Fachada();
         
-        coreFachada.salvarCarro(carro);
+        coreFachada.salvarOuEditarCarro(carro);
         
         modeloL.setText("");
         marcaL.setText("");

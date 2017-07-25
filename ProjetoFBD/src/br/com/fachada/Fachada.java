@@ -80,19 +80,35 @@ public class Fachada implements ICoreFacade {
         throw new UnsupportedOperationException("Not supported yet.");
         
     }
-
-    @Override
-    public boolean salvarOuEditarProfessor(Funcionario funcionario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Funcionario buscarFUncionarioPorid(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     @Override
     public List<Funcionario> getFuncionarios() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean salvarOuEditarFuncionario(Funcionario funcionario) {
+        return funcionarioBusiness.salvarOuEditar(funcionario);
+    }
+
+    @Override
+    public Funcionario buscarFuncionarioPorid(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean salvarOuEditarCarro(Carro carro) {
+        return carroBusiness.salvarOuEditar(carro);
+    }
+
+    @Override
+    public Carro buscarCarroPorid(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Carro> getCarro() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
