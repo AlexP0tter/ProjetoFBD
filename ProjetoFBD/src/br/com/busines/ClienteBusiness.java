@@ -54,6 +54,18 @@ public class ClienteBusiness implements IAClienteBusines{
         return false;
         
     }
+    
+    public boolean alterar(Cliente cliente) {
+        
+        try{
+        clienteDao.alterar(cliente);
+        return true;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return true;
+    }
 
     @Override
     public Cliente buscarPorid(Long id) {

@@ -40,6 +40,18 @@ public class FuncionarioBusiness implements IAFuncionarioBusines {
         }
         return false;
     }
+    
+    public boolean alterar(Funcionario fun) {
+        
+        try{
+        funcionarioDao.alterar(fun);
+        return true;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return true;
+    }
 
     @Override
     public Funcionario buscarPorid(int id) {

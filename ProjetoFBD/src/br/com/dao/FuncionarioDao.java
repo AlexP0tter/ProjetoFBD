@@ -43,10 +43,10 @@ public class FuncionarioDao implements IaFuncionarioDao{
             statement = con.prepareStatement(SqlUtil.SQL_INSERT_FUNCIONARIO_ALL);
             statement.setInt(1, funcionario.getId());
             statement.setString(2, funcionario.getNome());
-            statement.setString(3, funcionario.getCpf());
-            statement.setString(4, funcionario.getContato());
-            statement.setString(5, funcionario.getEndereco());
-            statement.setString(6, funcionario.getCargo());
+            statement.setString(3, funcionario.getCargo());
+            statement.setString(4, funcionario.getCpf());            
+            statement.setString(5, funcionario.getContato());
+            statement.setString(6, funcionario.getEndereco());            
             
             statement.execute();
             return funcionario;
@@ -59,6 +59,34 @@ public class FuncionarioDao implements IaFuncionarioDao{
             }
         }
         throw new Exception("Erro....");
+    }
+    
+    public Funcionario alterar(Funcionario fun)throws Exception {
+        try {
+            statement = con.prepareStatement(SqlUtil.UPDATE_FUNCIONARIO);            
+            
+            statement.setString(1, fun.getNome());
+            statement.setString(2, fun.getCargo());
+            statement.setString(3, fun.getCPF());
+            statement.setString(5, fun.getEndereco());
+            statement.setString(4, fun.getContato());
+            statement.setInt(6, fun.getId());
+            
+            statement.execute();
+                    
+            return fun;
+                     
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            try {
+                con.rollback();
+            } catch (SQLException ex1) {
+                ex1.printStackTrace();
+            }
+        }
+             throw new Exception("Erro....");
+        
     }
 
     @Override

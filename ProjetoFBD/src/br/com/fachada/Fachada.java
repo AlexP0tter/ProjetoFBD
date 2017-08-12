@@ -68,6 +68,16 @@ public class Fachada implements ICoreFacade {
         return clienteBusiness.buscarPorid(id);
     }
     
+    
+    public boolean alterarCliente(Cliente cliente) {
+        return clienteBusiness.alterar(cliente);
+    }
+    
+    public boolean alterarFun(Funcionario fun) {
+        return funcionarioBusiness.alterar(fun);
+    }
+    
+    
         
 
     @Override

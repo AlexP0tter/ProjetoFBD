@@ -183,7 +183,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         setVisible(false);
-        ExibirClientes clientes =  new ExibirClientes();
+        FuncionarioCRUD clientes =  new FuncionarioCRUD();
         clientes.setVisible(true);
     }//GEN-LAST:event_jButton9ActionPerformed
 

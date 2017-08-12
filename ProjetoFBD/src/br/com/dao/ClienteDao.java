@@ -79,6 +79,47 @@ public class ClienteDao implements IaClienteDao{
              throw new Exception("Erro....");
         
     }
+    
+    public Cliente alterar(Cliente cliente)throws Exception {
+        try {
+            statement = con.prepareStatement(SqlUtil.UPDATE_CLIENTE);
+            
+            
+            statement.setString(1, cliente.getNome());
+            statement.setString(2, cliente.getCPF());
+            statement.setString(3, cliente.getEndereco());
+            statement.setString(4, cliente.getContato());
+            statement.setInt(5, cliente.getId());
+
+            
+            statement.execute();
+            
+            /*
+            statement = con.prepareStatement(SqlUtil.SELECT_CLIENTE_ULTIMO_REGISTRO);        
+            result = statement.executeQuery();            
+            result.next();
+            
+            cliente.setId(new Integer(result.getInt("id")));  
+            */
+            
+            return cliente;
+            
+            //statement.executeQuery(); consulta no bd, retorna uma lisat de valores
+            //statement.executeUpdate(); execulta uma inclusao, exclusao, alteração
+            //result.getString("nome do campo na tabela"); recupera valor
+            
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            try {
+                con.rollback();
+            } catch (SQLException ex1) {
+                ex1.printStackTrace();
+            }
+        }
+             throw new Exception("Erro....");
+        
+    }
 
     /**
      *

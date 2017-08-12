@@ -74,6 +74,14 @@ public class Funcionario {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+
+    public void setCPF(String text) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getCPF() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }
