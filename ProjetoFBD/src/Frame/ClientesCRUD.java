@@ -328,7 +328,7 @@ public class ClientesCRUD extends javax.swing.JFrame {
         cliente.setContato(contatoCliente.getText());
 
         Fachada coreFachada = new Fachada();
-        coreFachada.salvarOuEditarCliente(cliente);
+        coreFachada.salvarCliente(cliente);
 
         nomeCliente.setText("");
         cpfCliente.setText("");
@@ -345,6 +345,7 @@ public class ClientesCRUD extends javax.swing.JFrame {
         int linha = jTable1.getSelectedRow();
         String nome = jTable1.getValueAt(linha, 1).toString();
         String cpf = jTable1.getValueAt(linha, 2).toString();
+        
         int id = Integer.parseInt(jTable1.getValueAt(linha, 0).toString());
         
         cliente.setId(id);

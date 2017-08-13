@@ -15,65 +15,43 @@ import java.util.logging.Logger;
  *
  * @author Alexp0tter
  */
-public class ClienteBusiness implements IAClienteBusines{
-    
+public class ClienteBusiness {
+
     private ClienteDao clienteDao;
-    
+
     public ClienteBusiness() {
         clienteDao = new ClienteDao();
     }
-    
-    @Override
 
     public boolean salvarOuEditar(Cliente cliente) {
-        
-        try{
-        clienteDao.salvar(cliente);
-        return true;
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }     
-        
-        /*
+
         try {
-            if (cliente.getId() == null) {
-                cliente  = clienteDao.salvar(cliente);                
-                return true;
-            }
-            if (cliente.getId() != null) {
-                clienteDao.editar(cliente);
-                return true;
-            }
-
+            clienteDao.salvar(cliente);
+            return true;
         } catch (Exception e) {
-                e.printStackTrace();
-               // O que fazer com a exeçao.. 
+            e.printStackTrace();
         }
-*/
+
         return false;
-        
+
     }
-    
+
     public boolean alterar(Cliente cliente) {
-        
-        try{
-        clienteDao.alterar(cliente);
-        return true;
-        }
-        catch(Exception e){
+
+        try {
+            clienteDao.alterar(cliente);
+            return true;
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return true;
     }
 
-    @Override
     public Cliente buscarPorid(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<Cliente> getAllI() throws Exception{
+    public List<Cliente> getAllI() throws Exception {
         try {
             return clienteDao.getAllI();
         } catch (Exception ex) {
@@ -81,5 +59,5 @@ public class ClienteBusiness implements IAClienteBusines{
         }
         throw new Exception("Erro....");
     }
-    
+
 }

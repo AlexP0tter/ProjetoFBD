@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author Alexp0tter
  */
-public class FuncionarioBusiness implements IAFuncionarioBusines {
+public class FuncionarioBusiness{
     
      private FuncionarioDao funcionarioDao;
     
@@ -28,7 +28,7 @@ public class FuncionarioBusiness implements IAFuncionarioBusines {
         
     }
 */
-    @Override
+    
     public boolean salvarOuEditar(Funcionario fun) {
         
         try{
@@ -53,12 +53,12 @@ public class FuncionarioBusiness implements IAFuncionarioBusines {
         return true;
     }
 
-    @Override
+    
     public Funcionario buscarPorid(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
+    
     public List<Funcionario> getAllI() throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

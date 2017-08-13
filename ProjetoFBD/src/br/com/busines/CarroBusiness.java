@@ -15,22 +15,16 @@ import java.util.List;
  */
 
 
-public class CarroBusiness implements IACarrosBusines{
+public class CarroBusiness{
     
     private CarrosDao carroDao;
     
     public CarroBusiness() {
         carroDao = new CarrosDao();
     }
-    /*
-    public boolean salvar(Carro carro){
-        
-        return carroDao.salvar(carro);
-    }
-*/
-
-    @Override
-    public boolean salvarOuEditar(Carro carro) {
+   
+    
+    public boolean salvar(Carro carro) {
     try{
         carroDao.salvar(carro);
         return true;
@@ -41,13 +35,24 @@ public class CarroBusiness implements IACarrosBusines{
     
     return false;
     }
+    
+    public boolean alterar(Carro car) {
 
-    @Override
+        try {
+            carroDao.alterar(car);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+   
     public Carro buscarPorid(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
+    
     public List<Carro> getAllI() throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

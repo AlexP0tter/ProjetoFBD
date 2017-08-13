@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author Alexp0tter
  */
-public class FuncionarioDao implements IaFuncionarioDao{
+public class FuncionarioDao{
     
     Connection con;
     PreparedStatement statement;
@@ -67,7 +67,7 @@ public class FuncionarioDao implements IaFuncionarioDao{
             
             statement.setString(1, fun.getNome());
             statement.setString(2, fun.getCargo());
-            statement.setString(3, fun.getCPF());
+            statement.setString(3, fun.getCpf());
             statement.setString(5, fun.getEndereco());
             statement.setString(4, fun.getContato());
             statement.setInt(6, fun.getId());
@@ -89,17 +89,17 @@ public class FuncionarioDao implements IaFuncionarioDao{
         
     }
 
-    @Override
+    
     public boolean editar(Funcionario fun) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
+    
     public Funcionario buscarPorid(Funcionario fun) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
+    
     public List<Funcionario> getAllI() throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

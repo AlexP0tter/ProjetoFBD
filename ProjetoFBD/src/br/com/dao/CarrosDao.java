@@ -17,15 +17,15 @@ import java.util.List;
  *
  * @author Alexp0tter
  */
-public class CarrosDao implements IaCarroDao {
-    
+public class CarrosDao {
+
     Connection con;
     PreparedStatement statement;
 
     public CarrosDao() {
         try {
             con = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
-            
+
         } catch (Exception ex) {
             ex.printStackTrace();
             try {
@@ -36,16 +36,20 @@ public class CarrosDao implements IaCarroDao {
         }
 
     }
-    public Carro salvar(Carro carro) throws Exception{
+
+    public Carro salvar(Carro carro) throws Exception {
         try {
             statement = con.prepareStatement(SqlUtil.SQL_INSERT_CARRO_ALL);
+
             statement.setInt(1, carro.getId());
             statement.setString(2, carro.getModelo());
-            statement.setString(3, carro.getNome());
+            statement.setString(3, carro.getMarca());
             statement.setString(4, carro.getPlaca());
-            statement.setString(5, carro.getCategoria());
+            statement.setString(5, carro.getCor());
             statement.execute();
+
             return carro;
+
         } catch (SQLException ex) {
             ex.printStackTrace();
             try {
@@ -57,19 +61,39 @@ public class CarrosDao implements IaCarroDao {
         throw new Exception("Erro....");
     }
 
-    @Override
-    public boolean editar(Carro carro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Carro alterar(Carro carro) throws Exception {
+
+        try {
+            statement = con.prepareStatement(SqlUtil.UPDATE_CARROS);
+
+            statement.setString(1, carro.getModelo());
+            statement.setString(2, carro.getMarca());
+            statement.setString(3, carro.getPlaca());
+            statement.setString(4, carro.getCor());
+            statement.setInt(5, carro.getId());
+
+            statement.execute();
+
+            return carro;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            try {
+                con.rollback();
+            } catch (SQLException ex1) {
+                ex1.printStackTrace();
+            }
+        }
+        throw new Exception("Erro....");
+
     }
 
-    @Override
     public Carro buscarPorid(Carro carro) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
     public List<Carro> getAllI() throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

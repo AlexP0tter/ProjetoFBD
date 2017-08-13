@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  *
  * @author Alexp0tter
  */
-public class Fachada implements ICoreFacade {
+public class Fachada{
     
     private static Fachada fachada;
 
@@ -32,8 +32,7 @@ public class Fachada implements ICoreFacade {
     public Fachada() {
         clienteBusiness = new ClienteBusiness();
         carroBusiness = new CarroBusiness();
-        funcionarioBusiness = new FuncionarioBusiness();
-        
+        funcionarioBusiness = new FuncionarioBusiness();        
         
     }
 
@@ -43,44 +42,32 @@ public class Fachada implements ICoreFacade {
         }
         return fachada;
     }
-/*
+
+   
     public boolean salvarCliente(Cliente cliente) {
         return clienteBusiness.salvarOuEditar(cliente);
     }
-
     
-    public boolean salvarCarro(Carro carro) {
-        return carroBusiness.salvar(carro);
+    public boolean alterarCliente(Cliente cliente) {
+        return clienteBusiness.alterar(cliente);        
     }
     
     public boolean salvarFuncionario(Funcionario funcionario) {
-        return funcionarioBusiness.salvar(funcionario);
-    }
-*/
-
-    @Override
-    public boolean salvarOuEditarCliente(Cliente cliente) {
-        return clienteBusiness.salvarOuEditar(cliente);
-    }
-
-    @Override
-    public Cliente buscarClientePorid(Long id) {
-        return clienteBusiness.buscarPorid(id);
-    }
-    
-    
-    public boolean alterarCliente(Cliente cliente) {
-        return clienteBusiness.alterar(cliente);
+        return funcionarioBusiness.salvarOuEditar(funcionario);
     }
     
     public boolean alterarFun(Funcionario fun) {
         return funcionarioBusiness.alterar(fun);
     }
     
+    public boolean salvarCarro(Carro carro) {
+        return carroBusiness.salvar(carro);
+    }
     
-        
-
-    @Override
+    public boolean alterarCarro(Carro car) {
+        return carroBusiness.alterar(car);
+    }
+    
     public List<Cliente> getClientes() {
         try {
             return clienteBusiness.getAllI();
@@ -91,35 +78,14 @@ public class Fachada implements ICoreFacade {
         
     }
     
-
-    @Override
     public List<Funcionario> getFuncionarios() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public boolean salvarOuEditarFuncionario(Funcionario funcionario) {
-        return funcionarioBusiness.salvarOuEditar(funcionario);
-    }
+    
+    
 
-    @Override
-    public Funcionario buscarFuncionarioPorid(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
-    @Override
-    public boolean salvarOuEditarCarro(Carro carro) {
-        return carroBusiness.salvarOuEditar(carro);
-    }
-
-    @Override
-    public Carro buscarCarroPorid(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Carro> getCarro() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
 }

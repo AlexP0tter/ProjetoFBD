@@ -12,26 +12,26 @@ package br.com.model;
 public class Carro {
     
     private int id;
-    private String nome, placa, modelo, categoria;
+    private String modelo, placa, marca, cor;
 
-    public Carro(int id, String modelo, String placa, String Marca, String categoria) {
+    public Carro(int id, String modelo, String merca, String placa, String cor) {
         this.id = id;
-        this.nome = modelo;
+        this.modelo = modelo;
         this.placa = placa;
-        this.modelo = Marca;
-        this.categoria = categoria;
+        this.marca = marca;
+        this.cor = cor;
     }
     
     public Carro(){
         
     }
 
-    public String getCategoria() {
-        return categoria;
+    public String getCor() {
+        return cor;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setCor(String cor) {
+        this.cor = cor;
     }
     
     
@@ -44,12 +44,12 @@ public class Carro {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getModelo() {
+        return modelo;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
     }
 
     public String getPlaca() {
@@ -60,24 +60,14 @@ public class Carro {
         this.placa = placa;
     }
 
-    public String getModelo() {
-        return modelo;
+    public String getMarca() {
+        return marca;
     }
 
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
 
-    public void getModelo(String text) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void getNome(String text) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void getPlaca(String text) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
     
 }
