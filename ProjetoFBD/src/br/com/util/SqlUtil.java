@@ -10,24 +10,16 @@ package br.com.util;
  * @author Alexp0tter
  */
 public class SqlUtil {
-    
-    public static String termo1, termo2; 
-    
-    
-    
-
-    public static final String SELECT_CLIENTE_ULTIMO_REGISTRO = "SELECT * FROM cliente ORDER BY id DESC LIMIT 1";     
-    
+      
     public static final String SQL_INSERT_CLIENTE_ALL = "INSERT INTO cliente(id,nome, cpf, endereco, contato) values(?,?,?,?,?)";
     public static final String SELECT_CLIENTE = "SELECT id ,nome,cpf,endereco,contato FROM cliente";
     public static final String UPDATE_CLIENTE = "update cliente set nome = ?, cpf = ?, endereco = ?, contato = ? where id = ?";
-    public static final String SELECT_CLIENTE_CPF = "select cpf from cliente where cpf=?";
-    
+       
     
     public static final String SQL_INSERT_FUNCIONARIO_ALL = "INSERT INTO funcionário(id, nome,cargo, cpf,contato,endereco) values(?,?,?,?,?,?)";
     public static final String SELECT_FUNCIONARIO = "SELECT id, nome,cargo, cpf,contato,endereco FROM funcionário ";
     public static final String UPDATE_FUNCIONARIO = "update funcionário set nome = ?, cargo=?, cpf = ?, contato = ?, endereco = ? where id = ?";
-    public static final String SELECT_FUNCIONARIO_CPF = "select cpf from funcionário where cpf=?";
+    
     
     public static final String SQL_INSERT_CARRO_ALL = "INSERT INTO carro(id, modelo, marca, placa, cor) values(?,?,?,?,?)";
     public static final String SELECT_CARROS = "SELECT id, modelo, marca, placa, cor FROM carro ";
@@ -36,6 +28,7 @@ public class SqlUtil {
     public static final String SQL_INSERT_LOCACAO_ALL = "INSERT INTO locacao(id, cliente, carro, funcionario, dataRetirada,dataDevo,valor) values(?,?,?,?,?,?,?)";
     public static final String SELECT_LOCACAO = "SELECT id, cliente, carro, funcionario, dataRetirada,dataDevo,valor FROM locacao";
     public static final String UPDATE_LOCACAO = "update locacao set cliente = ?, carro = ?,funcionario=?, dataRetirada = ?,dataDevo = ?,valor = ? where id = ?";
+    
     private SqlUtil() {
     }
 }
