@@ -38,11 +38,8 @@ public class TelaInicial extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jButton8 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btAluga = new javax.swing.JButton();
+        btSair = new javax.swing.JButton();
         btCliente = new javax.swing.JButton();
         btCarro = new javax.swing.JButton();
         btFuncionario = new javax.swing.JButton();
@@ -51,20 +48,19 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton8.setText("Realizar Reserva");
-
-        jButton10.setText("Caixa");
-
-        jButton4.setText("Realizar Aluguel");
-
-        jButton7.setText("Sair");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        btAluga.setText("Realizar Aluguel");
+        btAluga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                btAlugaActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Exibir Alugueis");
+        btSair.setText("Sair");
+        btSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSairActionPerformed(evt);
+            }
+        });
 
         btCliente.setText("Cliente");
         btCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -74,8 +70,18 @@ public class TelaInicial extends javax.swing.JFrame {
         });
 
         btCarro.setText("Carro");
+        btCarro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCarroActionPerformed(evt);
+            }
+        });
 
         btFuncionario.setText("Funcionario");
+        btFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btFuncionarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -84,15 +90,12 @@ public class TelaInicial extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btAluga, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                    .addComponent(btSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btCarro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(461, Short.MAX_VALUE))
+                .addContainerGap(471, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,15 +107,9 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btFuncionario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
-                .addComponent(jButton10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton7)
+                .addComponent(btAluga)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
+                .addComponent(btSair)
                 .addContainerGap())
         );
 
@@ -120,9 +117,7 @@ public class TelaInicial extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,13 +127,33 @@ public class TelaInicial extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
         System.exit(EXIT_ON_CLOSE);
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_btSairActionPerformed
 
     private void btClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClienteActionPerformed
-        // TODO add your handling code here:
+        setVisible(false);
+        ClientesCRUD ccrud = new ClientesCRUD();
+        ccrud.setVisible(true);
     }//GEN-LAST:event_btClienteActionPerformed
+
+    private void btAlugaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlugaActionPerformed
+        setVisible(false);
+        locacaoCRUD lcrud = new locacaoCRUD();
+        lcrud.setVisible(true);
+    }//GEN-LAST:event_btAlugaActionPerformed
+
+    private void btCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCarroActionPerformed
+        setVisible(false);
+        CarrosCrud cacrud = new CarrosCrud();
+        cacrud.setVisible(true);
+    }//GEN-LAST:event_btCarroActionPerformed
+
+    private void btFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFuncionarioActionPerformed
+        setVisible(false);
+        FuncionarioCRUD fcrud = new FuncionarioCRUD();
+        fcrud.setVisible(true);
+    }//GEN-LAST:event_btFuncionarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,14 +192,11 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btAluga;
     private javax.swing.JButton btCarro;
     private javax.swing.JButton btCliente;
     private javax.swing.JButton btFuncionario;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
+    private javax.swing.JButton btSair;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }

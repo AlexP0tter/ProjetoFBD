@@ -38,7 +38,7 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
             }
         }
 
-        PopularJTable(SqlUtil.SELECT_FUNCIONARIO);     
+        PopularJTable(SqlUtil.SELECT_FUNCIONARIO);
 
     }
 
@@ -74,7 +74,7 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
         btBusca = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cliente");
+        setTitle("Funcionário");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -100,7 +100,7 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
         });
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Cliente"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Funcionário"));
 
         jLabel4.setText("Contato");
 
@@ -177,7 +177,7 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Clientes"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Funcionários"));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -319,7 +319,6 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
-     
 
         fun.setNome(nomeFun.getText());
         fun.setCpf(cpfFun.getText());
@@ -347,7 +346,7 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
         String nome = jTable1.getValueAt(linha, 1).toString();
         String cpf = jTable1.getValueAt(linha, 2).toString();
         int id = Integer.parseInt(jTable1.getValueAt(linha, 0).toString());
-        
+
         fun.setId(id);
         fun.setNome(nomeFun.getText());
         fun.setCargo(cargoFun.getText());
@@ -356,12 +355,18 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
         fun.setContato(contatoFun.getText());
 
         Fachada coreFachada = new Fachada();
-        coreFachada.alterarFun(fun);         
+        coreFachada.alterarFun(fun);
+
+        nomeFun.setText("");
+        cargoFun.setText("");
+        cpfFun.setText("");
+        endFun.setText("");
+        contatoFun.setText("");
     }//GEN-LAST:event_btAlterarActionPerformed
 
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        
+
         int linha = jTable1.getSelectedRow(); // retorna a linha selecionada pelo usuario
         nomeFun.setText(jTable1.getValueAt(linha, 1).toString()); // retorna o valor da celula linha X 0
         cargoFun.setText(jTable1.getValueAt(linha, 2).toString()); // retorna o valor da celula linha X 0        
@@ -382,6 +387,12 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
                 + fieldBusca.getText() + "%'"
                 + " ORDER BY id";
         this.PopularJTable(sql);// TODO add your handling code here:
+        
+        nomeFun.setText("");
+        cargoFun.setText("");
+        cpfFun.setText("");
+        endFun.setText("");
+        contatoFun.setText("");
     }//GEN-LAST:event_btBuscaActionPerformed
 
     public void PopularJTable(String sql) {
@@ -409,39 +420,7 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
             System.out.println("o erro foi " + ex);
         }
     }
-    
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new FuncionarioCRUD().setVisible(true);
-            }
-        });
-    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAlterar;

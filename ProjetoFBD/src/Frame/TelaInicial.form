@@ -23,10 +23,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <Component id="jPanel2" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
+          <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -49,16 +46,13 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jButton4" max="32767" attributes="0"/>
-                      <Component id="jButton5" max="32767" attributes="0"/>
-                      <Component id="jButton7" max="32767" attributes="0"/>
-                      <Component id="jButton8" pref="139" max="32767" attributes="0"/>
-                      <Component id="jButton10" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btAluga" pref="139" max="32767" attributes="0"/>
+                      <Component id="btSair" max="32767" attributes="0"/>
                       <Component id="btFuncionario" alignment="0" max="32767" attributes="0"/>
                       <Component id="btCarro" alignment="0" max="32767" attributes="0"/>
                       <Component id="btCliente" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="461" max="32767" attributes="0"/>
+                  <EmptySpace pref="471" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -72,48 +66,30 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btFuncionario" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButton8" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButton4" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButton5" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="93" max="32767" attributes="0"/>
-                  <Component id="jButton10" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButton7" min="-2" max="-2" attributes="0"/>
+                  <Component id="btAluga" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="180" max="32767" attributes="0"/>
+                  <Component id="btSair" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="jButton8">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Realizar Reserva"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButton10">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Caixa"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButton4">
+        <Component class="javax.swing.JButton" name="btAluga">
           <Properties>
             <Property name="text" type="java.lang.String" value="Realizar Aluguel"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAlugaActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton7">
+        <Component class="javax.swing.JButton" name="btSair">
           <Properties>
             <Property name="text" type="java.lang.String" value="Sair"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton7ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btSairActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButton5">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Exibir Alugueis"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btCliente">
           <Properties>
@@ -127,11 +103,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Carro"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCarroActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btFuncionario">
           <Properties>
             <Property name="text" type="java.lang.String" value="Funcionario"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btFuncionarioActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

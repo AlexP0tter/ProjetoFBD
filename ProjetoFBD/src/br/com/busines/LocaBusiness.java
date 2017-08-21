@@ -5,22 +5,19 @@
  */
 package br.com.busines;
 
-import br.com.dao.ClienteDao;
-import br.com.dao.FuncionarioDao;
-import br.com.model.Cliente;
-import br.com.model.Funcionario;
-import java.util.List;
+import br.com.dao.LocaDao;
+import br.com.model.Locacao;
 
 /**
  *
  * @author Alexp0tter
  */
-public class FuncionarioBusiness{
+public class LocaBusiness {
     
-     private FuncionarioDao funcionarioDao;
+    private LocaDao locaDao;
     
-    public FuncionarioBusiness() {
-        funcionarioDao = new FuncionarioDao();
+    public LocaBusiness() {
+        locaDao = new LocaDao();
     }
     /*
     public Funcionario salvar(Funcionario funcionario){
@@ -29,10 +26,10 @@ public class FuncionarioBusiness{
     }
 */
     
-    public boolean salvarOuEditar(Funcionario fun) {
+    public boolean salvar(Locacao loc) {
         
         try{
-        funcionarioDao.salvar(fun);
+        locaDao.salvar(loc);
         return true;
         }
         catch(Exception e){
@@ -41,16 +38,16 @@ public class FuncionarioBusiness{
         return false;
     }
     
-    public boolean alterar(Funcionario fun) {
+    public boolean alterar(Locacao loc) {
         
         try{
-        funcionarioDao.alterar(fun);
+        locaDao.alterar(loc);
         return true;
         }
         catch(Exception e){
             e.printStackTrace();
         }
         return true;
-    }  
+    } 
     
 }

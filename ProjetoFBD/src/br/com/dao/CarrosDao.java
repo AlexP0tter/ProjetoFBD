@@ -88,12 +88,6 @@ public class CarrosDao {
 
     }
 
-    public Carro buscarPorid(Carro carro) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public List<Carro> getAllI() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
 }

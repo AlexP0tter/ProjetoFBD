@@ -8,9 +8,11 @@ package br.com.fachada;
 import br.com.busines.CarroBusiness;
 import br.com.busines.ClienteBusiness;
 import br.com.busines.FuncionarioBusiness;
+import br.com.busines.LocaBusiness;
 import br.com.model.Carro;
 import br.com.model.Cliente;
 import br.com.model.Funcionario;
+import br.com.model.Locacao;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,11 +30,13 @@ public class Fachada{
     private ClienteBusiness clienteBusiness;
     private CarroBusiness carroBusiness;
     private FuncionarioBusiness funcionarioBusiness;
+    private LocaBusiness locaBusiness;
 
     public Fachada() {
         clienteBusiness = new ClienteBusiness();
         carroBusiness = new CarroBusiness();
-        funcionarioBusiness = new FuncionarioBusiness();        
+        funcionarioBusiness = new FuncionarioBusiness(); 
+        locaBusiness = new LocaBusiness();
         
     }
 
@@ -68,22 +72,14 @@ public class Fachada{
         return carroBusiness.alterar(car);
     }
     
-    public List<Cliente> getClientes() {
-        try {
-            return clienteBusiness.getAllI();
-        } catch (Exception ex) {
-            Logger.getLogger(Fachada.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean salvarLoca(Locacao loc){
+        return locaBusiness.salvar(loc);
         
     }
     
-    public List<Funcionario> getFuncionarios() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
-    
+    public boolean alterarLoca(Locacao loc){
+       return locaBusiness.alterar(loc);
+    }    
 
     
 

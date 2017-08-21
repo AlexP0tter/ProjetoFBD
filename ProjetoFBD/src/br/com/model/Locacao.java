@@ -13,20 +13,79 @@ import java.sql.Date;
  */
 public class Locacao {
     
-    private Carro carro;
-    private Date dataRetirada, dataDevolucao;
+    //private Carro carro;
+    //private Cliente cliente;
+    //private Funcionario fun;
+    
+    private String cliente, carro, fun;
+    private String dataRetirada, dataDevolucao;
     private float valor;
+    
+    private int id;
     
     public Locacao(){
         
     }
 
-    public Locacao(Carro carro, Date dataRetirada, Date dataDevolucao, float valor) {
+    public Locacao(int id,String carro, String cliente,String fun, String dataRetirada, String dataDevolucao, float valor) {
+        this.id = id;
         this.carro = carro;
+        this.cliente = cliente;
+        this.fun = fun;
         this.dataRetirada = dataRetirada;
         this.dataDevolucao = dataDevolucao;
         this.valor = valor;
-    }  
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
+
+    public String getCarro() {
+        return carro;
+    }
+
+    public void setCarro(String carro) {
+        this.carro = carro;
+    }
+
+    public String getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
+    }
+
+    public String getFun() {
+        return fun;
+    }
+
+    public void setFun(String fun) {
+        this.fun = fun;
+    }
+
+    public String getDataRetirada() {
+        return dataRetirada;
+    }
+
+    public void setDataRetirada(String dataRetirada) {
+        this.dataRetirada = dataRetirada;
+    }
+
+    public String getDataDevolucao() {
+        return dataDevolucao;
+    }
+
+    public void setDataDevolucao(String dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
+    }
 
     public float getValor() {
         return valor;
@@ -36,28 +95,5 @@ public class Locacao {
         this.valor = valor;
     }
     
-    public Carro getCarro() {
-        return carro;
-    }
-
-    public void setCarro(Carro carro) {
-        this.carro = carro;
-    }
-
-    public Date getDataRetirada() {
-        return dataRetirada;
-    }
-
-    public void setDataRetirada(Date dataRetirada) {
-        this.dataRetirada = dataRetirada;
-    }
-
-    public Date getDataDevolucao() {
-        return dataDevolucao;
-    }
-
-    public void setDataDevolucao(Date dataDevolucao) {
-        this.dataDevolucao = dataDevolucao;
-    }
     
 }

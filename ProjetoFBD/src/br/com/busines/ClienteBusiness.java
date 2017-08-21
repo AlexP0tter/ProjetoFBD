@@ -47,17 +47,6 @@ public class ClienteBusiness {
         return true;
     }
 
-    public Cliente buscarPorid(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public List<Cliente> getAllI() throws Exception {
-        try {
-            return clienteDao.getAllI();
-        } catch (Exception ex) {
-            Logger.getLogger(ClienteBusiness.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        throw new Exception("Erro....");
-    }
+    
 
 }

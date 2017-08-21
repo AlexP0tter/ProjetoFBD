@@ -5,25 +5,23 @@
  */
 package br.com.dao;
 
-import br.com.model.Cliente;
-import br.com.model.Funcionario;
+import br.com.model.Locacao;
 import br.com.util.ConnectionFactory;
 import br.com.util.SqlUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.List;
 
 /**
  *
  * @author Alexp0tter
  */
-public class FuncionarioDao{
+public class LocaDao {
     
     Connection con;
     PreparedStatement statement;
 
-    public FuncionarioDao() {
+    public LocaDao() {
         try {
             con = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
             
@@ -38,18 +36,19 @@ public class FuncionarioDao{
         }
 
     }
-    public Funcionario salvar(Funcionario funcionario)throws Exception {
+    public Locacao salvar(Locacao loc)throws Exception {
         try {
-            statement = con.prepareStatement(SqlUtil.SQL_INSERT_FUNCIONARIO_ALL);
-            statement.setInt(1, funcionario.getId());
-            statement.setString(2, funcionario.getNome());
-            statement.setString(3, funcionario.getCargo());
-            statement.setString(4, funcionario.getCpf());            
-            statement.setString(5, funcionario.getContato());
-            statement.setString(6, funcionario.getEndereco());            
+            statement = con.prepareStatement(SqlUtil.SQL_INSERT_LOCACAO_ALL);
+            statement.setInt(1, loc.getId());
+            statement.setString(2, loc.getCliente());
+            statement.setString(3, loc.getCarro());
+            statement.setString(4, loc.getFun());            
+            statement.setString(5, loc.getDataRetirada());
+            statement.setString(6, loc.getDataDevolucao());
+            statement.setDouble(7, loc.getValor());            
             
             statement.execute();
-            return funcionario;
+            return loc;
         } catch (SQLException ex) {
             ex.printStackTrace();
             try {
@@ -61,20 +60,21 @@ public class FuncionarioDao{
         throw new Exception("Erro....");
     }
     
-    public Funcionario alterar(Funcionario fun)throws Exception {
+    public Locacao alterar(Locacao loc)throws Exception {
         try {
-            statement = con.prepareStatement(SqlUtil.UPDATE_FUNCIONARIO);            
+            statement = con.prepareStatement(SqlUtil.UPDATE_LOCACAO);            
             
-            statement.setString(1, fun.getNome());
-            statement.setString(2, fun.getCargo());
-            statement.setString(3, fun.getCpf());
-            statement.setString(5, fun.getEndereco());
-            statement.setString(4, fun.getContato());
-            statement.setInt(6, fun.getId());
+            statement.setString(1, loc.getCliente());
+            statement.setString(2, loc.getCarro());
+            statement.setString(3, loc.getFun());            
+            statement.setString(4, loc.getDataRetirada());
+            statement.setString(5, loc.getDataDevolucao());
+            statement.setDouble(6, loc.getValor()); 
+            statement.setInt(7, loc.getId());
             
             statement.execute();
                     
-            return fun;
+            return loc;
                      
             
         } catch (SQLException ex) {
@@ -88,8 +88,5 @@ public class FuncionarioDao{
              throw new Exception("Erro....");
         
     }
-
-    
-    
     
 }

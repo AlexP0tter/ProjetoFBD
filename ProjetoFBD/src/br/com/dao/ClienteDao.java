@@ -94,46 +94,5 @@ public class ClienteDao {
 
     }
 
-    public Cliente buscarPorid(Cliente cliente) throws Exception {
-        try {
-            statement = con.prepareStatement(SqlUtil.SELECT_CLIENTE_ULTIMO_REGISTRO);
-            result = statement.executeQuery();
-            result.next();
-            cliente.setId(new Integer(result.getInt("id")));
-
-            return cliente;
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ClienteDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        throw new Exception("Erro....");
-    }
-
-    public List<Cliente> getAllI() throws Exception {
-
-        List<Cliente> lista = new ArrayList<>();
-        ArrayList dados = new ArrayList();
-
-        try {
-            statement = con.prepareStatement(SqlUtil.SELECT_CLIENTE);
-            result.first();
-            //result = statement.executeQuery();
-            do {
-                //lista.add(new Cliente(result.getInt("id"),result.getString("nome"),result.getString("cpf"),result.getString("endereco"),result.getString("contato")));
-                dados.add(new Object[]{result.getInt("id"), result.getString("nome"), result.getString("cpf"), result.getString("endereco"), result.getString("contato")});
-            } while (result.next());
-
-            //return lista;
-            return dados;
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ClienteDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        throw new Exception("Erro....");
-    }
-
-    public boolean editar(Cliente aluno) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
 }
