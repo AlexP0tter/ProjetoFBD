@@ -12,16 +12,44 @@ package br.com.model;
 public class Funcionario {
     
     private int id;
-    private String nome,cargo, endereco,contato,cpf;
+    private String nome,cargo,contato,cpf;
+    private String senha, login;
+    private Endereco end;
 
-    public Funcionario(int id, String nome, String cargo, String endereco, String contato, String cpf) {
+    public Funcionario(int id,int idEnd, String nome, String cargo, String contato, String cpf,String rua, String bairro, String cidade, String uf, String cep, String usuario, String senha) {
         this.id = id;
         this.nome = nome;
         this.cargo = cargo;
-        this.endereco = endereco;
         this.contato = contato;
         this.cpf = cpf;
+        this.login = login;
+        this.senha = senha;
+        end = new Endereco(idEnd,rua, bairro, cidade, uf, cep);
     }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public Endereco getEnd() {
+        return end;
+    }
+
+    public void setEnd(Endereco end) {
+        this.end = end;
+    }    
     
     public Funcionario(){
         
@@ -49,15 +77,7 @@ public class Funcionario {
 
     public void setCargo(String cargo) {
         this.cargo = cargo;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
+    } 
 
     public String getContato() {
         return contato;

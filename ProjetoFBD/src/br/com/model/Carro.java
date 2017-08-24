@@ -13,28 +13,22 @@ public class Carro {
     
     private int id;
     private String modelo, placa, marca, cor;
+    private boolean status;
+    private double valorDiaria;
 
-    public Carro(int id, String modelo, String merca, String placa, String cor) {
+    public Carro(int id, String modelo, String placa, String marca, String cor, boolean status, double valorDiaria) {
         this.id = id;
         this.modelo = modelo;
         this.placa = placa;
         this.marca = marca;
         this.cor = cor;
+        this.status = status;
+        this.valorDiaria = valorDiaria;
     }
-    
+           
     public Carro(){
         
     }
-
-    public String getCor() {
-        return cor;
-    }
-
-    public void setCor(String cor) {
-        this.cor = cor;
-    }
-    
-    
 
     public int getId() {
         return id;
@@ -68,6 +62,31 @@ public class Carro {
         this.marca = marca;
     }
 
-   
+    public String getCor() {
+        return cor;
+    }
+
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public double getValorDiaria() {
+        return valorDiaria;
+    }
+
+    public void setValorDiaria(double valorDiaria) {
+        this.valorDiaria = valorDiaria;
+    }
     
+    
+
+   
 }

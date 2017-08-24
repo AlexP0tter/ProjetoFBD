@@ -12,14 +12,15 @@ package br.com.model;
 public class Cliente {   
     
     private int id;
-    private String Nome, CPF, endereco,contato;
+    private String Nome, CPF,contato;
+    private Endereco endereco; 
     
-    public Cliente( int id,String Nome, String CPF, String endereco, String contato) {
+    public Cliente( int id,int idEnd,String Nome, String CPF,  String contato, String rua, String bairro, String cidade, String uf, String cep) {
         this.id = id;
         this.Nome = Nome;
         this.CPF = CPF;
-        this.endereco = endereco;
         this.contato = contato;
+        endereco = new Endereco(idEnd,rua, cidade, uf, bairro,cep);
     }
     
     public Cliente(){
@@ -48,15 +49,7 @@ public class Cliente {
     public void setCPF(String CPF) {
         this.CPF = CPF;
     }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
+    
     public String getContato() {
         return contato;
     }

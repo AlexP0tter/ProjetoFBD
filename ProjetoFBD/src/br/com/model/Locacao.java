@@ -17,24 +17,85 @@ public class Locacao {
     //private Cliente cliente;
     //private Funcionario fun;
     
-    private String cliente, carro, fun;
-    private String dataRetirada, dataDevolucao;
-    private float valor;
+    private Cliente cliente;
+    private Carro carro;
+    private Funcionario fun;
+    private Date dataRetirada, dataDevolucao;
+    private double valor;
+    private boolean statusLocacao;
     
     private int id;
-    
-    public Locacao(){
-        
-    }
 
-    public Locacao(int id,String carro, String cliente,String fun, String dataRetirada, String dataDevolucao, float valor) {
-        this.id = id;
-        this.carro = carro;
+    public Locacao(Cliente cliente, Carro carro, Funcionario fun, Date dataRetirada, Date dataDevolucao, double valor, boolean statusLocacao, int id) {
         this.cliente = cliente;
+        this.carro = carro;
         this.fun = fun;
         this.dataRetirada = dataRetirada;
         this.dataDevolucao = dataDevolucao;
         this.valor = valor;
+        this.statusLocacao = statusLocacao;
+        this.id = id;
+    }
+    
+    
+    public Locacao(){
+        
+    } 
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Carro getCarro() {
+        return carro;
+    }
+
+    public void setCarro(Carro carro) {
+        this.carro = carro;
+    }
+
+    public Funcionario getFun() {
+        return fun;
+    }
+
+    public void setFun(Funcionario fun) {
+        this.fun = fun;
+    }
+
+    public Date getDataRetirada() {
+        return dataRetirada;
+    }
+
+    public void setDataRetirada(Date dataRetirada) {
+        this.dataRetirada = dataRetirada;
+    }
+
+    public Date getDataDevolucao() {
+        return dataDevolucao;
+    }
+
+    public void setDataDevolucao(Date dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    public boolean isStatusLocacao() {
+        return statusLocacao;
+    }
+
+    public void setStatusLocacao(boolean statusLocacao) {
+        this.statusLocacao = statusLocacao;
     }
 
     public int getId() {
@@ -45,55 +106,6 @@ public class Locacao {
         this.id = id;
     }
     
-    
-
-    public String getCarro() {
-        return carro;
-    }
-
-    public void setCarro(String carro) {
-        this.carro = carro;
-    }
-
-    public String getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(String cliente) {
-        this.cliente = cliente;
-    }
-
-    public String getFun() {
-        return fun;
-    }
-
-    public void setFun(String fun) {
-        this.fun = fun;
-    }
-
-    public String getDataRetirada() {
-        return dataRetirada;
-    }
-
-    public void setDataRetirada(String dataRetirada) {
-        this.dataRetirada = dataRetirada;
-    }
-
-    public String getDataDevolucao() {
-        return dataDevolucao;
-    }
-
-    public void setDataDevolucao(String dataDevolucao) {
-        this.dataDevolucao = dataDevolucao;
-    }
-
-    public float getValor() {
-        return valor;
-    }
-
-    public void setValor(float valor) {
-        this.valor = valor;
-    }
     
     
 }
