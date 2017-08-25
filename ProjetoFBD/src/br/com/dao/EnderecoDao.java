@@ -6,29 +6,24 @@
 package br.com.dao;
 
 import br.com.model.Carro;
-import br.com.model.Cliente;
+import br.com.model.Endereco;
 import br.com.util.ConnectionFactory;
 import br.com.util.SqlUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author Alexp0tter
  */
-public class ClienteDao {
+public class EnderecoDao {
 
     Connection con;
     PreparedStatement statement;
-    ResultSet result;
 
-    public ClienteDao() {
+    public EnderecoDao() {
         try {
             con = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
 
@@ -43,20 +38,19 @@ public class ClienteDao {
 
     }
 
-    public Cliente salvar(Cliente cliente) throws Exception {
+    public Endereco salvar(Endereco end) throws Exception {
         try {
-            statement = con.prepareStatement(SqlUtil.SQL_INSERT_CLIENTE_ALL);
+            statement = con.prepareStatement(SqlUtil.SQL_INSERT_ENDERECO_ALL);
 
-            statement.setInt(1, cliente.getId());
-            statement.setInt(2, cliente.getEndereco().getId());
-            statement.setString(3, cliente.getCPF());
-            statement.setString(4, cliente.getNome());
-            statement.setString(5, cliente.getContato());           
+            statement.setInt(1, end.getId());
+            statement.setString(2, end.getRua());
+            statement.setString(3, end.getBairro());
+            statement.setString(4, end.getCep());
+            statement.setString(5, end.getCidade());
+            statement.setString(6, end.getUf());
             
-            
-            statement.execute();
 
-            return cliente;
+            return end;
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -67,22 +61,23 @@ public class ClienteDao {
             }
         }
         throw new Exception("Erro....");
-
     }
 
-    public Cliente alterar(Cliente cliente) throws Exception {
-        try {
-            statement = con.prepareStatement(SqlUtil.UPDATE_CLIENTE);
+    public Endereco alterar(Endereco end) throws Exception {
 
-            statement.setInt(1, cliente.getEndereco().getId());
-            statement.setString(2, cliente.getCPF());
-            statement.setString(3, cliente.getNome());
-            statement.setString(4, cliente.getContato());  
-            statement.setInt(5, cliente.getId());
+        try {
+            statement = con.prepareStatement(SqlUtil.UPDATE_ENDERECO);
+
+            statement.setString(1, end.getRua());
+            statement.setString(2, end.getBairro());
+            statement.setString(3, end.getCep());
+            statement.setString(4, end.getCidade());
+            statement.setString(5, end.getUf());
+            statement.setInt(6, end.getId());
 
             statement.execute();
 
-            return cliente;
+            return end;
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -97,4 +92,5 @@ public class ClienteDao {
     }
 
     
+
 }

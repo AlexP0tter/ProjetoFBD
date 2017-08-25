@@ -7,10 +7,12 @@ package br.com.fachada;
 
 import br.com.busines.CarroBusiness;
 import br.com.busines.ClienteBusiness;
+import br.com.busines.EnderecoBusiness;
 import br.com.busines.FuncionarioBusiness;
 import br.com.busines.LocaBusiness;
 import br.com.model.Carro;
 import br.com.model.Cliente;
+import br.com.model.Endereco;
 import br.com.model.Funcionario;
 import br.com.model.Locacao;
 import java.util.List;
@@ -31,12 +33,14 @@ public class Fachada{
     private CarroBusiness carroBusiness;
     private FuncionarioBusiness funcionarioBusiness;
     private LocaBusiness locaBusiness;
+    private EnderecoBusiness endBusiness;
 
     public Fachada() {
         clienteBusiness = new ClienteBusiness();
         carroBusiness = new CarroBusiness();
         funcionarioBusiness = new FuncionarioBusiness(); 
         locaBusiness = new LocaBusiness();
+        endBusiness = new EnderecoBusiness();
         
     }
 
@@ -45,6 +49,14 @@ public class Fachada{
             fachada = new Fachada();
         }
         return fachada;
+    }
+    
+    public boolean salvarEnd(Endereco endereco) {
+        return endBusiness.salvar(endereco);
+    }
+    
+    public boolean alterarEnd(Endereco endereco) {
+        return endBusiness.alterar(endereco);        
     }
 
    

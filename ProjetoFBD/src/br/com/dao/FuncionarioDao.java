@@ -38,18 +38,20 @@ public class FuncionarioDao{
         }
 
     }
-    public Funcionario salvar(Funcionario funcionario)throws Exception {
+    public Funcionario salvar(Funcionario fun)throws Exception {
         try {
             statement = con.prepareStatement(SqlUtil.SQL_INSERT_FUNCIONARIO_ALL);
-            statement.setInt(1, funcionario.getId());
-            statement.setString(2, funcionario.getNome());
-            statement.setString(3, funcionario.getCargo());
-            statement.setString(4, funcionario.getCpf());            
-            statement.setString(5, funcionario.getContato());
-            statement.setString(6, funcionario.getEndereco());            
+            statement.setInt(1, fun.getId());
+            statement.setInt(2, fun.getEnd().getId());         
+            statement.setString(3, fun.getNome());
+            statement.setString(4, fun.getCpf());
+            statement.setString(5, fun.getCargo());            
+            statement.setString(6, fun.getContato());
+            statement.setString(7, fun.getLogin());
+            statement.setString(8, fun.getSenha());
             
             statement.execute();
-            return funcionario;
+            return fun;
         } catch (SQLException ex) {
             ex.printStackTrace();
             try {
@@ -63,14 +65,16 @@ public class FuncionarioDao{
     
     public Funcionario alterar(Funcionario fun)throws Exception {
         try {
-            statement = con.prepareStatement(SqlUtil.UPDATE_FUNCIONARIO);            
+            statement = con.prepareStatement(SqlUtil.UPDATE_FUNCIONARIO);       
             
-            statement.setString(1, fun.getNome());
-            statement.setString(2, fun.getCargo());
+            statement.setInt(1, fun.getEnd().getId());         
+            statement.setString(2, fun.getNome());
             statement.setString(3, fun.getCpf());
-            statement.setString(5, fun.getEndereco());
-            statement.setString(4, fun.getContato());
-            statement.setInt(6, fun.getId());
+            statement.setString(4, fun.getCargo());            
+            statement.setString(5, fun.getContato());
+            statement.setString(6, fun.getLogin());
+            statement.setString(7, fun.getSenha());
+            statement.setInt(8, fun.getId());
             
             statement.execute();
                     
