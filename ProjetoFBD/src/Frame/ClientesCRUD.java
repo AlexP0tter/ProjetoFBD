@@ -2,6 +2,7 @@ package Frame;
 
 import br.com.fachada.Fachada;
 import br.com.model.Cliente;
+import br.com.model.Endereco;
 import br.com.util.ConnectionFactory;
 import br.com.util.SqlUtil;
 import java.sql.Connection;
@@ -29,6 +30,7 @@ public class ClientesCRUD extends javax.swing.JFrame {
     ResultSet result;
     Connection con;
     Cliente cliente = new Cliente();
+    Endereco endereco = new Endereco();
 
     public ClientesCRUD() {
         initComponents();

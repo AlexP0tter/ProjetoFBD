@@ -11,7 +11,7 @@ package br.com.util;
  */
 public class SqlUtil {
 
-    public static final String SQL_INSERT_CLIENTE_ALL = "INSERT INTO cliente(id,idEndereco, cpf, nome, contato) values(?,?,?,?,?)";
+    public static final String SQL_INSERT_CLIENTE_ALL = "INSERT INTO cliente(id,idEndereco, cpf, nome, contato) values(?,(SELECT id FROM endereco ORDER BY id DESC LIMIT 1),?,?,?)";
     public static final String SELECT_CLIENTE = "SELECT id ,nome,cpf,endereco,contato FROM cliente";
     public static final String UPDATE_CLIENTE = "update cliente set nome = ?, cpf = ?, endereco = ?, contato = ? where id = ?";
 
