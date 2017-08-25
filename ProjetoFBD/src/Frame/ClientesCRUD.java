@@ -66,19 +66,19 @@ public class ClientesCRUD extends javax.swing.JFrame {
         btCadastrar = new javax.swing.JButton();
         btAlterar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        nomeFun = new javax.swing.JTextField();
-        endFun = new javax.swing.JTextField();
+        nomeFild = new javax.swing.JTextField();
+        endFild = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        cpfFun = new javax.swing.JFormattedTextField();
+        cepFild = new javax.swing.JFormattedTextField();
+        cpfFild = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        contatoFun = new javax.swing.JFormattedTextField();
+        bairroFild = new javax.swing.JTextField();
+        ufFild = new javax.swing.JTextField();
+        contatoFild = new javax.swing.JFormattedTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        cidadeFild = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -118,22 +118,22 @@ public class ClientesCRUD extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Cliente"));
 
-        nomeFun.addActionListener(new java.awt.event.ActionListener() {
+        nomeFild.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomeFunActionPerformed(evt);
+                nomeFildActionPerformed(evt);
             }
         });
 
         jLabel2.setText("CPF");
 
         try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
+            cepFild.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
 
         try {
-            cpfFun.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+            cpfFild.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -144,14 +144,14 @@ public class ClientesCRUD extends javax.swing.JFrame {
 
         jLabel3.setText("Endereço");
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        ufFild.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                ufFildActionPerformed(evt);
             }
         });
 
         try {
-            contatoFun.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) # #### - ####")));
+            contatoFild.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) # #### - ####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -176,7 +176,7 @@ public class ClientesCRUD extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(nomeFun))
+                            .addComponent(nomeFild))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -185,32 +185,32 @@ public class ClientesCRUD extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addGap(69, 69, 69))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(cpfFun, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cpfFild, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(contatoFun, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(contatoFild, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(endFun, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(endFild, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(bairroFild, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(4, 4, 4)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cidadeFild, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3)
+                            .addComponent(ufFild)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
-                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cepFild, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
@@ -222,9 +222,9 @@ public class ClientesCRUD extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomeFun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cpfFun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(contatoFun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nomeFild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cpfFild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(contatoFild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -234,11 +234,11 @@ public class ClientesCRUD extends javax.swing.JFrame {
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(endFun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(endFild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bairroFild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cidadeFild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cepFild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ufFild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46))
         );
 
@@ -387,22 +387,34 @@ public class ClientesCRUD extends javax.swing.JFrame {
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
      
 
-        cliente.setNome(nomeCliente.getText());
-        cliente.setCPF(cpfCliente.getText());
-        cliente.setEndereco(endCliente.getText());
-        cliente.setContato(contatoCliente.getText());
+        endereco.setRua(endFild.getText());
+        endereco.setBairro(bairroFild.getText());
+        endereco.setCep(cepFild.getText());
+        endereco.setCidade(cidadeFild.getText());
+        endereco.setUf(ufFild.getText());
+        
+        
+        cliente.setNome(nomeFild.getText());
+        cliente.setCPF(cpfFild.getText());
+        cliente.setContato(contatoFild.getText());
 
         Fachada coreFachada = new Fachada();
+        coreFachada.salvarEnd(endereco);
         coreFachada.salvarCliente(cliente);
+        
+        endFild.setText("");
+        bairroFild.setText("");
+        cepFild.setText("");
+        cidadeFild.setText("");
+        ufFild.setText("");
 
-        nomeCliente.setText("");
-        cpfCliente.setText("");
-        endCliente.setText("");
-        contatoCliente.setText("");
+        nomeFild.setText("");
+        cpfFild.setText("");
+        contatoFild.setText("");
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
-
+/*
         int linha = jTable1.getSelectedRow();
         String nome = jTable1.getValueAt(linha, 1).toString();
         String cpf = jTable1.getValueAt(linha, 2).toString();
@@ -421,18 +433,18 @@ public class ClientesCRUD extends javax.swing.JFrame {
         nomeCliente.setText("");
         cpfCliente.setText("");
         endCliente.setText("");
-        contatoCliente.setText("");
+        contatoCliente.setText("");*/
     }//GEN-LAST:event_btAlterarActionPerformed
 
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        
+        /*
         int linha = jTable1.getSelectedRow(); // retorna a linha selecionada pelo usuario
         nomeCliente.setText(jTable1.getValueAt(linha, 1).toString()); // retorna o valor da celula linha X 0
         cpfCliente.setText(jTable1.getValueAt(linha, 2).toString()); // retorna o valor da celula linha X 1
         endCliente.setText(jTable1.getValueAt(linha, 3).toString()); // retorna o valor da celula linha X 2
         contatoCliente.setText(jTable1.getValueAt(linha, 4).toString()); // retorna o valor da celula linha X 2
-
+*/
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void fieldBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldBuscaActionPerformed
@@ -440,7 +452,7 @@ public class ClientesCRUD extends javax.swing.JFrame {
     }//GEN-LAST:event_fieldBuscaActionPerformed
 
     private void btBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscaActionPerformed
-
+/*
         String sql = "SELECT * FROM cliente WHERE nome LIKE '%"
                 + fieldBusca.getText() + "%' OR cpf LIKE '%"
                 + fieldBusca.getText() + "%'"
@@ -450,16 +462,16 @@ public class ClientesCRUD extends javax.swing.JFrame {
         nomeCliente.setText("");
         cpfCliente.setText("");
         endCliente.setText("");
-        contatoCliente.setText("");
+        contatoCliente.setText("");*/
     }//GEN-LAST:event_btBuscaActionPerformed
 
-    private void nomeFunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeFunActionPerformed
+    private void nomeFildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeFildActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nomeFunActionPerformed
+    }//GEN-LAST:event_nomeFildActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void ufFildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ufFildActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_ufFildActionPerformed
 
     public void PopularJTable(String sql) {
         try {
@@ -486,18 +498,52 @@ public class ClientesCRUD extends javax.swing.JFrame {
         }
     }
     
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new ClientesCRUD().setVisible(true);
+            }
+        });
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField bairroFild;
     private javax.swing.JButton btAlterar;
     private javax.swing.JButton btBusca;
     private javax.swing.JButton btCadastrar;
-    private javax.swing.JFormattedTextField contatoFun;
-    private javax.swing.JFormattedTextField cpfFun;
-    private javax.swing.JTextField endFun;
+    private javax.swing.JFormattedTextField cepFild;
+    private javax.swing.JTextField cidadeFild;
+    private javax.swing.JFormattedTextField contatoFild;
+    private javax.swing.JFormattedTextField cpfFild;
+    private javax.swing.JTextField endFild;
     private javax.swing.JTextField fieldBusca;
     private javax.swing.JButton jButton1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -512,9 +558,7 @@ public class ClientesCRUD extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField nomeFun;
+    private javax.swing.JTextField nomeFild;
+    private javax.swing.JTextField ufFild;
     // End of variables declaration//GEN-END:variables
 }
