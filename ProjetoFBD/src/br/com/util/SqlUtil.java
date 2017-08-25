@@ -15,7 +15,7 @@ public class SqlUtil {
     public static final String SELECT_CLIENTE = "SELECT id ,nome,cpf,endereco,contato FROM cliente";
     public static final String UPDATE_CLIENTE = "update cliente set nome = ?, cpf = ?, endereco = ?, contato = ? where id = ?";
 
-    public static final String SQL_INSERT_FUNCIONARIO_ALL = "INSERT INTO funcionário(id ,idEndereco ,nome ,CPF ,cargo ,contato ,loginUser ,loginSenha) values(?,?,?,?,?,?,?,?)";
+    public static final String SQL_INSERT_FUNCIONARIO_ALL = "INSERT INTO funcionário(id ,idEndereco ,nome ,CPF ,cargo ,contato ,loginUser ,loginSenha) values(?,(SELECT id FROM endereco ORDER BY id DESC LIMIT 1),?,?,?,?,?,?)";
     public static final String SELECT_FUNCIONARIO = "SELECT id ,idEndereco ,nome ,CPF ,cargo ,contato ,loginUser ,loginSenha FROM funcionário ";
     public static final String UPDATE_FUNCIONARIO = "update funcionário set nome = ?, cargo=?, cpf = ?, contato = ?, endereco = ? where id = ?";
 

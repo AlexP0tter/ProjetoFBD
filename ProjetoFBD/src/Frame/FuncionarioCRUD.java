@@ -2,6 +2,7 @@ package Frame;
 
 import br.com.fachada.Fachada;
 import br.com.model.Cliente;
+import br.com.model.Endereco;
 import br.com.model.Funcionario;
 import br.com.util.ConnectionFactory;
 import br.com.util.SqlUtil;
@@ -21,6 +22,7 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
     ResultSet result;
     Connection con;
     Funcionario fun = new Funcionario();
+    Endereco endereco = new Endereco();
 
     public FuncionarioCRUD() {
         initComponents();
@@ -59,7 +61,7 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         nomeFun = new javax.swing.JTextField();
-        endFun = new javax.swing.JTextField();
+        endFild = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         cpfFun = new javax.swing.JFormattedTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -67,17 +69,17 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         cargoFun = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        bairroFild = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        cidadeFild = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        cepFild = new javax.swing.JFormattedTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        ufFild = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -153,16 +155,16 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
         jLabel10.setText("Senha");
 
         try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
+            cepFild.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
 
         jLabel11.setText("UF");
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        ufFild.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                ufFildActionPerformed(evt);
             }
         });
 
@@ -175,26 +177,26 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(endFun, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(endFild, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(bairroFild, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(4, 4, 4)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cidadeFild, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3)
+                            .addComponent(ufFild)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addGap(0, 25, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cepFild, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(nomeFun)
@@ -245,16 +247,17 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(endFun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(endFild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bairroFild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cidadeFild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cepFild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ufFild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel9)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -407,19 +410,31 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
 
+        endereco.setRua(endFild.getText());
+        endereco.setBairro(bairroFild.getText());
+        endereco.setCep(cepFild.getText());
+        endereco.setCidade(cidadeFild.getText());
+        endereco.setUf(ufFild.getText());
+
         fun.setNome(nomeFun.getText());
         fun.setCpf(cpfFun.getText());
         fun.setCargo(cargoFun.getText());
-        fun.setEndereco(endFun.getText());
         fun.setContato(contatoFun.getText());
 
         Fachada coreFachada = new Fachada();
+        coreFachada.salvarEnd(endereco);
         coreFachada.salvarFuncionario(fun);
-
+        
+        endFild.setText("");
+        bairroFild.setText("");
+        cepFild.setText("");
+        cidadeFild.setText("");
+        ufFild.setText("");
+        
         nomeFun.setText("");
         cargoFun.setText("");
         cpfFun.setText("");
-        endFun.setText("");
+        endFild.setText("");
         contatoFun.setText("");
     }//GEN-LAST:event_btCadastrarActionPerformed
 
@@ -438,7 +453,6 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
         fun.setNome(nomeFun.getText());
         fun.setCargo(cargoFun.getText());
         fun.setCpf(cpfFun.getText());
-        fun.setEndereco(endFun.getText());
         fun.setContato(contatoFun.getText());
 
         Fachada coreFachada = new Fachada();
@@ -447,7 +461,7 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
         nomeFun.setText("");
         cargoFun.setText("");
         cpfFun.setText("");
-        endFun.setText("");
+        endFild.setText("");
         contatoFun.setText("");
     }//GEN-LAST:event_btAlterarActionPerformed
 
@@ -458,7 +472,7 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
         nomeFun.setText(jTable1.getValueAt(linha, 1).toString()); // retorna o valor da celula linha X 0
         cargoFun.setText(jTable1.getValueAt(linha, 2).toString()); // retorna o valor da celula linha X 0        
         cpfFun.setText(jTable1.getValueAt(linha, 3).toString()); // retorna o valor da celula linha X 1
-        endFun.setText(jTable1.getValueAt(linha, 4).toString()); // retorna o valor da celula linha X 2
+        endFild.setText(jTable1.getValueAt(linha, 4).toString()); // retorna o valor da celula linha X 2
         contatoFun.setText(jTable1.getValueAt(linha, 5).toString()); // retorna o valor da celula linha X 2
 
     }//GEN-LAST:event_jTable1MouseClicked
@@ -478,13 +492,13 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
         nomeFun.setText("");
         cargoFun.setText("");
         cpfFun.setText("");
-        endFun.setText("");
+        endFild.setText("");
         contatoFun.setText("");
     }//GEN-LAST:event_btBuscaActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void ufFildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ufFildActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_ufFildActionPerformed
 
     public void PopularJTable(String sql) {
         try {
@@ -514,16 +528,18 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField bairroFild;
     private javax.swing.JButton btAlterar;
     private javax.swing.JButton btBusca;
     private javax.swing.JButton btCadastrar;
     private javax.swing.JTextField cargoFun;
+    private javax.swing.JFormattedTextField cepFild;
+    private javax.swing.JTextField cidadeFild;
     private javax.swing.JFormattedTextField contatoFun;
     private javax.swing.JFormattedTextField cpfFun;
-    private javax.swing.JTextField endFun;
+    private javax.swing.JTextField endFild;
     private javax.swing.JTextField fieldBusca;
     private javax.swing.JButton jButton1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -541,11 +557,9 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField nomeFun;
+    private javax.swing.JTextField ufFild;
     // End of variables declaration//GEN-END:variables
 }
