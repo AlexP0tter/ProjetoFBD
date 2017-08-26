@@ -46,11 +46,11 @@ public class ClienteDao {
 
     public Cliente salvar(Cliente cliente) throws Exception {
         try {
-            Long id = salvarEndereco(cliente.getEndereco());
+            Long idEnd = salvarEndereco(cliente.getEndereco());
             statement = con.prepareStatement(SqlUtil.SQL_INSERT_CLIENTE_ALL);
 
             statement.setInt(1, cliente.getId());
-            statement.setLong(2, id);
+            statement.setLong(2, idEnd);
             statement.setString(3, cliente.getCPF());
             statement.setString(4, cliente.getNome());
             statement.setString(5, cliente.getContato());           
@@ -74,9 +74,10 @@ public class ClienteDao {
 
     public Cliente alterar(Cliente cliente) throws Exception {
         try {
+            Long idEnd = alterarEndereco(cliente.getEndereco());
             statement = con.prepareStatement(SqlUtil.UPDATE_CLIENTE);
 
-            statement.setInt(1, cliente.getEndereco().getId());
+            statement.setLong(1, idEnd);
             statement.setString(2, cliente.getCPF());
             statement.setString(3, cliente.getNome());
             statement.setString(4, cliente.getContato());  
@@ -102,6 +103,43 @@ public class ClienteDao {
         
         try{
             statement = con.prepareStatement(SqlUtil.SQL_INSERT_ENDERECO_ALL);
+
+            statement.setInt(1, end.getId());
+            statement.setString(2, end.getRua());
+            statement.setString(3, end.getBairro());
+            statement.setString(4, end.getCep());
+            statement.setString(5, end.getCidade());
+            statement.setString(6, end.getUf());
+            statement.execute();
+            
+            statement = con.prepareStatement("select * from endereco");
+            result = statement.executeQuery();
+            
+            while(result.next()){
+                if(result.isLast()){
+                    return result.getLong("id");
+                }
+            }
+            
+            return new Long(0);
+            
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+            try {
+                con.rollback();
+            } catch (SQLException ex1) {
+                ex1.printStackTrace();
+                throw new Exception(ex1.getMessage());
+            }
+            throw new Exception(ex.getMessage());
+    }
+    }
+    
+    private Long alterarEndereco(Endereco end) throws Exception{
+        
+        try{
+            statement = con.prepareStatement(SqlUtil.UPDATE_ENDERECO);
 
             statement.setInt(1, end.getId());
             statement.setString(2, end.getRua());
