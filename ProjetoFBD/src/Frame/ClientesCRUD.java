@@ -30,7 +30,7 @@ public class ClientesCRUD extends javax.swing.JFrame {
     ResultSet result;
     Connection con;
     Cliente cliente = new Cliente();
-    Endereco endereco = new Endereco();
+    //Endereco endereco = new Endereco();
 
     public ClientesCRUD() {
         initComponents();
@@ -355,8 +355,8 @@ public class ClientesCRUD extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(btCadastrar)
@@ -386,20 +386,34 @@ public class ClientesCRUD extends javax.swing.JFrame {
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
      
-
+        //nao sei se pode fazer assim
+        
+        cliente.getEndereco().setRua(endFild.getText());
+        cliente.getEndereco().setBairro(bairroFild.getText());
+        cliente.getEndereco().setCidade(cidadeFild.getText());
+        cliente.getEndereco().setUf(ufFild.getText());
+        cliente.getEndereco().setCep(cepFild.getText());
+        
+        
+        /*
         endereco.setRua(endFild.getText());
         endereco.setBairro(bairroFild.getText());
         endereco.setCep(cepFild.getText());
         endereco.setCidade(cidadeFild.getText());
         endereco.setUf(ufFild.getText());
+        endereco.setId(0);
+        */
         
         
         cliente.setNome(nomeFild.getText());
         cliente.setCPF(cpfFild.getText());
         cliente.setContato(contatoFild.getText());
+        
+        //cliente.setEndereco(endereco);
+        
 
         Fachada coreFachada = new Fachada();
-        coreFachada.salvarEnd(endereco);
+        //coreFachada.salvarEnd(cliente.getEndereco());
         coreFachada.salvarCliente(cliente);
         
         endFild.setText("");

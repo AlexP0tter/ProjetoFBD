@@ -15,15 +15,17 @@ public class Cliente {
     private String Nome, CPF,contato;
     private Endereco endereco; 
     
-    public Cliente( int id,int idEnd,String Nome, String CPF,  String contato, String rua, String bairro, String cidade, String uf, String cep) {
+    public Cliente( int id,Endereco end,String Nome, String CPF,  String contato) {
         this.id = id;
         this.Nome = Nome;
         this.CPF = CPF;
         this.contato = contato;
-        endereco = new Endereco(idEnd,rua, cidade, uf, bairro,cep);
+        this.endereco = end;
+        //endereco = new Endereco(idEnd,rua, cidade, uf, bairro,cep);
     }
     
     public Cliente(){
+        endereco = new Endereco();
     }
 
     public Endereco getEndereco() {
