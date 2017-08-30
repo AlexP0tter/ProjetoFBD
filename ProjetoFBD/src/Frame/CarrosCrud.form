@@ -152,7 +152,7 @@
                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel35" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="diariaCarro" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="taxaCarro" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -180,7 +180,7 @@
                           <Component id="marcaCarro" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="corCarro" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="placaCarro" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="diariaCarro" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="taxaCarro" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="statusLocCarro" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -209,7 +209,7 @@
                 <Property name="text" type="java.lang.String" value="Valor Di&#xe1;ria"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="diariaCarro">
+            <Component class="javax.swing.JTextField" name="taxaCarro">
             </Component>
             <Component class="javax.swing.JTextField" name="placaCarro">
               <Events>

@@ -69,7 +69,7 @@ public class CarrosCrud extends javax.swing.JFrame {
         jLabel31 = new javax.swing.JLabel();
         marcaCarro = new javax.swing.JTextField();
         jLabel35 = new javax.swing.JLabel();
-        diariaCarro = new javax.swing.JTextField();
+        taxaCarro = new javax.swing.JTextField();
         placaCarro = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -171,7 +171,7 @@ public class CarrosCrud extends javax.swing.JFrame {
                 .addGap(8, 8, 8)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel35)
-                    .addComponent(diariaCarro, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(taxaCarro, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
@@ -194,7 +194,7 @@ public class CarrosCrud extends javax.swing.JFrame {
                     .addComponent(marcaCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(corCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(placaCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(diariaCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(taxaCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(statusLocCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -344,10 +344,12 @@ public class CarrosCrud extends javax.swing.JFrame {
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
      
 
-       carro.setModelo(modeloCarro.getText());
+        carro.setModelo(modeloCarro.getText());
         carro.setMarca(marcaCarro.getText());
         carro.setPlaca(placaCarro.getText());
         carro.setCor(corCarro.getText());
+        carro.setValorDiaria(Double.parseDouble(taxaCarro.getText()));
+        carro.setStatus(Boolean.parseBoolean(statusLocCarro.getText()));
 
         Fachada coreFachada = new Fachada();
         coreFachada.salvarCarro(carro);
@@ -356,6 +358,10 @@ public class CarrosCrud extends javax.swing.JFrame {
         marcaCarro.setText("");
         placaCarro.setText("");
         corCarro.setText("");
+        taxaCarro.setText("");
+        statusLocCarro.setText("");
+        
+        
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
@@ -371,6 +377,8 @@ public class CarrosCrud extends javax.swing.JFrame {
         carro.setMarca(marcaCarro.getText());
         carro.setPlaca(placaCarro.getText());
         carro.setCor(corCarro.getText());
+        carro.setValorDiaria(Double.parseDouble(taxaCarro.getText()));
+        carro.setStatus(Boolean.parseBoolean(statusLocCarro.getText()));
 
         Fachada coreFachada = new Fachada();
         coreFachada.alterarCarro(carro);
@@ -379,6 +387,8 @@ public class CarrosCrud extends javax.swing.JFrame {
         marcaCarro.setText("");
         placaCarro.setText("");
         corCarro.setText("");
+        taxaCarro.setText("");
+        statusLocCarro.setText("");
     }//GEN-LAST:event_btAlterarActionPerformed
 
 
@@ -389,7 +399,8 @@ public class CarrosCrud extends javax.swing.JFrame {
         marcaCarro.setText(jTable1.getValueAt(linha, 2).toString()); // retorna o valor da celula linha X 1
         placaCarro.setText(jTable1.getValueAt(linha, 3).toString()); // retorna o valor da celula linha X 2
         corCarro.setText(jTable1.getValueAt(linha, 4).toString()); // retorna o valor da celula linha X 2
-
+        taxaCarro.setText(jTable1.getValueAt(linha, 5).toString());
+        statusLocCarro.setText(jTable1.getValueAt(linha, 6).toString());
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void fieldBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldBuscaActionPerformed
@@ -409,6 +420,8 @@ public class CarrosCrud extends javax.swing.JFrame {
         marcaCarro.setText("");
         placaCarro.setText("");
         corCarro.setText("");
+        taxaCarro.setText("");
+        statusLocCarro.setText("");
     }//GEN-LAST:event_btBuscaActionPerformed
 
     private void marcaCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_marcaCarroActionPerformed
@@ -440,12 +453,47 @@ public class CarrosCrud extends javax.swing.JFrame {
                     result.getString("modelo"),
                     result.getString("marca"),
                     result.getString("placa"),
-                    result.getString("cor"),});
+                    result.getString("cor"),
+                    result.getString("valorDiaria"),
+                    result.getString("satusLocacao"),});
             }
 
         } catch (SQLException ex) {
             System.out.println("o erro foi " + ex);
         }
+    }
+    
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new CarrosCrud().setVisible(true);
+            }
+        });
     }
     
     
@@ -455,7 +503,6 @@ public class CarrosCrud extends javax.swing.JFrame {
     private javax.swing.JButton btBusca;
     private javax.swing.JButton btCadastrar;
     private javax.swing.JTextField corCarro;
-    private javax.swing.JTextField diariaCarro;
     private javax.swing.JTextField fieldBusca;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
@@ -474,5 +521,6 @@ public class CarrosCrud extends javax.swing.JFrame {
     private javax.swing.JTextField modeloCarro;
     private javax.swing.JTextField placaCarro;
     private javax.swing.JTextField statusLocCarro;
+    private javax.swing.JTextField taxaCarro;
     // End of variables declaration//GEN-END:variables
 }

@@ -46,6 +46,8 @@ public class CarrosDao {
             statement.setString(3, carro.getMarca());
             statement.setString(4, carro.getPlaca());
             statement.setString(5, carro.getCor());
+            statement.setDouble(6, carro.getValorDiaria());
+            statement.setBoolean(7, carro.isStatus());
             statement.execute();
 
             return carro;
@@ -71,6 +73,8 @@ public class CarrosDao {
             statement.setString(3, carro.getPlaca());
             statement.setString(4, carro.getCor());
             statement.setInt(5, carro.getId());
+            statement.setDouble(6, carro.getValorDiaria());
+            statement.setBoolean(7, carro.isStatus());
 
             statement.execute();
 
