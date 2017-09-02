@@ -68,13 +68,13 @@ public class CarrosDao {
         try {
             statement = con.prepareStatement(SqlUtil.UPDATE_CARROS);
 
-            statement.setInt(1, carro.getId());
-            statement.setString(2, carro.getModelo());
-            statement.setString(3, carro.getMarca());
-            statement.setString(4, carro.getPlaca());
-            statement.setString(5, carro.getCor());
-            statement.setDouble(6, carro.getValorDiaria());
-            statement.setBoolean(7, carro.isStatus());
+            statement.setString(1, carro.getModelo());
+            statement.setString(2, carro.getMarca());
+            statement.setString(3, carro.getPlaca());
+            statement.setString(4, carro.getCor());
+            statement.setDouble(5, carro.getValorDiaria());
+            statement.setBoolean(6, carro.isStatus());
+            statement.setInt(7, carro.getId());
 
             statement.execute();
 
