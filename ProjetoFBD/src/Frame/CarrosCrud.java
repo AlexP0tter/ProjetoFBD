@@ -455,7 +455,7 @@ public class CarrosCrud extends javax.swing.JFrame {
                     result.getString("placa"),
                     result.getString("cor"),
                     result.getString("valorDiaria"),
-                    result.getString("satusLocacao"),});
+                    result.getString("statusLocacao"),});
             }
 
         } catch (SQLException ex) {
