@@ -2,17 +2,12 @@ package Frame;
 
 import br.com.fachada.Fachada;
 import br.com.model.Cliente;
-import br.com.model.Endereco;
 import br.com.util.ConnectionFactory;
 import br.com.util.SqlUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JOptionPane;
-import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -48,7 +43,7 @@ public class ClientesCRUD extends javax.swing.JFrame {
             }
         }
 
-        PopularJTable(SqlUtil.SELECT_CLIENTE);     
+        PopularJTable(SqlUtil.SELECT_CLIENTE);
 
     }
 
@@ -131,6 +126,11 @@ public class ClientesCRUD extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        cepFild.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cepFildActionPerformed(evt);
+            }
+        });
 
         try {
             cpfFild.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
@@ -144,6 +144,12 @@ public class ClientesCRUD extends javax.swing.JFrame {
 
         jLabel3.setText("Endereço");
 
+        bairroFild.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bairroFildActionPerformed(evt);
+            }
+        });
+
         ufFild.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ufFildActionPerformed(evt);
@@ -155,8 +161,19 @@ public class ClientesCRUD extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        contatoFild.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contatoFildActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Cidade");
+
+        cidadeFild.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cidadeFildActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("CEP");
 
@@ -172,45 +189,46 @@ public class ClientesCRUD extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(nomeFild))
+                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(254, 254, 254)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(cpfFild, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(94, 94, 94)
-                                .addComponent(jLabel4)
-                                .addGap(69, 69, 69))
+                                .addComponent(endFild, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(bairroFild))
+                            .addComponent(jLabel3)
+                            .addComponent(nomeFild, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 146, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(cidadeFild, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(contatoFild, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ufFild)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(cpfFild, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(contatoFild, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(238, 238, 238)
-                        .addComponent(jLabel6)
-                        .addGap(109, 109, 109)
-                        .addComponent(jLabel7)
-                        .addGap(58, 58, 58)
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                        .addComponent(jLabel8)
-                        .addGap(57, 57, 57))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(endFild, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel11)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bairroFild, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cidadeFild, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ufFild)
-                        .addGap(4, 4, 4)
-                        .addComponent(cepFild, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(cepFild, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,14 +249,14 @@ public class ClientesCRUD extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(jLabel8)
                     .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(endFild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bairroFild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cidadeFild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cepFild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ufFild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cepFild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
+                    .addComponent(cidadeFild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bairroFild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(endFild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -249,14 +267,14 @@ public class ClientesCRUD extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "ENDEREÇO", "CPF", "NOME", "CONTATO"
+                "ID", "Nome", "CPF", "Contato", "Endereço", "Bairro", "Cidade", "UF", "CEP", "idEnd"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -280,7 +298,7 @@ public class ClientesCRUD extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
+                .addComponent(jScrollPane2)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -384,37 +402,21 @@ public class ClientesCRUD extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
-     
+
         //nao sei se pode fazer assim
-        
         cliente.getEndereco().setRua(endFild.getText());
         cliente.getEndereco().setBairro(bairroFild.getText());
         cliente.getEndereco().setCidade(cidadeFild.getText());
         cliente.getEndereco().setUf(ufFild.getText());
         cliente.getEndereco().setCep(cepFild.getText());
-        
-        
-        /*
-        endereco.setRua(endFild.getText());
-        endereco.setBairro(bairroFild.getText());
-        endereco.setCep(cepFild.getText());
-        endereco.setCidade(cidadeFild.getText());
-        endereco.setUf(ufFild.getText());
-        endereco.setId(0);
-        */
-        
-        
+
         cliente.setNome(nomeFild.getText());
         cliente.setCPF(cpfFild.getText());
         cliente.setContato(contatoFild.getText());
-        
-        //cliente.setEndereco(endereco);
-        
 
         Fachada coreFachada = new Fachada();
-        //coreFachada.salvarEnd(cliente.getEndereco());
         coreFachada.salvarCliente(cliente);
-        
+
         endFild.setText("");
         bairroFild.setText("");
         cepFild.setText("");
@@ -427,37 +429,55 @@ public class ClientesCRUD extends javax.swing.JFrame {
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
-/*
+
         int linha = jTable1.getSelectedRow();
-        String nome = jTable1.getValueAt(linha, 1).toString();
-        String cpf = jTable1.getValueAt(linha, 2).toString();
+
+        int id = Integer.parseInt(jTable1.getValueAt(linha, 0).toString());        
         
-        int id = Integer.parseInt(jTable1.getValueAt(linha, 0).toString());
-        
+        int idEnd  = Integer.parseInt(jTable1.getValueAt(linha, 9).toString());
+
         cliente.setId(id);
-        cliente.setNome(nomeCliente.getText());
-        cliente.setCPF(cpfCliente.getText());
-        cliente.setEndereco(endCliente.getText());
-        cliente.setContato(contatoCliente.getText());
+        cliente.getEndereco().setId(idEnd);
+        cliente.getEndereco().setRua(endFild.getText());
+        cliente.getEndereco().setBairro(bairroFild.getText());
+        cliente.getEndereco().setCidade(cidadeFild.getText());
+        cliente.getEndereco().setUf(ufFild.getText());
+        cliente.getEndereco().setCep(cepFild.getText());
+        
+
+        cliente.setNome(nomeFild.getText());
+        cliente.setCPF(cpfFild.getText());
+        cliente.setContato(contatoFild.getText());
 
         Fachada coreFachada = new Fachada();
         coreFachada.alterarCliente(cliente);
-        
-        nomeCliente.setText("");
-        cpfCliente.setText("");
-        endCliente.setText("");
-        contatoCliente.setText("");*/
+
+        endFild.setText("");
+        bairroFild.setText("");
+        cepFild.setText("");
+        cidadeFild.setText("");
+        ufFild.setText("");
+
+        nomeFild.setText("");
+        cpfFild.setText("");
+        contatoFild.setText("");
     }//GEN-LAST:event_btAlterarActionPerformed
 
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        /*
-        int linha = jTable1.getSelectedRow(); // retorna a linha selecionada pelo usuario
-        nomeCliente.setText(jTable1.getValueAt(linha, 1).toString()); // retorna o valor da celula linha X 0
-        cpfCliente.setText(jTable1.getValueAt(linha, 2).toString()); // retorna o valor da celula linha X 1
-        endCliente.setText(jTable1.getValueAt(linha, 3).toString()); // retorna o valor da celula linha X 2
-        contatoCliente.setText(jTable1.getValueAt(linha, 4).toString()); // retorna o valor da celula linha X 2
-*/
+
+        int linha = jTable1.getSelectedRow(); // retorna a linha selecionada pelo usuario        
+
+        nomeFild.setText(jTable1.getValueAt(linha, 1).toString());
+        cpfFild.setText(jTable1.getValueAt(linha, 2).toString());
+        contatoFild.setText(jTable1.getValueAt(linha, 3).toString());
+        endFild.setText(jTable1.getValueAt(linha, 4).toString());
+        bairroFild.setText(jTable1.getValueAt(linha, 5).toString());
+        cidadeFild.setText(jTable1.getValueAt(linha, 6).toString());
+        ufFild.setText(jTable1.getValueAt(linha, 7).toString());
+        cepFild.setText(jTable1.getValueAt(linha, 8).toString());
+
+
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void fieldBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldBuscaActionPerformed
@@ -465,17 +485,22 @@ public class ClientesCRUD extends javax.swing.JFrame {
     }//GEN-LAST:event_fieldBuscaActionPerformed
 
     private void btBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscaActionPerformed
-/*
-        String sql = "SELECT * FROM cliente WHERE nome LIKE '%"
-                + fieldBusca.getText() + "%' OR cpf LIKE '%"
+
+        String sql = "select cl.id, cl.nome, cl.cpf, cl.contato, cl.idEndereco, end.rua, end.bairro, end.cidade, end.cep, end.uf from cliente as cl inner join endereco AS end ON end.id = cl.idEndereco WHERE cl.nome LIKE '%"
+                + fieldBusca.getText() + "%' OR cl.cpf LIKE '%"
                 + fieldBusca.getText() + "%'"
                 + " ORDER BY id";
         this.PopularJTable(sql);// TODO add your handling code here:
-        
-        nomeCliente.setText("");
-        cpfCliente.setText("");
-        endCliente.setText("");
-        contatoCliente.setText("");*/
+
+        endFild.setText("");
+        bairroFild.setText("");
+        cepFild.setText("");
+        cidadeFild.setText("");
+        ufFild.setText("");
+
+        nomeFild.setText("");
+        cpfFild.setText("");
+        contatoFild.setText("");
     }//GEN-LAST:event_btBuscaActionPerformed
 
     private void nomeFildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeFildActionPerformed
@@ -485,6 +510,22 @@ public class ClientesCRUD extends javax.swing.JFrame {
     private void ufFildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ufFildActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ufFildActionPerformed
+
+    private void cepFildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cepFildActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cepFildActionPerformed
+
+    private void cidadeFildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cidadeFildActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cidadeFildActionPerformed
+
+    private void contatoFildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contatoFildActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_contatoFildActionPerformed
+
+    private void bairroFildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bairroFildActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bairroFildActionPerformed
 
     public void PopularJTable(String sql) {
         try {
@@ -499,18 +540,25 @@ public class ClientesCRUD extends javax.swing.JFrame {
             while (result.next()) {
                 model.addRow(new Object[]{
                     //retorna os dados da tabela do BD, cada campo e um coluna.
-                    result.getString("id"),
-                    result.getString("idEndereco"),
-                    result.getString("CPF"),
-                    result.getString("nome"),
-                    result.getString("contato"),});
+
+                    result.getString("cl.id"),
+                    result.getString("cl.nome"),
+                    result.getString("cl.cpf"),
+                    result.getString("cl.contato"),
+                    result.getString("end.rua"),
+                    result.getString("end.bairro"),
+                    result.getString("end.cidade"),
+                    result.getString("end.uf"),
+                    result.getString("end.cep"),
+                    result.getString("cl.idEndereco")
+                });
             }
 
         } catch (SQLException ex) {
             System.out.println("o erro foi " + ex);
         }
     }
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -534,17 +582,17 @@ public class ClientesCRUD extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                
+
                 new ClientesCRUD().setVisible(true);
             }
         });
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField bairroFild;

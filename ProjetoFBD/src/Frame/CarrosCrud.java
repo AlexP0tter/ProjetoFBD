@@ -15,15 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author jesit
- */
+
 public class CarrosCrud extends javax.swing.JFrame {
 
     PreparedStatement statement;
@@ -409,7 +401,7 @@ public class CarrosCrud extends javax.swing.JFrame {
 
     private void btBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscaActionPerformed
 
-        String sql = "SELECT * FROM carro WHERE modelo LIKE '%"
+        String sql = "SELECT modelo,marca FROM carro WHERE modelo LIKE '%"
                 + fieldBusca.getText() + "%' OR marca LIKE '%"
                 + fieldBusca.getText() + "%'"
                 + " ORDER BY id";
