@@ -22,7 +22,7 @@ public class SqlUtil {
 
     public static final String SQL_INSERT_CARRO_ALL = "INSERT INTO carro(id,modelo,marca,placa,cor,valorDiaria,statusLocacao) values(?,?,?,?,?,?,?)";
     public static final String SELECT_CARROS = "SELECT id,modelo,marca,placa,cor,valorDiaria,statusLocacao FROM carro ";
-    public static final String UPDATE_CARROS = "update carro set modelo = ?, marca=?, placa = ?, cor = ? , valorDiaria = ?,statusLocacao = ? where id = ?";
+    public static final String UPDATE_CARROS = "update carro set modelo = ?, marca = ?, placa = ?, cor = ? , valorDiaria = ?, statusLocacao = ? where id = ?";
 
     public static final String SQL_INSERT_LOCACAO_ALL = "INSERT INTO locacao(id, cliente, carro, funcionario, dataRetirada,dataDevo,valor) values(?,?,?,?,?,?,?)";
     public static final String SELECT_LOCACAO = "SELECT id, cliente, carro, funcionario, dataRetirada,dataDevo,valor FROM locacao";
