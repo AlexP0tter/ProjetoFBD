@@ -249,7 +249,7 @@ public class ClientesCRUD extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "NOME", "CPF", "CONTATO", "ENDEREÇO"
+                "ID", "ENDEREÇO", "CPF", "NOME", "CONTATO"
             }
         ) {
             Class[] types = new Class [] {
@@ -500,9 +500,9 @@ public class ClientesCRUD extends javax.swing.JFrame {
                 model.addRow(new Object[]{
                     //retorna os dados da tabela do BD, cada campo e um coluna.
                     result.getString("id"),
+                    result.getString("idEndereco"),
+                    result.getString("CPF"),
                     result.getString("nome"),
-                    result.getString("cpf"),
-                    result.getString("endereco"),
                     result.getString("contato"),});
             }
 
