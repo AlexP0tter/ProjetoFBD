@@ -18,7 +18,7 @@ public class SqlUtil {
 
     public static final String SQL_INSERT_FUNCIONARIO_ALL = "INSERT INTO funcionario(id ,idEndereco ,nome ,CPF ,cargo ,contato ,loginUser ,loginSenha) values(?,?,?,?,?,?,?,?)";
     public static final String SELECT_FUNCIONARIO = "SELECT fun.id, end.rua, end.bairro, end.cidade, fun.nome, fun.cpf, fun.contato, fun.cargo, fun.loginUser, fun.loginSenha FROM funcionario AS fun inner join endereco AS end ON end.id = fun.idEndereco";
-    public static final String UPDATE_FUNCIONARIO = "update funcionario set nome = ?, cargo = ?, cpf = ?, contato = ?, idEndereco = ?, loginUser = ?, loginSenha = ?  where id = ?";
+    public static final String UPDATE_FUNCIONARIO = "update funcionario set nome = ?, cargo = ?, cpf = ?, contato = ?, loginUser = ?, loginSenha = ?  where id = ?";
 
     public static final String SQL_INSERT_CARRO_ALL = "INSERT INTO carro(id,modelo,marca,placa,cor,valorDiaria,statusLocacao) values(?,?,?,?,?,?,?)";
     public static final String SELECT_CARROS = "SELECT id,modelo,marca,placa,cor,valorDiaria,statusLocacao FROM carro ";
@@ -31,6 +31,7 @@ public class SqlUtil {
     public static final String SQL_INSERT_ENDERECO_ALL ="INSERT INTO endereco(id ,rua ,bairro ,cep ,cidade ,uf) values(?,?,?,?,?,?)";
     public static final String SELECT_ENDERECO ="SELECT id ,rua ,bairro ,cep ,cidade ,uf FROM endereco";
     public static final String UPDATE_ENDERECO ="update endereco set rua = ?, bairro = ?, cidade = ?, uf = ?, cep =? where id = (select idEndereco from cliente where id = ?)";
+    public static final String UPDATE_ENDERECO_FUN ="update endereco set rua = ?, bairro = ?, cidade = ?, uf = ?, cep =? where id = (select idEndereco from funcionario where id = ?)";
     
     private SqlUtil() {
     }

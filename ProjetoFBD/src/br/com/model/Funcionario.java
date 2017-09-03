@@ -14,9 +14,9 @@ public class Funcionario {
     private int id;
     private String nome,cargo,contato,cpf;
     private String senha, login;
-    private Endereco end;
+    private Endereco endereco;
 
-    public Funcionario(int id,int idEnd, String nome, String cargo, String contato, String cpf,String rua, String bairro, String cidade, String uf, String cep, String usuario, String senha) {
+    public Funcionario(int id,Endereco end, String nome, String cargo, String contato, String cpf,String rua, String bairro, String cidade, String uf, String cep, String usuario, String senha) {
         this.id = id;
         this.nome = nome;
         this.cargo = cargo;
@@ -24,7 +24,7 @@ public class Funcionario {
         this.cpf = cpf;
         this.login = login;
         this.senha = senha;
-        end = new Endereco(idEnd,rua, bairro, cidade, uf, cep);
+        this.endereco = end;
     }
 
     public String getSenha() {
@@ -43,13 +43,13 @@ public class Funcionario {
         this.login = login;
     }
 
-    public Endereco getEnd() {
-        return end;
+    public Endereco getEndereco() {
+        return endereco;
     }
 
-    public void setEnd(Endereco end) {
-        this.end = end;
-    }    
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }   
     
     public Funcionario(){
         
