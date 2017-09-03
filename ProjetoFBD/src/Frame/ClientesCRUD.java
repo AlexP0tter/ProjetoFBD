@@ -190,18 +190,13 @@ public class ClientesCRUD extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(254, 254, 254)
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(cpfFild, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(260, 260, 260)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel7)
+                            .addComponent(cpfFild, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -267,14 +262,14 @@ public class ClientesCRUD extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nome", "CPF", "Contato", "Endereço", "Bairro", "Cidade", "UF", "CEP", "idEnd"
+                "ID", "Nome", "CPF", "Contato", "Endereço", "Bairro", "Cidade", "UF", "CEP"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, true
+                false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -434,10 +429,9 @@ public class ClientesCRUD extends javax.swing.JFrame {
 
         int id = Integer.parseInt(jTable1.getValueAt(linha, 0).toString());        
         
-        int idEnd  = Integer.parseInt(jTable1.getValueAt(linha, 9).toString());
 
         cliente.setId(id);
-        cliente.getEndereco().setId(idEnd);
+        
         cliente.getEndereco().setRua(endFild.getText());
         cliente.getEndereco().setBairro(bairroFild.getText());
         cliente.getEndereco().setCidade(cidadeFild.getText());
@@ -549,8 +543,8 @@ public class ClientesCRUD extends javax.swing.JFrame {
                     result.getString("end.bairro"),
                     result.getString("end.cidade"),
                     result.getString("end.uf"),
-                    result.getString("end.cep"),
-                    result.getString("cl.idEndereco")
+                    result.getString("end.cep")
+                    
                 });
             }
 
