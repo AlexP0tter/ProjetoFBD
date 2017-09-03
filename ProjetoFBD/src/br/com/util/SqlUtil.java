@@ -17,7 +17,7 @@ public class SqlUtil {
     public static final String UPDATE_CLIENTE = "update cliente set cpf = ?,nome = ?, contato = ? where id = ?";
 
     public static final String SQL_INSERT_FUNCIONARIO_ALL = "INSERT INTO funcionario(id ,idEndereco ,nome ,cpf ,cargo ,contato ,loginUser ,loginSenha) values(?,?,?,?,?,?,?,?)";
-    public static final String SELECT_FUNCIONARIO = "SELECT fun.id, end.rua, end.bairro, end.cidade, fun.nome, fun.cpf, fun.contato, fun.cargo, fun.loginUser, fun.loginSenha, fun.idEndereco FROM funcionario AS fun inner join endereco AS end ON end.id = fun.idEndereco";
+    public static final String SELECT_FUNCIONARIO = "SELECT fun.id,fun.nome, fun.cpf, fun.cargo, fun.contato, fun.loginUser, fun.loginSenha, fun.idEndereco, end.rua, end.bairro, end.cidade, end.cep, end.uf FROM funcionario AS fun inner join endereco AS end ON end.id = fun.idEndereco";
     public static final String UPDATE_FUNCIONARIO = "update funcionario set nome = ?, cargo = ?, cpf = ?, contato = ?, loginUser = ?, loginSenha = ?  where id = ?";
     
     //public static final String SQL_INSERT_FUNCIONARIO_ALL = "INSERT INTO funcionário(id ,idEndereco ,nome ,cpf ,cargo ,contato ,loginUser ,loginSenha) values(?,?,?,?,?,?,?,?)";
