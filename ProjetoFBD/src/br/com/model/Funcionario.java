@@ -27,32 +27,17 @@ public class Funcionario {
         this.endereco = end;
     }
 
-    public String getSenha() {
-        return senha;
+    public Funcionario() {
+        
+        endereco = new Endereco();
     }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
+    
     public Endereco getEndereco() {
         return endereco;
     }
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
-    }   
-    
-    public Funcionario(){
-        
     }
 
     public int getId() {
@@ -77,14 +62,6 @@ public class Funcionario {
 
     public void setCargo(String cargo) {
         this.cargo = cargo;
-    } 
-
-    public String getContato() {
-        return contato;
-    }
-
-    public void setContato(String contato) {
-        this.contato = contato;
     }
 
     public String getCpf() {
@@ -95,7 +72,31 @@ public class Funcionario {
         this.cpf = cpf;
     }
 
+    public String getContato() {
+        return contato;
+    }
+
+    public void setContato(String contato) {
+        this.contato = contato;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
     
     
-    
+
+   
 }
