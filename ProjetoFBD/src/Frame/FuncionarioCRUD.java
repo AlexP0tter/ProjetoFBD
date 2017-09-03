@@ -75,8 +75,8 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        userLogin = new javax.swing.JTextField();
+        userSenha = new javax.swing.JTextField();
         cepFild = new javax.swing.JFormattedTextField();
         jLabel11 = new javax.swing.JLabel();
         ufFild = new javax.swing.JTextField();
@@ -213,7 +213,7 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(cargoFun, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(userLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addGap(89, 89, 89)
@@ -223,7 +223,7 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jTextField5))))
+                            .addComponent(userSenha))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -260,8 +260,8 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
                         .addComponent(jLabel9)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(userSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(userLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cargoFun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
         );
@@ -274,14 +274,14 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "NOME", "CARGO", "CPF", "ENDEREÇO", "CONTATO"
+                "ID", "NOME", "CARGO", "CPF", "CONTATO", "ENDEREÇO", "bairro", "cidade", "uf", "cep"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, false, false
+                false, false, false, false, false, false, true, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -410,19 +410,21 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
 
-        endereco.setRua(endFild.getText());
-        endereco.setBairro(bairroFild.getText());
-        endereco.setCep(cepFild.getText());
-        endereco.setCidade(cidadeFild.getText());
-        endereco.setUf(ufFild.getText());
-
+        fun.getEndereco().setRua(endFild.getText());
+        fun.getEndereco().setBairro(bairroFild.getText());
+        fun.getEndereco().setCidade(cidadeFild.getText());
+        fun.getEndereco().setUf(ufFild.getText());
+        fun.getEndereco().setCep(cepFild.getText());
+        
+        
         fun.setNome(nomeFun.getText());
         fun.setCpf(cpfFun.getText());
         fun.setCargo(cargoFun.getText());
         fun.setContato(contatoFun.getText());
+        fun.setLogin(userLogin.getText());
+        fun.setSenha(userSenha.getText());
 
         Fachada coreFachada = new Fachada();
-        coreFachada.salvarEnd(endereco);
         coreFachada.salvarFuncionario(fun);
         
         endFild.setText("");
@@ -436,6 +438,8 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
         cpfFun.setText("");
         endFild.setText("");
         contatoFun.setText("");
+        userLogin.setText("");
+        userSenha.setText("");
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void nomeFunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeFunActionPerformed
@@ -590,9 +594,9 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField nomeFun;
     private javax.swing.JTextField ufFild;
+    private javax.swing.JTextField userLogin;
+    private javax.swing.JTextField userSenha;
     // End of variables declaration//GEN-END:variables
 }
