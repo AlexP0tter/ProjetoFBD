@@ -22,7 +22,7 @@ public class Funcionario {
         this.cargo = cargo;
         this.contato = contato;
         this.cpf = cpf;
-        this.login = login;
+        this.login = usuario;
         this.senha = senha;
         this.endereco = end;
     }
