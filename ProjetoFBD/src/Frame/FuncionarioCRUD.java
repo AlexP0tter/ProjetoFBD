@@ -274,14 +274,14 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "NOME", "CARGO", "CPF", "CONTATO", "ENDEREÇO", "bairro", "cidade", "uf", "cep"
+                "ID", "NOME", "CARGO", "CPF", "CONTATO", "Usuario", "senha", "ENDEREÇO", "bairro", "cidade", "uf", "cep"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true, true, true, true
+                false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -416,7 +416,6 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
         fun.getEndereco().setUf(ufFild.getText());
         fun.getEndereco().setCep(cepFild.getText());
         
-        
         fun.setNome(nomeFun.getText());
         fun.setCpf(cpfFun.getText());
         fun.setCargo(cargoFun.getText());
@@ -436,7 +435,6 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
         nomeFun.setText("");
         cargoFun.setText("");
         cpfFun.setText("");
-        endFild.setText("");
         contatoFun.setText("");
         userLogin.setText("");
         userSenha.setText("");
@@ -449,36 +447,59 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
 
         int linha = jTable1.getSelectedRow();
-        String nome = jTable1.getValueAt(linha, 1).toString();
-        String cpf = jTable1.getValueAt(linha, 2).toString();
+        
         int id = Integer.parseInt(jTable1.getValueAt(linha, 0).toString());
 
         fun.setId(id);
+        
+        fun.getEndereco().setRua(endFild.getText());
+        fun.getEndereco().setBairro(bairroFild.getText());
+        fun.getEndereco().setCidade(cidadeFild.getText());
+        fun.getEndereco().setUf(ufFild.getText());
+        fun.getEndereco().setCep(cepFild.getText());
+        
         fun.setNome(nomeFun.getText());
         fun.setCargo(cargoFun.getText());
         fun.setCpf(cpfFun.getText());
         fun.setContato(contatoFun.getText());
+        fun.setLogin(userLogin.getText());
+        fun.setSenha(userSenha.getText());
 
         Fachada coreFachada = new Fachada();
         coreFachada.alterarFun(fun);
 
+        endFild.setText("");
+        bairroFild.setText("");
+        cepFild.setText("");
+        cidadeFild.setText("");
+        ufFild.setText("");
+        
         nomeFun.setText("");
         cargoFun.setText("");
         cpfFun.setText("");
-        endFild.setText("");
         contatoFun.setText("");
+        userLogin.setText("");
+        userSenha.setText("");
+        
     }//GEN-LAST:event_btAlterarActionPerformed
 
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
         int linha = jTable1.getSelectedRow(); // retorna a linha selecionada pelo usuario
-        nomeFun.setText(jTable1.getValueAt(linha, 1).toString()); // retorna o valor da celula linha X 0
-        cargoFun.setText(jTable1.getValueAt(linha, 2).toString()); // retorna o valor da celula linha X 0        
-        cpfFun.setText(jTable1.getValueAt(linha, 3).toString()); // retorna o valor da celula linha X 1
-        endFild.setText(jTable1.getValueAt(linha, 4).toString()); // retorna o valor da celula linha X 2
-        contatoFun.setText(jTable1.getValueAt(linha, 5).toString()); // retorna o valor da celula linha X 2
-
+        
+        nomeFun.setText(jTable1.getValueAt(linha, 1).toString());
+        cargoFun.setText(jTable1.getValueAt(linha, 2).toString());
+        cpfFun.setText(jTable1.getValueAt(linha, 3).toString());
+        contatoFun.setText(jTable1.getValueAt(linha, 4).toString());
+        userLogin.setText(jTable1.getValueAt(linha, 5).toString());
+        userSenha.setText(jTable1.getValueAt(linha, 6).toString());
+        
+        endFild.setText(jTable1.getValueAt(linha, 7).toString());
+        bairroFild.setText(jTable1.getValueAt(linha, 8).toString());
+        cidadeFild.setText(jTable1.getValueAt(linha, 9).toString());
+        ufFild.setText(jTable1.getValueAt(linha, 10).toString());
+        cepFild.setText(jTable1.getValueAt(linha, 11).toString());
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void fieldBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldBuscaActionPerformed
@@ -487,17 +508,24 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
 
     private void btBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscaActionPerformed
 
-        String sql = "SELECT * FROM funcionário WHERE nome LIKE '%"
+        String sql = "SELECT * FROM funcionario WHERE nome LIKE '%"
                 + fieldBusca.getText() + "%' OR cpf LIKE '%"
                 + fieldBusca.getText() + "%'"
                 + " ORDER BY id";
         this.PopularJTable(sql);// TODO add your handling code here:
         
+        endFild.setText("");
+        bairroFild.setText("");
+        cepFild.setText("");
+        cidadeFild.setText("");
+        ufFild.setText("");
+        
         nomeFun.setText("");
         cargoFun.setText("");
         cpfFun.setText("");
-        endFild.setText("");
         contatoFun.setText("");
+        userLogin.setText("");
+        userSenha.setText("");
     }//GEN-LAST:event_btBuscaActionPerformed
 
     private void ufFildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ufFildActionPerformed
@@ -517,12 +545,18 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
             while (result.next()) {
                 model.addRow(new Object[]{
                     //retorna os dados da tabela do BD, cada campo e um coluna.
-                    result.getString("id"),
-                    result.getString("nome"),
-                    result.getString("cargo"),
-                    result.getString("cpf"),
-                    result.getString("endereco"),
-                    result.getString("contato"),});
+                    result.getString("fun.id"),
+                    result.getString("fun.nome"),
+                    result.getString("fun.cargo"),
+                    result.getString("fun.cpf"),
+                    result.getString("fun.contato"),
+                    result.getString("fun.loginUser"),
+                    result.getString("fun.loginSenha"),
+                    result.getString("end.rua"),
+                    result.getString("end.bairro"),
+                    result.getString("end.cidade"),
+                    result.getString("end.uf"),
+                    result.getString("end.cep"),});
             }
 
         } catch (SQLException ex) {
