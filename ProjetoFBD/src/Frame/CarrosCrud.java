@@ -401,7 +401,7 @@ public class CarrosCrud extends javax.swing.JFrame {
 
     private void btBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscaActionPerformed
 
-        String sql = "SELECT modelo,marca FROM carro WHERE modelo LIKE '%"
+        String sql = "SELECT modelo, marca, placa, cor, valorDiaria, statusLocacao FROM carro WHERE modelo LIKE '%"
                 + fieldBusca.getText() + "%' OR marca LIKE '%"
                 + fieldBusca.getText() + "%'"
                 + " ORDER BY id";
