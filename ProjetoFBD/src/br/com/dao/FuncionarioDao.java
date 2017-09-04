@@ -72,13 +72,13 @@ public class FuncionarioDao{
         try {
             statement = con.prepareStatement(SqlUtil.UPDATE_FUNCIONARIO);       
                    
-            statement.setString(2, fun.getNome());
-            statement.setString(3, fun.getCpf());
-            statement.setString(4, fun.getCargo());            
-            statement.setString(5, fun.getContato());
-            statement.setString(6, fun.getLogin());
-            statement.setString(7, fun.getSenha());
-            statement.setInt(8, fun.getId());
+            statement.setString(1, fun.getNome());
+            statement.setString(2, fun.getCpf());
+            statement.setString(3, fun.getCargo());            
+            statement.setString(4, fun.getContato());
+            statement.setString(5, fun.getLogin());
+            statement.setString(6, fun.getSenha());
+            statement.setInt(7, fun.getId());
             
             statement2 = con.prepareStatement(SqlUtil.UPDATE_ENDERECO_FUN);
             
