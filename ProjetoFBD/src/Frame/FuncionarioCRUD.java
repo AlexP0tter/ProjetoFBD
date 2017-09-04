@@ -508,8 +508,8 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
 
     private void btBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscaActionPerformed
 
-        String sql = "SELECT * FROM funcionario WHERE nome LIKE '%"
-                + fieldBusca.getText() + "%' OR cpf LIKE '%"
+        String sql = "SELECT fun.id,fun.nome, fun.cpf, fun.cargo, fun.contato, fun.loginUser, fun.loginSenha, fun.idEndereco, end.rua, end.bairro, end.cidade, end.cep, end.uf FROM funcionario AS fun inner join endereco AS end ON end.id = fun.idEndereco WHERE fun.nome LIKE '%"
+                + fieldBusca.getText() + "%' OR fun.cpf LIKE '%"
                 + fieldBusca.getText() + "%'"
                 + " ORDER BY id";
         this.PopularJTable(sql);// TODO add your handling code here:
