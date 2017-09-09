@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
 public class ClientesCRUD extends javax.swing.JFrame {
 
     PreparedStatement statement;
-    ResultSet result, result2;
+    ResultSet result;
     Connection con;
     Cliente cliente = new Cliente();
     //Endereco endereco = new Endereco();
