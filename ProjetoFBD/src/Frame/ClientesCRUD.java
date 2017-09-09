@@ -8,6 +8,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -22,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
 public class ClientesCRUD extends javax.swing.JFrame {
 
     PreparedStatement statement;
-    ResultSet result;
+    ResultSet result, result2;
     Connection con;
     Cliente cliente = new Cliente();
     //Endereco endereco = new Endereco();
@@ -398,7 +401,56 @@ public class ClientesCRUD extends javax.swing.JFrame {
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
 
-        //nao sei se pode fazer assim
+        String sql1 = "select cl.cpffrom cliente as cl inner join endereco AS end ON end.id = cl.idEndereco WHERE cl.cpf LIKE '%"
+                + cpfFild.getText() + "%'";
+        
+        String sql2 = "SELECT fun.cpf FROM funcionario AS fun inner join endereco AS end ON end.id = fun.idEndereco WHERE fun.cpf LIKE '%"
+                + cpfFild.getText() + "%'";
+        
+        try {
+            statement = con.prepareStatement(sql1);
+            statement.execute();
+            result = statement.executeQuery();
+            
+            statement = con.prepareStatement(sql2);
+            statement.execute();
+            result = statement.executeQuery();
+            
+            if(result!=null && result.next() && result2!=null && result2.next()){
+                
+                JOptionPane.showMessageDialog(null, "cpf ja existe");
+            }
+            
+            else{
+                
+                cliente.getEndereco().setRua(endFild.getText());
+                cliente.getEndereco().setBairro(bairroFild.getText());
+                cliente.getEndereco().setCidade(cidadeFild.getText());
+                cliente.getEndereco().setUf(ufFild.getText());
+                cliente.getEndereco().setCep(cepFild.getText());
+
+                cliente.setNome(nomeFild.getText());
+                cliente.setCPF(cpfFild.getText());
+                cliente.setContato(contatoFild.getText());
+
+                Fachada coreFachada = new Fachada();
+                coreFachada.salvarCliente(cliente);
+
+                endFild.setText("");
+                bairroFild.setText("");
+                cepFild.setText("");
+                cidadeFild.setText("");
+                ufFild.setText("");
+
+                nomeFild.setText("");
+                cpfFild.setText("");
+                contatoFild.setText("");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientesCRUD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        /*
         cliente.getEndereco().setRua(endFild.getText());
         cliente.getEndereco().setBairro(bairroFild.getText());
         cliente.getEndereco().setCidade(cidadeFild.getText());
@@ -421,6 +473,7 @@ public class ClientesCRUD extends javax.swing.JFrame {
         nomeFild.setText("");
         cpfFild.setText("");
         contatoFild.setText("");
+        */
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
