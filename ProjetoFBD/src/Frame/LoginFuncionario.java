@@ -152,12 +152,10 @@ public class LoginFuncionario extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         String sql1 = "SELECT fun.loginUser FROM funcionario AS fun inner join endereco AS end ON end.id = fun.idEndereco WHERE fun.loginUser LIKE '%"
-                + loginF.getText() + "%'"
-                + " ORDER BY id";
+                + loginF.getText() + "%'";
         
         String sql2 = "SELECT fun.loginSenha FROM funcionario AS fun inner join endereco AS end ON end.id = fun.idEndereco WHERE fun.loginSenha LIKE '%"
-                + senhaF.getText() + "%'"
-                + " ORDER BY id";
+                + senhaF.getText() + "%'";
         
         try {
             statement = con.prepareStatement(sql1);
@@ -167,19 +165,16 @@ public class LoginFuncionario extends javax.swing.JFrame {
             statement = con.prepareStatement(sql2);
             statement.execute();
             result2 = statement.executeQuery();
-            
-            while (result.next() && result2.next()){
+               
+            if(result!=null && result2!=null && result.next() && result2.next()){
+                 setVisible(false);
+                 new TelaInicial().setVisible(true);
+             }
+            else{
+                 setVisible(false);
+                 new FuncionarioLoginCadastro().setVisible(true);
+             }
                 
-                if(result!=null && result2!=null){
-                    setVisible(false);
-                    new TelaInicial().setVisible(true);
-                }
-                else{
-                    setVisible(false);
-                    new FuncionarioLoginCadastro().setVisible(true);
-                }
-                
-            }
         } catch (SQLException ex) {
             Logger.getLogger(LoginFuncionario.class.getName()).log(Level.SEVERE, null, ex);
         }
