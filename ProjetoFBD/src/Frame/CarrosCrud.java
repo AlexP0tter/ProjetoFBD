@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
@@ -336,6 +338,42 @@ public class CarrosCrud extends javax.swing.JFrame {
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
      
 
+        String sql1 = "SELECT placa FROM carro WHERE placa LIKE '%"
+                + placaCarro.getText() + "%'";
+        
+        try {
+            statement = con.prepareStatement(sql1);
+            statement.execute();
+            result = statement.executeQuery();
+            
+            if(result!=null && result.next()){
+                
+                JOptionPane.showMessageDialog(null, "Placa existente!");
+            }
+            else{
+                
+                carro.setModelo(modeloCarro.getText());
+                carro.setMarca(marcaCarro.getText());
+                carro.setPlaca(placaCarro.getText());
+                carro.setCor(corCarro.getText());
+                carro.setValorDiaria(Double.parseDouble(taxaCarro.getText()));
+                carro.setStatus(Boolean.parseBoolean(statusLocCarro.getText()));
+
+                Fachada coreFachada = new Fachada();
+                coreFachada.salvarCarro(carro);
+
+                modeloCarro.setText("");
+                marcaCarro.setText("");
+                placaCarro.setText("");
+                corCarro.setText("");
+                taxaCarro.setText("");
+                statusLocCarro.setText("");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CarrosCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        /*
         carro.setModelo(modeloCarro.getText());
         carro.setMarca(marcaCarro.getText());
         carro.setPlaca(placaCarro.getText());
@@ -353,7 +391,7 @@ public class CarrosCrud extends javax.swing.JFrame {
         taxaCarro.setText("");
         statusLocCarro.setText("");
         
-        
+        */
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
