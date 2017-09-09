@@ -404,19 +404,12 @@ public class ClientesCRUD extends javax.swing.JFrame {
         String sql1 = "select cl.cpf FROM cliente as cl inner join endereco AS end ON end.id = cl.idEndereco WHERE cl.cpf LIKE '%"
                 + cpfFild.getText() + "%'";
         
-        String sql2 = "SELECT fun.cpf FROM funcionario AS fun inner join endereco AS end ON end.id = fun.idEndereco WHERE fun.cpf LIKE '%"
-                + cpfFild.getText() + "%'";
-        
         try {
             statement = con.prepareStatement(sql1);
             statement.execute();
             result = statement.executeQuery();
-            
-            statement = con.prepareStatement(sql2);
-            statement.execute();
-            result2 = statement.executeQuery();
-            
-            if(result!=null && result.next() && result2!=null && result2.next()){
+           
+            if(result!=null && result.next()){
                 
                 JOptionPane.showMessageDialog(null, "cpf ja existe");
             }
