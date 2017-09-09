@@ -566,6 +566,14 @@ public class CarrosCrud extends javax.swing.JFrame {
     public void setTaxaCarro(JTextField taxaCarro) {
         this.taxaCarro = taxaCarro;
     }
+
+    public JTextField getCorCarro() {
+        return corCarro;
+    }
+
+    public void setCorCarro(JTextField corCarro) {
+        this.corCarro = corCarro;
+    }
     
     
     
