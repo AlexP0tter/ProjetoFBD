@@ -401,7 +401,7 @@ public class ClientesCRUD extends javax.swing.JFrame {
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
 
-        String sql1 = "select cl.cpffrom cliente as cl inner join endereco AS end ON end.id = cl.idEndereco WHERE cl.cpf LIKE '%"
+        String sql1 = "select cl.cpf FROM cliente as cl inner join endereco AS end ON end.id = cl.idEndereco WHERE cl.cpf LIKE '%"
                 + cpfFild.getText() + "%'";
         
         String sql2 = "SELECT fun.cpf FROM funcionario AS fun inner join endereco AS end ON end.id = fun.idEndereco WHERE fun.cpf LIKE '%"
