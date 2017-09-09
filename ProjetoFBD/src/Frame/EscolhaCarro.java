@@ -5,15 +5,24 @@
  */
 package Frame;
 
+import br.com.util.ConnectionFactory;
+import br.com.util.SqlUtil;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Alexp0tter
  */
 public class EscolhaCarro extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ExcolhaCarro
-     */
+    PreparedStatement statement;
+    ResultSet result;
+    Connection con;
+    
     public EscolhaCarro() {
         initComponents();
     }
@@ -198,104 +207,45 @@ public class EscolhaCarro extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         setVisible(false);
-        TelaInicial inicial = new TelaInicial();
-        inicial.setVisible(true);
+        
+        
+        try {
+            con = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            try {
+                con.rollback();
+            } catch (SQLException ex1) {
+                ex.printStackTrace();
+            }
+        }
+
+        PopularJTable(SqlUtil.SELECT_CARROS);
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
 
-        String sql1 = "SELECT placa FROM carro WHERE placa LIKE '%"
-        + placaCarro.getText() + "%'";
-
-        try {
-            statement = con.prepareStatement(sql1);
-            statement.execute();
-            result = statement.executeQuery();
-
-            if(result!=null && result.next()){
-
-                JOptionPane.showMessageDialog(null, "Placa existente!");
-            }
-            else{
-
-                carro.setModelo(modeloCarro.getText());
-                carro.setMarca(marcaCarro.getText());
-                carro.setPlaca(placaCarro.getText());
-                carro.setCor(corCarro.getText());
-                carro.setValorDiaria(Double.parseDouble(taxaCarro.getText()));
-                carro.setStatus(Boolean.parseBoolean(statusLocCarro.getText()));
-
-                Fachada coreFachada = new Fachada();
-                coreFachada.salvarCarro(carro);
-
-                modeloCarro.setText("");
-                marcaCarro.setText("");
-                placaCarro.setText("");
-                corCarro.setText("");
-                taxaCarro.setText("");
-                statusLocCarro.setText("");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(CarrosCrud.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        /*
-        carro.setModelo(modeloCarro.getText());
-        carro.setMarca(marcaCarro.getText());
-        carro.setPlaca(placaCarro.getText());
-        carro.setCor(corCarro.getText());
-        carro.setValorDiaria(Double.parseDouble(taxaCarro.getText()));
-        carro.setStatus(Boolean.parseBoolean(statusLocCarro.getText()));
-
-        Fachada coreFachada = new Fachada();
-        coreFachada.salvarCarro(carro);
-
-        modeloCarro.setText("");
-        marcaCarro.setText("");
-        placaCarro.setText("");
-        corCarro.setText("");
-        taxaCarro.setText("");
-        statusLocCarro.setText("");
-
-        */
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
 
-        int linha = jTable1.getSelectedRow();
-        String modelo = jTable1.getValueAt(linha, 1).toString();
-        String marca = jTable1.getValueAt(linha, 2).toString();
-
-        int id = Integer.parseInt(jTable1.getValueAt(linha, 0).toString());
-
-        carro.setId(id);
-        carro.setModelo(modeloCarro.getText());
-        carro.setMarca(marcaCarro.getText());
-        carro.setPlaca(placaCarro.getText());
-        carro.setCor(corCarro.getText());
-        carro.setValorDiaria(Double.parseDouble(taxaCarro.getText()));
-        carro.setStatus(Boolean.parseBoolean(statusLocCarro.getText()));
-
-        Fachada coreFachada = new Fachada();
-        coreFachada.alterarCarro(carro);
-
-        modeloCarro.setText("");
-        marcaCarro.setText("");
-        placaCarro.setText("");
-        corCarro.setText("");
-        taxaCarro.setText("");
-        statusLocCarro.setText("");
     }//GEN-LAST:event_btAlterarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
         int linha = jTable1.getSelectedRow(); // retorna a linha selecionada pelo usuario
+        
+        /*
         modeloCarro.setText(jTable1.getValueAt(linha, 1).toString()); // retorna o valor da celula linha X 0
         marcaCarro.setText(jTable1.getValueAt(linha, 2).toString()); // retorna o valor da celula linha X 1
         placaCarro.setText(jTable1.getValueAt(linha, 3).toString()); // retorna o valor da celula linha X 2
         corCarro.setText(jTable1.getValueAt(linha, 4).toString()); // retorna o valor da celula linha X 2
         taxaCarro.setText(jTable1.getValueAt(linha, 5).toString());
         statusLocCarro.setText(jTable1.getValueAt(linha, 6).toString());
+        */
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void fieldBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldBuscaActionPerformed
@@ -311,14 +261,34 @@ public class EscolhaCarro extends javax.swing.JFrame {
 
         this.PopularJTable(sql);// TODO add your handling code here:
 
-        modeloCarro.setText("");
-        marcaCarro.setText("");
-        placaCarro.setText("");
-        corCarro.setText("");
-        taxaCarro.setText("");
-        statusLocCarro.setText("");
     }//GEN-LAST:event_btBuscaActionPerformed
 
+    public void PopularJTable(String sql) {
+        try {
+
+            statement = con.prepareStatement(sql);
+            statement.execute();
+            result = statement.executeQuery();
+
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setNumRows(0);
+
+            while (result.next()) {
+                model.addRow(new Object[]{
+                    //retorna os dados da tabela do BD, cada campo e um coluna.
+                    result.getString("id"),
+                    result.getString("modelo"),
+                    result.getString("marca"),
+                    result.getString("placa"),
+                    result.getString("cor"),
+                    result.getString("valorDiaria"),
+                    result.getString("statusLocacao"),});
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("o erro foi " + ex);
+        }
+    }
     /**
      * @param args the command line arguments
      */

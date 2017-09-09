@@ -239,23 +239,7 @@ public class locacaoCRUD extends javax.swing.JFrame {
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
 
-        loc.setCliente(clienteLocacao.getText());
-        loc.setCarro(carroLoca.getText());
-        loc.setFun(funLoca.getText());
-        loc.setDataRetirada(dataRetirLoca.getText());
-        loc.setDataDevolucao(dataDevoLoca.getText());
-
-        loc.setValor(Integer.parseInt(valorLoca.getText()));
-
-        Fachada coreFachada = new Fachada();
-        coreFachada.salvarLoca(loc);
-
-        clienteLocacao.setText("");
-        carroLoca.setText("");
-        funLoca.setText("");
-        dataRetirLoca.setText("");
-        dataDevoLoca.setText("");
-        valorLoca.setText("");
+        
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void btBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscaActionPerformed
@@ -267,12 +251,7 @@ public class locacaoCRUD extends javax.swing.JFrame {
 
         this.PopularJTable(sql);// TODO add your handling code here:
 
-        clienteLocacao.setText("");
-        carroLoca.setText("");
-        funLoca.setText("");
-        dataRetirLoca.setText("");
-        dataDevoLoca.setText("");
-        valorLoca.setText("");
+        
     }//GEN-LAST:event_btBuscaActionPerformed
 
     private void fieldBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldBuscaActionPerformed
@@ -282,40 +261,20 @@ public class locacaoCRUD extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
         int linha = jTable1.getSelectedRow(); // retorna a linfildCarroada pelo usuario
+        
+        /*
         clienteLocacao.setText(jTable1.getValueAt(linha, 1).toString()); // retorna o valor da celula linha X 0
         carroLoca.setText(jTable1.getValueAt(linha, 2).toString()); // retorna o valor da celula linha X 1
         funLoca.setText(jTable1.getValueAt(linha, 3).toString()); // retorna o valor da celula linha X 2
         dataRetirLoca.setText(jTable1.getValueAt(linha, 4).toString()); // retorna o valor da celula linha X 2
         dataDevoLoca.setText(jTable1.getValueAt(linha, 5).toString()); // retorna o valor da celula linha X 2
         valorLoca.setText(jTable1.getValueAt(linha, 6).toString()); // retorna o valor da celula linha X 2
+        */
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
 
-        int linha = jTable1.getSelectedRow();
-        String cliente = jTable1.getValueAt(linha, 1).toString();
-        String carro = jTable1.getValueAt(linha, 2).toString();
-
-        int id = Integer.parseInt(jTable1.getValueAt(linha, 0).toString());
-
-        loc.setId(id);
-        loc.setCliente(clienteLocacao.getText());
-        loc.setCarro(carroLoca.getText());
-        loc.setFun(funLoca.getText());
-        loc.setDataRetirada(dataRetirLoca.getText());
-        loc.setDataDevolucao(dataDevoLoca.getText());
-
-        loc.setValor(Integer.parseInt(valorLoca.getText()));
-
-        Fachada coreFachada = new Fachada();
-        coreFachada.alterarLoca(loc);
-
-        clienteLocacao.setText("");
-        carroLoca.setText("");
-        funLoca.setText("");
-        dataRetirLoca.setText("");
-        dataDevoLoca.setText("");
-        valorLoca.setText("");
+        
     }//GEN-LAST:event_btAlterarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
