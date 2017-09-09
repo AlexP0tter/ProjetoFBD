@@ -5,17 +5,42 @@
  */
 package Frame;
 
+import br.com.model.Funcionario;
+import br.com.util.ConnectionFactory;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Alexp0tter
  */
 public class LoginFuncionario extends javax.swing.JFrame {
 
-    /**
-     * Creates new form LoginFuncionario
-     */
+    PreparedStatement statement;
+    ResultSet result, result2;
+    Connection con;
+    Funcionario fun = new Funcionario();
+    
     public LoginFuncionario() {
         initComponents();
+        
+        setVisible(true);
+
+        try {
+            con = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            try {
+                con.rollback();
+            } catch (SQLException ex1) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -30,8 +55,8 @@ public class LoginFuncionario extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        senhaLogin = new javax.swing.JTextField();
+        loginF = new javax.swing.JTextField();
+        senhaF = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -45,6 +70,11 @@ public class LoginFuncionario extends javax.swing.JFrame {
         jLabel2.setText("Senha");
 
         jButton1.setText("Entrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Sair");
 
@@ -70,8 +100,8 @@ public class LoginFuncionario extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addGap(112, 112, 112))
-                    .addComponent(senhaLogin)
-                    .addComponent(jTextField1)
+                    .addComponent(senhaF)
+                    .addComponent(loginF)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(115, 115, 115)
                         .addComponent(jLabel1)
@@ -85,11 +115,11 @@ public class LoginFuncionario extends javax.swing.JFrame {
                 .addContainerGap(133, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(loginF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(senhaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(senhaF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -118,6 +148,43 @@ public class LoginFuncionario extends javax.swing.JFrame {
         setVisible(false);
         new FuncionarioLoginCadastro().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        String sql1 = "SELECT fun.loginUser FROM funcionario AS fun inner join endereco AS end ON end.id = fun.idEndereco WHERE fun.loginUser LIKE '%"
+                + loginF.getText() + "%'"
+                + " ORDER BY id";
+        
+        String sql2 = "SELECT fun.loginSenha FROM funcionario AS fun inner join endereco AS end ON end.id = fun.idEndereco WHERE fun.loginSenha LIKE '%"
+                + senhaF.getText() + "%'"
+                + " ORDER BY id";
+        
+        try {
+            statement = con.prepareStatement(sql1);
+            statement.execute();
+            result = statement.executeQuery();
+            
+            statement = con.prepareStatement(sql2);
+            statement.execute();
+            result2 = statement.executeQuery();
+            
+            while (result.next() && result2.next()){
+                
+                if(result!=null && result2!=null){
+                    setVisible(false);
+                    new TelaInicial().setVisible(true);
+                }
+                else{
+                    setVisible(false);
+                    new FuncionarioLoginCadastro().setVisible(true);
+                }
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,7 +228,7 @@ public class LoginFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField senhaLogin;
+    private javax.swing.JTextField loginF;
+    private javax.swing.JTextField senhaF;
     // End of variables declaration//GEN-END:variables
 }
