@@ -414,7 +414,7 @@ public class ClientesCRUD extends javax.swing.JFrame {
             
             statement = con.prepareStatement(sql2);
             statement.execute();
-            result = statement.executeQuery();
+            result2 = statement.executeQuery();
             
             if(result!=null && result.next() && result2!=null && result2.next()){
                 
