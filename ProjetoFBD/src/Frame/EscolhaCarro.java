@@ -244,7 +244,7 @@ public class EscolhaCarro extends javax.swing.JFrame {
         carrosCrud.getModeloCarro().setText(jTable1.getValueAt(linha, 1).toString()); // retorna o valor da celula linha X 0
         carrosCrud.getMarcaCarro().setText(jTable1.getValueAt(linha, 2).toString()); // retorna o valor da celula linha X 1
         carrosCrud.getPlacaCarro().setText(jTable1.getValueAt(linha, 3).toString()); // retorna o valor da celula linha X 2
-        carrosCrud.corCarro().setText(jTable1.getValueAt(linha, 4).toString()); // retorna o valor da celula linha X 2
+        carrosCrud.getCorCarro().setText(jTable1.getValueAt(linha, 4).toString()); // retorna o valor da celula linha X 2
         carrosCrud.getTaxaCarro().setText(jTable1.getValueAt(linha, 5).toString());
         carrosCrud.getStatusLocCarro().setText(jTable1.getValueAt(linha, 6).toString());
     }//GEN-LAST:event_jTable1MouseClicked
@@ -262,12 +262,12 @@ public class EscolhaCarro extends javax.swing.JFrame {
 
         this.PopularJTable(sql);// TODO add your handling code here:
 
-        carrosCrud.modeloCarro.setText("");
-        carrosCrud.marcaCarro.setText("");
-        carrosCrud.placaCarro.setText("");
-        carrosCrud.corCarro.setText("");
-        carrosCrud.taxaCarro.setText("");
-        carrosCrud.statusLocCarro.setText("");
+        carrosCrud.getModeloCarro().setText("");
+        carrosCrud.getMarcaCarro().setText("");
+        carrosCrud.getPlacaCarro().setText("");
+        carrosCrud.getCorCarro().setText("");
+        carrosCrud.getTaxaCarro().setText("");
+        carrosCrud.getStatusLocCarro().setText("");
     }//GEN-LAST:event_btBuscaActionPerformed
 
     public void PopularJTable(String sql) {
