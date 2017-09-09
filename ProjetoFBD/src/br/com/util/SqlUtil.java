@@ -35,6 +35,7 @@ public class SqlUtil {
     public static final String SQL_INSERT_ENDERECO_ALL ="INSERT INTO endereco(id ,rua ,bairro ,cep ,cidade ,uf) values(?,?,?,?,?,?)";
     public static final String SELECT_ENDERECO ="SELECT id ,rua ,bairro ,cep ,cidade ,uf FROM endereco";
     public static final String UPDATE_ENDERECO ="update endereco set rua = ?, bairro = ?, cidade = ?, uf = ?, cep =? where id = (select idEndereco from cliente where id = ?)";
+    
     public static final String UPDATE_ENDERECO_FUN ="update endereco set rua = ?, bairro = ?, cidade = ?, uf = ?, cep =? where id = (select idEndereco from funcionario where id = ?)";
     
     private SqlUtil() {
