@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
@@ -410,6 +412,55 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
 
+        String sql1 = "SELECT fun.cpf FROM funcionario AS fun inner join endereco AS end ON end.id = fun.idEndereco WHERE fun.cpf LIKE '%"
+                + cpfFun.getText() + "%'";
+        
+        try {
+            statement = con.prepareStatement(sql1);
+            statement.execute();
+            result = statement.executeQuery();
+           
+            if(result!=null && result.next()){
+                
+                JOptionPane.showMessageDialog(null, "cpf ja existe");
+            }
+            
+            else{
+                
+                fun.getEndereco().setRua(endFild.getText());
+                fun.getEndereco().setBairro(bairroFild.getText());
+                fun.getEndereco().setCidade(cidadeFild.getText());
+                fun.getEndereco().setUf(ufFild.getText());
+                fun.getEndereco().setCep(cepFild.getText());
+        
+                fun.setNome(nomeFun.getText());
+                fun.setCpf(cpfFun.getText());
+                fun.setCargo(cargoFun.getText());
+                fun.setContato(contatoFun.getText());
+                fun.setLogin(userLogin.getText());
+                fun.setSenha(userSenha.getText());
+
+                Fachada coreFachada = new Fachada();
+                coreFachada.salvarFuncionario(fun);
+        
+                endFild.setText("");
+                bairroFild.setText("");
+                cepFild.setText("");
+                cidadeFild.setText("");
+                ufFild.setText("");
+        
+                nomeFun.setText("");
+                cargoFun.setText("");
+                cpfFun.setText("");
+                contatoFun.setText("");
+                userLogin.setText("");
+                userSenha.setText("");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FuncionarioCRUD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+        /*
         fun.getEndereco().setRua(endFild.getText());
         fun.getEndereco().setBairro(bairroFild.getText());
         fun.getEndereco().setCidade(cidadeFild.getText());
@@ -438,6 +489,7 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
         contatoFun.setText("");
         userLogin.setText("");
         userSenha.setText("");
+        */
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void nomeFunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeFunActionPerformed
