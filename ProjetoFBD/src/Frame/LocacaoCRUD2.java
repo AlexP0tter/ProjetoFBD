@@ -565,8 +565,16 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
 
     public double calcularValor() {
         
-        Date dataSaida = Date.valueOf(dataRetirLoca.getText());
+        String dataRecebida1 = dataRetirLoca.getText();
+        String dataRecebida2 = dataRetirLoca.getText();
+        
+        Date dataSaida = Date.valueOf();
         Date dataDevolucao = Date.valueOf(dataDevoLoca.getText());
+        
+        long dt = (dataDevolucao.getTime() - dataSaida.getTime()) + 3600000;
+        
+        double valor = dt / 86400000L;
+        
         
         
         /*
