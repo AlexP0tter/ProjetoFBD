@@ -22,7 +22,7 @@ public class TelaInicial extends javax.swing.JFrame {
     /**
      * Creates new form TelaInicial
      */
-    public TelaInicial(){ 
+    public TelaInicial(String CPFfun){ 
         
         super("TELA INICIAL");
         initComponents();
@@ -206,7 +206,7 @@ public class TelaInicial extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new TelaInicial().setVisible(true);
+                new TelaInicial("").setVisible(true);
             }
         });
     }

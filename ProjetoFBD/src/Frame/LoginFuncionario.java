@@ -168,7 +168,7 @@ public class LoginFuncionario extends javax.swing.JFrame {
                
             if(result!=null && result2!=null && result.next() && result2.next()){
                  setVisible(false);
-                 new TelaInicial().setVisible(true);
+                 new TelaInicial("").setVisible(true);
              }
             else{
                  setVisible(false);

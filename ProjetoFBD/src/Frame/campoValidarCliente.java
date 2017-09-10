@@ -169,7 +169,7 @@ public class campoValidarCliente extends javax.swing.JFrame {
 
             if (result != null && result.next()) {
                 setVisible(false);
-                new Locacao(cpfFild.getText()).setVisible(true);
+                new LocacaoCRUD2(cpfFild.getText()).setVisible(true);
 
             } else {
                 int resposta;
