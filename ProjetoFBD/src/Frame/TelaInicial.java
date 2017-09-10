@@ -159,7 +159,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void btAlugaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlugaActionPerformed
         setVisible(false);
-        locacaoCRUD lcrud = new locacaoCRUD();
+        tabelaLocacao lcrud = new tabelaLocacao();
         lcrud.setVisible(true);
     }//GEN-LAST:event_btAlugaActionPerformed
 

@@ -11,45 +11,41 @@ import br.com.model.LocacaoModel;
 import br.com.util.ConnectionFactory;
 import br.com.util.SqlUtil;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Alexp0tter
  */
-public class LocacaoCRUD2 extends javax.swing.JFrame {
+public class Locacao extends javax.swing.JFrame {
 
-    PreparedStatement statement, statement2;
-    ResultSet result, result2;
-    Connection con;
+    PreparedStatement statementCL,statCarro;
+    ResultSet resultCL,resultCarro;
+    Connection conCliente,conCarro;
     LocacaoModel loc = new LocacaoModel();
-    int idCl;
-    int idCarro;
-    int idFun;
+    private int idCl;
+    private int idCarro;
+    private int idFun;
     
-    LoginFuncionario loginFuncionario = new LoginFuncionario();
-
-    ArrayList<Cliente> cliente = new ArrayList<Cliente>();
-
-    public LocacaoCRUD2(String cpf) {
+    
+    public Locacao(String cpf) {
         initComponents();
+        setLocationRelativeTo(null);
+        
 
         try {
-            con = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
+            conCliente = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
+            conCarro = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
 
         } catch (Exception ex) {
             ex.printStackTrace();
             try {
-                con.rollback();
+                conCliente.rollback();
+                conCarro.rollback();
             } catch (SQLException ex1) {
                 ex.printStackTrace();
             }
@@ -57,39 +53,29 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
 
         try {
 
-            statement = con.prepareStatement("select cl.id, cl.nome, cl.cpf, cl.contato, cl.idEndereco, end.rua, end.bairro, end.cidade, end.cep, end.uf from cliente as cl inner join endereco AS end ON end.id = cl.idEndereco where cl.cpf ='"+cpf+"'");
-            statement.execute();
-            result = statement.executeQuery();
-            
-            statement2 = con.prepareStatement("select fun.id,fun.nome, fun.cpf, fun.cargo, fun.contato, fun.loginUser, fun.loginSenha, fun.idEndereco, end.rua, end.bairro, end.cidade, end.cep, end.uf from funcionario as fun inner join endereco AS end ON end.id = fun.idEndereco where fun.loginUser ='"+loginFuncionario.getLoginF().getText()+"'");
-            statement2.execute();
-            result2 = statement2.executeQuery();
+            statementCL = conCliente.prepareStatement("select cl.id, cl.nome, cl.cpf, cl.contato, cl.idEndereco, end.rua, end.bairro, end.cidade, end.cep, end.uf from cliente as cl inner join endereco AS end ON end.id = cl.idEndereco where cl.cpf ='"+cpf+"'");
+            statementCL.execute();
+            resultCL = statementCL.executeQuery();
 
-            while (result.next()) {
+            while (resultCL.next()) {
 
-                clienteNome.setText(result.getString("cl.nome"));
-                cpfCliente.setText(result.getString("cl.cpf"));
-                clienteContato.setText(result.getString("cl.contato"));
-                endCliente.setText(result.getString("end.rua"));
-                bairroCliente.setText(result.getString("end.bairro"));
-                cidadeCliente.setText(result.getString("end.cidade"));
-                ufCliente.setText(result.getString("end.uf"));
-                cepCliente.setText(result.getString("end.cep"));
+                clienteNome.setText(resultCL.getString("cl.nome"));
+                cpfCliente.setText(resultCL.getString("cl.cpf"));
+                clienteContato.setText(resultCL.getString("cl.contato"));
+                endCliente.setText(resultCL.getString("end.rua"));
+                bairroCliente.setText(resultCL.getString("end.bairro"));
+                cidadeCliente.setText(resultCL.getString("end.cidade"));
+                ufCliente.setText(resultCL.getString("end.uf"));
+                cepCliente.setText(resultCL.getString("end.cep"));
                 
-                idCl = Integer.parseInt((result.getString("cl.id")));    
-
-            }
-            
-            while (result2.next()) {           
-                
-                funLoca1.setText(result2.getString("fun.nome"));
-                
-                idFun = Integer.parseInt((result2.getString("fun.id")));
+                idCl = Integer.parseInt((resultCL.getString("cl.id"))); 
             }
 
         } catch (SQLException ex) {
             System.out.println("o erro foi " + ex);
         }
+        
+        PopularJTable(SqlUtil.SELECT_CARROS);
 
     }
 
@@ -127,6 +113,10 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        fieldBusca = new javax.swing.JTextField();
+        btBusca = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         bairroCliente = new javax.swing.JTextField();
         ufCliente = new javax.swing.JTextField();
@@ -144,10 +134,9 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
         jLabel42 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btVoltar = new javax.swing.JButton();
         btSalvar = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -267,6 +256,49 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
 
         jLabel35.setText("Valor Diária");
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Modelo", "Marca", "Placa", "Cor", "Valor Diária", "Status de Locação"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
+
+        fieldBusca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldBuscaActionPerformed(evt);
+            }
+        });
+
+        btBusca.setText("Buscar");
+        btBusca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -275,36 +307,50 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(modeloCarro))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(marcaCarro, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel31))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(corCarro, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(0, 161, Short.MAX_VALUE))
+                            .addComponent(modeloCarro))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(placaCarro, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(marcaCarro, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel31))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(corCarro, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(placaCarro, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(93, 93, 93)
+                                .addComponent(jLabel4)))
+                        .addGap(8, 8, 8)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel35)
+                            .addComponent(diariaCarro, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(statusLocCarro, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 779, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(93, 93, 93)
-                        .addComponent(jLabel4)))
-                .addGap(8, 8, 8)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel35)
-                    .addComponent(diariaCarro, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(statusLocCarro, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(fieldBusca)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btBusca)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fieldBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btBusca))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel31)
@@ -319,8 +365,7 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
                     .addComponent(corCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(placaCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(diariaCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(statusLocCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(statusLocCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
@@ -456,7 +501,12 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
                 .addGap(52, 52, 52))
         );
 
-        jButton1.setText("Voltar");
+        btVoltar.setText("Voltar");
+        btVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVoltarActionPerformed(evt);
+            }
+        });
 
         btSalvar.setText("Salvar");
         btSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -465,14 +515,12 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Cancelar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btCancelar.setText("Cancelar");
+        btCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btCancelarActionPerformed(evt);
             }
         });
-
-        jButton3.setText("Escolher Carro");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -485,13 +533,11 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
+                        .addComponent(btVoltar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btSalvar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)))
+                        .addComponent(btCancelar)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -499,16 +545,15 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btVoltar)
                     .addComponent(btSalvar)
-                    .addComponent(jButton4)
-                    .addComponent(jButton3))
+                    .addComponent(btCancelar))
                 .addContainerGap())
         );
 
@@ -565,54 +610,49 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btSalvarActionPerformed
 
-    public double calcularValor(){
-        
-        String dataRecebida1 = dataRetirLoca.getText();
-        String dataRecebida2 = dataDevoLoca.getText();
-        
-        
-        /*
-        try {
-            statement = con.prepareStatement("SELECT dataSaida from locacao where dataSaida ='"+ dataSaida+"'");
-            statement2 = con.prepareStatement("");
-        } catch (SQLException ex) {
-            Logger.getLogger(LocacaoCRUD2.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+    public double calcularValor() {
         return 0;
     }
-
-    public void alimentarFild() {
-
-        try {
-
-            statement = con.prepareStatement(SqlUtil.SELECT_CLIENTE);
-            statement.execute();
-            result = statement.executeQuery();
-
-            while (result.next()) {
-
-                result.getString("cl.id");
-                result.getString("cl.nome");
-                result.getString("cl.cpf");
-                result.getString("cl.contato");
-                result.getString("end.rua");
-                result.getString("end.bairro");
-                result.getString("end.cidade");
-                result.getString("end.uf");
-                result.getString("end.cep");
-            }
-
-        } catch (SQLException ex) {
-            System.out.println("o erro foi " + ex);
-        }
-    }
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    
+   
+    private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btCancelarActionPerformed
 
     private void clienteContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteContatoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_clienteContatoActionPerformed
+
+    private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
+        System.out.println(idCarro);
+    }//GEN-LAST:event_btVoltarActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+            
+        int linha = jTable1.getSelectedRow(); // retorna a linha selecionada pelo usuario
+        modeloCarro.setText(jTable1.getValueAt(linha, 1).toString()); // retorna o valor da celula linha X 0
+        marcaCarro.setText(jTable1.getValueAt(linha, 2).toString()); // retorna o valor da celula linha X 1
+        placaCarro.setText(jTable1.getValueAt(linha, 3).toString()); // retorna o valor da celula linha X 2
+        corCarro.setText(jTable1.getValueAt(linha, 4).toString()); // retorna o valor da celula linha X 2
+        diariaCarro.setText(jTable1.getValueAt(linha, 5).toString());
+        statusLocCarro.setText(jTable1.getValueAt(linha, 6).toString());
+       
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void fieldBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldBuscaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldBuscaActionPerformed
+
+    private void btBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscaActionPerformed
+
+        String sql = "SELECT * FROM carro WHERE modelo LIKE '%"
+        + fieldBusca.getText() + "%' OR marca LIKE '%"
+        + fieldBusca.getText() + "%'"
+        + " ORDER BY id";
+
+        this.PopularJTable(sql);// TODO add your handling code here:
+
+    }//GEN-LAST:event_btBuscaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -631,28 +671,83 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LocacaoCRUD2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Locacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LocacaoCRUD2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Locacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LocacaoCRUD2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Locacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LocacaoCRUD2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Locacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LocacaoCRUD2("").setVisible(true);
+                new Locacao("").setVisible(true);
             }
         });
     }
 
+    public int getIdCarro() {
+        return idCarro;
+    }
+
+    public void setIdCarro(int idCarro) {
+        this.idCarro = idCarro;
+    }
+    
+    public void PopularJTable(String sql) {
+        
+        try {
+
+            statCarro = conCarro.prepareStatement(sql);
+            statCarro.execute();
+            resultCarro = statCarro.executeQuery();
+
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setNumRows(0);
+
+            while (resultCarro.next()) {
+                model.addRow(new Object[]{
+                    //retorna os dados da tabela do BD, cada campo e um coluna.
+                    resultCarro.getString("id"),
+                    resultCarro.getString("modelo"),
+                    resultCarro.getString("marca"),
+                    resultCarro.getString("placa"),
+                    resultCarro.getString("cor"),
+                    resultCarro.getString("valorDiaria"),
+                    resultCarro.getString("statusLocacao"),});
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("o erro foi " + ex);
+        }
+    }
+    
+    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField bairroCliente;
+    private javax.swing.JButton btBusca;
+    private javax.swing.JButton btCancelar;
     private javax.swing.JButton btSalvar;
+    private javax.swing.JButton btVoltar;
     private javax.swing.JFormattedTextField cepCliente;
     private javax.swing.JTextField cidadeCliente;
     private javax.swing.JFormattedTextField clienteContato;
@@ -663,10 +758,8 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField dataRetirLoca;
     private javax.swing.JTextField diariaCarro;
     private javax.swing.JTextField endCliente;
+    private javax.swing.JTextField fieldBusca;
     private javax.swing.JTextField funLoca1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -690,6 +783,8 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField marcaCarro;
     private javax.swing.JTextField modeloCarro;

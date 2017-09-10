@@ -6,7 +6,7 @@
 package br.com.busines;
 
 import br.com.dao.LocaDao;
-import br.com.model.Locacao;
+import br.com.model.LocacaoModel;
 
 /**
  *
@@ -26,7 +26,7 @@ public class LocaBusiness {
     }
 */
     
-    public boolean salvar(Locacao loc) {
+    public boolean salvar(LocacaoModel loc) {
         
         try{
         locaDao.salvar(loc);
@@ -38,7 +38,7 @@ public class LocaBusiness {
         return false;
     }
     
-    public boolean alterar(Locacao loc) {
+    public boolean alterar(LocacaoModel loc) {
         
         try{
         locaDao.alterar(loc);

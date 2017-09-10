@@ -153,7 +153,7 @@ public class campoValidarCliente extends javax.swing.JFrame {
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
         setVisible(false);
-        locacaoCRUD loccrud = new locacaoCRUD();
+        tabelaLocacao loccrud = new tabelaLocacao();
         loccrud.setVisible(true);
     }//GEN-LAST:event_btCancelarActionPerformed
 
@@ -169,7 +169,7 @@ public class campoValidarCliente extends javax.swing.JFrame {
 
             if (result != null && result.next()) {
                 setVisible(false);
-                new LocacaoCRUD2(cpfFild.getText()).setVisible(true);
+                new Locacao(cpfFild.getText()).setVisible(true);
 
             } else {
                 int resposta;
@@ -183,7 +183,7 @@ public class campoValidarCliente extends javax.swing.JFrame {
                 } else {
                     
                     setVisible(false);
-                    locacaoCRUD loccrud = new locacaoCRUD();
+                    tabelaLocacao loccrud = new tabelaLocacao();
                     loccrud.setVisible(true);
                 }
             }
