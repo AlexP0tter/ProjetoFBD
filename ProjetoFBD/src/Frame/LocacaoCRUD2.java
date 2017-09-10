@@ -56,7 +56,7 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
             statement.execute();
             result = statement.executeQuery();
             
-            statement2 = con.prepareStatement("select fun.id,fun.nome, fun.cpf, fun.cargo, fun.contato, fun.loginUser, fun.loginSenha, fun.idEndereco, end.rua, end.bairro, end.cidade, end.cep, end.uf from funcionario as fun inner join endereco AS end ON end.id = fun.idEndereco where fun.loginUser ='"+loginFuncionario.getLoginF()+"'");
+            statement2 = con.prepareStatement("select fun.id,fun.nome, fun.cpf, fun.cargo, fun.contato, fun.loginUser, fun.loginSenha, fun.idEndereco, end.rua, end.bairro, end.cidade, end.cep, end.uf from funcionario as fun inner join endereco AS end ON end.id = fun.idEndereco where fun.loginUser ='"+loginFuncionario.getLoginF().getText()+"'");
             statement2.execute();
             result2 = statement2.executeQuery();
 
@@ -72,12 +72,14 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
                 cepCliente.setText(result.getString("end.cep"));
                 
                 idCl = Integer.parseInt((result.getString("cl.id")));    
+
+            }
+            
+            while (result2.next()) {           
                 
-                     
+                funLoca1.setText(result2.getString("fun.nome"));
                 
-                
-                
-                
+                idFun = Integer.parseInt((result2.getString("fun.id")));
             }
 
         } catch (SQLException ex) {
