@@ -10,6 +10,7 @@ import br.com.model.Cliente;
 import br.com.model.LocacaoModel;
 import br.com.util.ConnectionFactory;
 import br.com.util.SqlUtil;
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,6 +19,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JFormattedTextField;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -33,6 +36,9 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
     private int idCl;
     private int idCarro;
     private int idFun;
+
+    public LocacaoCRUD2() throws HeadlessException {
+    }
     
     
     
@@ -772,6 +778,32 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
     public void setIdCarro(int idCarro) {
         this.idCarro = idCarro;
     }
+
+    public JTextField getDiariaCarro() {
+        return diariaCarro;
+    }
+
+    public void setDiariaCarro(JTextField diariaCarro) {
+        this.diariaCarro = diariaCarro;
+    }
+
+    public JFormattedTextField getDataRetirLoca() {
+        return dataRetirLoca;
+    }
+
+    public void setDataRetirLoca(JFormattedTextField dataRetirLoca) {
+        this.dataRetirLoca = dataRetirLoca;
+    }
+
+    public JFormattedTextField getDataDevoLoca() {
+        return dataDevoLoca;
+    }
+
+    public void setDataDevoLoca(JFormattedTextField dataDevoLoca) {
+        this.dataDevoLoca = dataDevoLoca;
+    }
+    
+    
     
     public void PopularJTable(String sql) {
         

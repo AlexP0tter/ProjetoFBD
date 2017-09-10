@@ -37,6 +37,7 @@ public class tabelaLocacao extends javax.swing.JFrame {
     ResultSet result;
     Connection con;
     LocacaoModel loc = new LocacaoModel();
+    LocacaoCRUD2 lcrud = new LocacaoCRUD2();
     
     String nomeFun;
 
@@ -317,6 +318,26 @@ public class tabelaLocacao extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.out.println("o erro foi " + ex);
         }
+    }
+    
+    public double calcularValor() throws ParseException{
+        
+        String taxaCarro = lcrud.getDiariaCarro().getText();
+        
+        String saida = lcrud.getDataRetirLoca().getText();
+        String devolucao = lcrud.getDataDevoLoca().getText();
+        
+        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+        
+        Date carroSaida = formatador.parse(saida);
+        Date carroDevolucao = formatador.parse(devolucao);
+        
+        long dias = (carroDevolucao.getTime()-carroSaida.getTime())/(1000*60*60*24);
+        double taxa = Double.parseDouble(taxaCarro);
+        
+        double valorTotal = taxa*dias;
+        return valorTotal;
+
     }
     
     public static void main(String args[]) {
