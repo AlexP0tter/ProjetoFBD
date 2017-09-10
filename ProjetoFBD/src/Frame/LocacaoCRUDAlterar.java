@@ -38,6 +38,8 @@ public class LocacaoCRUDAlterar extends javax.swing.JFrame {
     int idCarro;
     int idFun;
     String nomeFun;
+    
+    int idLocacao;
 
     //public LocacaoCRUDAlterar() throws HeadlessException {
     //}
@@ -84,6 +86,8 @@ public class LocacaoCRUDAlterar extends javax.swing.JFrame {
                 dataDevoLoca.setText(resultloc.getString("loc.dataVolta"));
                 valorLoca.setText(resultloc.getString("loc.valorPagamento"));
                 statusLocacao.setText(resultloc.getString("loc.statusLocacao"));
+                
+                idLocacao = Integer.parseInt(resultloc.getString("loc.id"));
 
             }
         } catch (SQLException ex) {
@@ -625,18 +629,27 @@ public class LocacaoCRUDAlterar extends javax.swing.JFrame {
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
 
-        loc.getCliente().setId(idCl);
-        loc.getCarro().setId(idCarro);
-        loc.getFun().setId(idFun);
+        
+        try {
+            loc.setId(idLocacao);
+        
+            loc.getCliente().setId(idCl);
+            loc.getCarro().setId(idCarro);
+            loc.getFun().setId(idFun);
 
-        loc.setStatusLocacao(Boolean.parseBoolean(statusLocacao.getText()));
-        loc.setValor(Double.parseDouble(valorLoca.getText()));
-        loc.setDataDevolucao(dataDevoLoca.getText());
-        loc.setDataRetirada(dataRetirLoca.getText());
-
-        Fachada coreFachada = new Fachada();
-        coreFachada.salvarLoca(loc);
-
+            loc.setStatusLocacao(Boolean.parseBoolean(statusLocacao.getText()));
+            loc.setDataDevolucao(dataDevoLoca.getText());
+            loc.setDataRetirada(dataRetirLoca.getText());
+            loc.setValor(calcularValor());
+            
+            Fachada coreFachada = new Fachada();
+            coreFachada.alterarLoca(loc);
+            
+            
+        } catch (ParseException ex) {
+            Logger.getLogger(LocacaoCRUDAlterar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
     }//GEN-LAST:event_btSalvarActionPerformed
 
     public double calcularValor() throws ParseException {
