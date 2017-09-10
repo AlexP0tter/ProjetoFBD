@@ -19,6 +19,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -29,15 +31,35 @@ import javax.swing.table.DefaultTableModel;
  */
 public class LocacaoCRUDAlterar extends javax.swing.JFrame {
 
-    PreparedStatement statementCL,statCarro,statFun;
-    ResultSet resultCL,resultCarro,resultFun;
-    Connection conCliente,conCarro,conFun;
+    PreparedStatement statementCL,statCarro,statFun, statement;
+    ResultSet resultCL,resultCarro,resultFun, result;
+    Connection conCliente,conCarro,conFun, con;
     LocacaoModel loc = new LocacaoModel();
     private int idCl;
     private int idCarro;
     private int idFun;
 
-    public LocacaoCRUDAlterar() throws HeadlessException {
+    public LocacaoCRUDAlterar(int idLOcacao){
+        
+        initComponents();
+        setLocationRelativeTo(null);
+        
+        try {
+            con = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
+        } catch (Exception ex) {
+            try {
+                con.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(LocacaoCRUDAlterar.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+            Logger.getLogger(LocacaoCRUDAlterar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            statement = con.prepareStatement("SELECT loc.id, loc.idCliente, loc.idFuncionario, loc.idCarro, loc.dataSaida, loc.dataVolta, loc.valorPagamento, loc.statusLocacao FROM locacao as loc inner join cliente AS cli ON cli.id = loc.idClient inner join funcionario AS fun ON fun.id = loc.idFuncionario inner join carro AS car ON car.id = loc.idCarro WHERE loc.id = '"+idLOcacao+"'");
+        } catch (SQLException ex) {
+            Logger.getLogger(LocacaoCRUDAlterar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     
