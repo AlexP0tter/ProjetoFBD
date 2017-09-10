@@ -15,6 +15,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -563,18 +565,10 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btSalvarActionPerformed
 
-    public double calcularValor() {
+    public double calcularValor(){
         
         String dataRecebida1 = dataRetirLoca.getText();
-        String dataRecebida2 = dataRetirLoca.getText();
-        
-        Date dataSaida = Date.valueOf();
-        Date dataDevolucao = Date.valueOf(dataDevoLoca.getText());
-        
-        long dt = (dataDevolucao.getTime() - dataSaida.getTime()) + 3600000;
-        
-        double valor = dt / 86400000L;
-        
+        String dataRecebida2 = dataDevoLoca.getText();
         
         
         /*
