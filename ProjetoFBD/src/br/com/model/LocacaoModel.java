@@ -24,13 +24,13 @@ public class LocacaoModel {
     private Cliente cliente;
     private Carro carro;
     private Funcionario fun;
-    private Date dataRetirada, dataDevolucao;
+    private String dataRetirada, dataDevolucao;
     private double valor;
     private boolean statusLocacao;
     
     private int id;
 
-    public LocacaoModel(Cliente cliente, Carro carro, Funcionario fun, Date dataRetirada, Date dataDevolucao, double valor, boolean statusLocacao, int id) {
+    public LocacaoModel(Cliente cliente, Carro carro, Funcionario fun, String dataRetirada, String dataDevolucao, double valor, boolean statusLocacao, int id) {
         this.cliente = cliente;
         this.carro = carro;
         this.fun = fun;
@@ -74,21 +74,23 @@ public class LocacaoModel {
         this.fun = fun;
     }
 
-    public Date getDataRetirada() {
+    public String getDataRetirada() {
         return dataRetirada;
     }
 
-    public void setDataRetirada(Date dataRetirada) {
+    public void setDataRetirada(String dataRetirada) {
         this.dataRetirada = dataRetirada;
     }
 
-    public Date getDataDevolucao() {
+    public String getDataDevolucao() {
         return dataDevolucao;
     }
 
-    public void setDataDevolucao(Date dataDevolucao) {
+    public void setDataDevolucao(String dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
+
+    
 
     public double getValor() {
         return valor;

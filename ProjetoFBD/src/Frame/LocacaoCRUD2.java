@@ -32,6 +32,7 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
     int idCl;
     int idCarro;
     int idFun;
+    String nomeFun;
     
     
     
@@ -43,6 +44,7 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
         valorLoca.setText("0");
         statusLocacao.setText("true");
         dataDevoLoca.setText(null);
+        this.nomeFun = nomeFun;
         
         //status locação (finalizada em )
         
@@ -169,7 +171,6 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
         jLabel44 = new javax.swing.JLabel();
         btVoltar = new javax.swing.JButton();
         btSalvar = new javax.swing.JButton();
-        btCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -575,13 +576,6 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
             }
         });
 
-        btCancelar.setText("Cancelar");
-        btCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCancelarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -595,9 +589,7 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btVoltar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btSalvar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btCancelar)))
+                        .addComponent(btSalvar)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -612,8 +604,7 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btVoltar)
-                    .addComponent(btSalvar)
-                    .addComponent(btCancelar))
+                    .addComponent(btSalvar))
                 .addContainerGap())
         );
 
@@ -663,8 +654,11 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
         
         loc.setStatusLocacao(Boolean.parseBoolean(statusLocacao.getText()));
         loc.setValor(Double.parseDouble(valorLoca.getText()));
-        //loc.setDataDevolucao();
+        loc.setDataDevolucao(dataDevoLoca.getText());
+        loc.setDataRetirada(dataRetirLoca.getText());
+     
         
+        /*
         String saida = dataRetirLoca.getText();
         String devolucao = dataDevoLoca.getText();        
 
@@ -685,6 +679,7 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        */
 
         Fachada coreFachada = new Fachada();
         coreFachada.salvarLoca(loc);
@@ -711,16 +706,13 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
     }
     
    
-    private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
-        
-    }//GEN-LAST:event_btCancelarActionPerformed
-
     private void clienteContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteContatoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_clienteContatoActionPerformed
 
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
-        System.out.println(idCarro);
+        setVisible(false);
+        new tabelaLocacao(nomeFun);
     }//GEN-LAST:event_btVoltarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -860,7 +852,6 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField bairroCliente;
     private javax.swing.JButton btBusca;
-    private javax.swing.JButton btCancelar;
     private javax.swing.JButton btSalvar;
     private javax.swing.JButton btVoltar;
     private javax.swing.JFormattedTextField cepCliente;

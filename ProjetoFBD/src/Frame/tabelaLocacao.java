@@ -59,7 +59,7 @@ public class tabelaLocacao extends javax.swing.JFrame {
             }
         }
 
-        PopularJTable(SqlUtil.SELECT_LOCACAO);
+        PopularJTable(SqlUtil.SELECT_TABELA_LOC);
 
     }
 
@@ -305,14 +305,18 @@ public class tabelaLocacao extends javax.swing.JFrame {
 
             while (result.next()) {
                 model.addRow(new Object[]{
+                    //loc.id, cl.cpf,cr.modelo,fun.nome, loc.dataSaida,loc.dataVolta,loc.valorPagamento, loc.StatusLocacao
                     //retorna os dados da tabela do BD, cada campo e um coluna.
-                    result.getString("id"),
-                    result.getString("cliente"),
-                    result.getString("carro"),
-                    result.getString("funcionario"),
-                    result.getString("dataRetirada"),
-                    result.getString("dataDevo"),
-                    result.getString("valor"),});
+                    result.getString("loc.id"),
+                    result.getString("cl.cpf"),
+                    result.getString("cr.modelo"),
+                    result.getString("fun.nome"),
+                    result.getString("loc.dataSaida"),
+                    result.getString("loc.dataVolta"),
+                    result.getString("loc.valorPagamento"),
+                    result.getString("loc.statusLocacao")
+                
+                });
             }
 
         } catch (SQLException ex) {

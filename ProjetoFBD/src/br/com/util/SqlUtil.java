@@ -29,6 +29,7 @@ public class SqlUtil {
             + "INNER JOIN cliente AS cl ON cl.id = loc.idCliente "
             + "INNER JOIN funcionario AS fun ON fun.id = loc.idFuncionario "
             + "INNER JOIN carro AS cr ON cr.id = loc.idCarro";
+   public static final String SELECT_TABELA_LOC = "select loc.id, cl.cpf,cr.modelo,fun.nome, loc.dataSaida,loc.dataVolta,loc.valorPagamento, loc.StatusLocacao from locacao as loc INNER JOIN cliente AS cl ON cl.id = loc.idCliente INNER JOIN funcionario AS fun ON fun.id = loc.idFuncionario INNER JOIN carro AS cr ON cr.id = loc.idCarro"; 
 
     public static final String UPDATE_LOCACAO = "update locacao set cliente = ?, carro = ?,funcionario=?, dataRetirada = ?,dataDevo = ?,valor = ? where id = ?";
     

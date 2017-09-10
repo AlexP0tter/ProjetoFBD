@@ -43,8 +43,8 @@ public class LocaDao {
             statement.setInt(2, loc.getCliente().getId());
             statement.setInt(3, loc.getFun().getId());
             statement.setInt(4, loc.getCarro().getId());            
-            statement.setDate(5, loc.getDataRetirada());
-            statement.setDate(6, loc.getDataDevolucao());
+            statement.setString(5, loc.getDataRetirada());
+            statement.setString(6, loc.getDataDevolucao());
             statement.setDouble(7, loc.getValor());
             statement.setBoolean(8, loc.isStatusLocacao());
             
@@ -69,8 +69,8 @@ public class LocaDao {
             statement.setInt(1, loc.getCliente().getId());
             statement.setInt(2, loc.getFun().getId());
             statement.setInt(3, loc.getCarro().getId() );            
-            statement.setDate(4, loc.getDataRetirada());
-            statement.setDate(5, loc.getDataDevolucao());
+            statement.setString(4, loc.getDataRetirada());
+            statement.setString(5, loc.getDataDevolucao());
             statement.setDouble(6, loc.getValor());
             statement.setBoolean(7, loc.isStatusLocacao()); 
             statement.setInt(8, loc.getId());
