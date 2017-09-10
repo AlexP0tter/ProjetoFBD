@@ -59,7 +59,10 @@ public class LocacaoCRUDAlterar extends javax.swing.JFrame {
                 this.idFun = Integer.parseInt((resultloc.getString("loc.idFuncionario")));
                 this.idCarro = Integer.parseInt((resultloc.getString("loc.idCarro")));
                 
-                
+                dataRetirLoca.setText(resultloc.getString("loc.dataSaida"));
+                dataDevoLoca.setText(resultloc.getString("loc.dataVolta"));
+                valorLoca.setText(resultloc.getString("loc.valorPagamento"));
+                statusLocacao.setText(resultloc.getString("loc.statusLocacao"));
                 
                 
             }
