@@ -14,7 +14,7 @@ import br.com.model.Carro;
 import br.com.model.Cliente;
 import br.com.model.Endereco;
 import br.com.model.Funcionario;
-import br.com.model.Locacao;
+import br.com.model.LocacaoModel;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -84,12 +84,12 @@ public class Fachada{
         return carroBusiness.alterar(car);
     }
     
-    public boolean salvarLoca(Locacao loc){
+    public boolean salvarLoca(LocacaoModel loc){
         return locaBusiness.salvar(loc);
         
     }
     
-    public boolean alterarLoca(Locacao loc){
+    public boolean alterarLoca(LocacaoModel loc){
        return locaBusiness.alterar(loc);
     }    
 

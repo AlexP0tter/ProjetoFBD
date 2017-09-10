@@ -5,7 +5,7 @@
  */
 package br.com.dao;
 
-import br.com.model.Locacao;
+import br.com.model.LocacaoModel;
 import br.com.util.ConnectionFactory;
 import br.com.util.SqlUtil;
 import java.sql.Connection;
@@ -36,7 +36,7 @@ public class LocaDao {
         }
 
     }
-    public Locacao salvar(Locacao loc)throws Exception {
+    public LocacaoModel salvar(LocacaoModel loc)throws Exception {
         try {
             statement = con.prepareStatement(SqlUtil.SQL_INSERT_LOCACAO_ALL);
             statement.setInt(1, loc.getId());
@@ -62,7 +62,7 @@ public class LocaDao {
         throw new Exception("Erro....");
     }
     
-    public Locacao alterar(Locacao loc)throws Exception {
+    public LocacaoModel alterar(LocacaoModel loc)throws Exception {
         try {
             statement = con.prepareStatement(SqlUtil.UPDATE_LOCACAO);            
             

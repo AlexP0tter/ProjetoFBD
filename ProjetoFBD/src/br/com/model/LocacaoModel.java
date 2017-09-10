@@ -11,7 +11,7 @@ import java.sql.Date;
  *
  * @author Alexp0tter
  */
-public class Locacao {
+public class LocacaoModel {
     
     //private Carro carro;
     //private Cliente cliente;
@@ -26,7 +26,7 @@ public class Locacao {
     
     private int id;
 
-    public Locacao(Cliente cliente, Carro carro, Funcionario fun, Date dataRetirada, Date dataDevolucao, double valor, boolean statusLocacao, int id) {
+    public LocacaoModel(Cliente cliente, Carro carro, Funcionario fun, Date dataRetirada, Date dataDevolucao, double valor, boolean statusLocacao, int id) {
         this.cliente = cliente;
         this.carro = carro;
         this.fun = fun;
@@ -38,7 +38,7 @@ public class Locacao {
     }
     
     
-    public Locacao(){
+    public LocacaoModel(){
         
     } 
 
