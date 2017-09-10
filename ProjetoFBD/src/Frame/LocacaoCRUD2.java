@@ -65,7 +65,7 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
                 ufCliente.setText(result.getString("end.uf"));
                 cepCliente.setText(result.getString("end.cep"));
                 
-                idCl = Integer.parseInt((result.getString("cl.id")));       
+                idCl = Integer.parseInt((result.getString("cl.id")));    
                 
                      
                 

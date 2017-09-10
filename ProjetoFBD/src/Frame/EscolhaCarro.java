@@ -6,6 +6,7 @@
 package Frame;
 
 
+
 import br.com.model.Carro;
 
 import br.com.util.ConnectionFactory;
@@ -25,15 +26,17 @@ public class EscolhaCarro extends javax.swing.JFrame {
     PreparedStatement statement;
     ResultSet result;
     Connection con;
-
     Carro carro = new Carro();
+    Locacao locacao = new Locacao();
+    
+
+   
     CarrosCrud carrosCrud = new CarrosCrud();
     
 
     
     public EscolhaCarro() {
         initComponents();
-        carrosCrud.setVisible(false);
         
         try {
             con = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
@@ -260,6 +263,24 @@ public class EscolhaCarro extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
+        carrosCrud.setVisible(false);
+
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void fieldBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldBuscaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldBuscaActionPerformed
+
+    private void btBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscaActionPerformed
+
+        String sql = "SELECT * FROM carro WHERE modelo LIKE '%"
+        + fieldBusca.getText() + "%' OR marca LIKE '%"
+        + fieldBusca.getText() + "%'"
+        + " ORDER BY id";
+
+        this.PopularJTable(sql);// TODO add your handling code here:
+
+
         int linha = jTable1.getSelectedRow(); // retorna a linha selecionada pelo usuario
 
         
@@ -279,28 +300,23 @@ public class EscolhaCarro extends javax.swing.JFrame {
         carrosCrud.getTaxaCarro().setText(jTable1.getValueAt(linha, 5).toString());
         carrosCrud.getStatusLocCarro().setText(jTable1.getValueAt(linha, 6).toString());
 
-    }//GEN-LAST:event_jTable1MouseClicked
 
-    private void fieldBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldBuscaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fieldBuscaActionPerformed
-
-    private void btBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscaActionPerformed
-
-        String sql = "SELECT * FROM carro WHERE modelo LIKE '%"
-        + fieldBusca.getText() + "%' OR marca LIKE '%"
-        + fieldBusca.getText() + "%'"
-        + " ORDER BY id";
-
-        this.PopularJTable(sql);// TODO add your handling code here:
-
-
-        carrosCrud.getModeloCarro().setText("");
-        carrosCrud.getMarcaCarro().setText("");
-        carrosCrud.getPlacaCarro().setText("");
-        carrosCrud.getCorCarro().setText("");
-        carrosCrud.getTaxaCarro().setText("");
-        carrosCrud.getStatusLocCarro().setText("");
+        
+        
+        locacao.getModeloCarro().setText(jTable1.getValueAt(linha, 1).toString()); // retorna o valor da celula linha X 0
+        locacao.getMarcaCarro().setText(jTable1.getValueAt(linha, 2).toString()); // retorna o valor da celula linha X 1
+        locacao.getPlacaCarro().setText(jTable1.getValueAt(linha, 3).toString()); // retorna o valor da celula linha X 2
+        locacao.getCorCarro().setText(jTable1.getValueAt(linha, 4).toString()); // retorna o valor da celula linha X 2
+        locacao.getTaxaCarro().setText(jTable1.getValueAt(linha, 5).toString());
+        locacao.getStatusLocCarro().setText(jTable1.getValueAt(linha, 6).toString());
+        /*
+        carrosCrud.getModeloCarro().setText(jTable1.getValueAt(linha, 1).toString()); // retorna o valor da celula linha X 0
+        carrosCrud.getMarcaCarro().setText(jTable1.getValueAt(linha, 2).toString()); // retorna o valor da celula linha X 1
+        carrosCrud.getPlacaCarro().setText(jTable1.getValueAt(linha, 3).toString()); // retorna o valor da celula linha X 2
+        carrosCrud.getCorCarro().setText(jTable1.getValueAt(linha, 4).toString()); // retorna o valor da celula linha X 2
+        carrosCrud.getTaxaCarro().setText(jTable1.getValueAt(linha, 5).toString());
+        carrosCrud.getStatusLocCarro().setText(jTable1.getValueAt(linha, 6).toString());
+        */
 
     }//GEN-LAST:event_btBuscaActionPerformed
 
@@ -365,6 +381,16 @@ public class EscolhaCarro extends javax.swing.JFrame {
             }
         });
     }
+/*
+    public JTable getjTable1() {
+        return jTable1;
+    }
+
+    public void setjTable1(JTable jTable1) {
+        this.jTable1 = jTable1;
+    }
+    */
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAlterar;
