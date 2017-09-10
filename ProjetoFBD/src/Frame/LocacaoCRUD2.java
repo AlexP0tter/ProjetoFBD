@@ -5,17 +5,79 @@
  */
 package Frame;
 
+import br.com.fachada.Fachada;
+import br.com.model.Cliente;
+import br.com.model.Locacao;
+import br.com.util.ConnectionFactory;
+import br.com.util.SqlUtil;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Alexp0tter
  */
-public class Locacao extends javax.swing.JFrame {
+public class LocacaoCRUD2 extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Locacao
-     */
-    public Locacao() {
+    PreparedStatement statement;
+    ResultSet result;
+    Connection con;
+    Locacao loc = new Locacao();
+    int idCl;
+    int idCarro;
+    int idFun;
+
+    ArrayList<Cliente> cliente = new ArrayList<Cliente>();
+
+    public LocacaoCRUD2(String cpf) {
         initComponents();
+
+        try {
+            con = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            try {
+                con.rollback();
+            } catch (SQLException ex1) {
+                ex.printStackTrace();
+            }
+        }
+
+        try {
+
+            statement = con.prepareStatement("select cl.id, cl.nome, cl.cpf, cl.contato, cl.idEndereco, end.rua, end.bairro, end.cidade, end.cep, end.uf from cliente as cl inner join endereco AS end ON end.id = cl.idEndereco where cl.cpf ='"+cpf+"'");
+            statement.execute();
+            result = statement.executeQuery();
+
+            while (result.next()) {
+
+                clienteNome.setText(result.getString("cl.nome"));
+                cpfCliente.setText(result.getString("cl.cpf"));
+                clienteContato.setText(result.getString("cl.contato"));
+                endCliente.setText(result.getString("end.rua"));
+                bairroCliente.setText(result.getString("end.bairro"));
+                cidadeCliente.setText(result.getString("end.cidade"));
+                ufCliente.setText(result.getString("end.uf"));
+                cepCliente.setText(result.getString("end.cep"));
+                
+                idCl = Integer.parseInt((result.getString("cl.id")));       
+                
+                     
+                
+                
+                
+                
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("o erro foi " + ex);
+        }
+
     }
 
     /**
@@ -32,11 +94,11 @@ public class Locacao extends javax.swing.JFrame {
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
-        valorLoca1 = new javax.swing.JTextField();
+        valorLoca = new javax.swing.JTextField();
         funLoca1 = new javax.swing.JTextField();
         jLabel36 = new javax.swing.JLabel();
-        dataDevoLoca1 = new javax.swing.JFormattedTextField();
-        dataRetirLoca1 = new javax.swing.JFormattedTextField();
+        dataDevoLoca = new javax.swing.JFormattedTextField();
+        dataRetirLoca = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         jTextField10 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
@@ -53,24 +115,24 @@ public class Locacao extends javax.swing.JFrame {
         jLabel31 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
-        jTextField13 = new javax.swing.JTextField();
-        jTextField14 = new javax.swing.JTextField();
-        contatoFun4 = new javax.swing.JFormattedTextField();
-        nomeFun4 = new javax.swing.JTextField();
+        bairroCliente = new javax.swing.JTextField();
+        ufCliente = new javax.swing.JTextField();
+        clienteContato = new javax.swing.JFormattedTextField();
+        clienteNome = new javax.swing.JTextField();
         jLabel38 = new javax.swing.JLabel();
-        endFun4 = new javax.swing.JTextField();
-        jTextField15 = new javax.swing.JTextField();
+        endCliente = new javax.swing.JTextField();
+        cidadeCliente = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
-        jFormattedTextField5 = new javax.swing.JFormattedTextField();
+        cepCliente = new javax.swing.JFormattedTextField();
         jLabel40 = new javax.swing.JLabel();
-        cpfFun4 = new javax.swing.JFormattedTextField();
+        cpfCliente = new javax.swing.JFormattedTextField();
         jLabel41 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btSalvar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
@@ -96,13 +158,13 @@ public class Locacao extends javax.swing.JFrame {
         jLabel36.setText("Funcionário");
 
         try {
-            dataDevoLoca1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/##")));
+            dataDevoLoca.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
 
         try {
-            dataRetirLoca1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/##")));
+            dataRetirLoca.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -123,20 +185,20 @@ public class Locacao extends javax.swing.JFrame {
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(funLoca1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(dataRetirLoca1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(dataRetirLoca, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(9, 9, 9)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel32)
-                    .addComponent(dataDevoLoca1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dataDevoLoca, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(valorLoca1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(valorLoca, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel34))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 92, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jTextField10))
                 .addContainerGap())
         );
@@ -152,9 +214,9 @@ public class Locacao extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(funLoca1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dataDevoLoca1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dataRetirLoca1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(valorLoca1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dataDevoLoca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dataRetirLoca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(valorLoca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -251,21 +313,26 @@ public class Locacao extends javax.swing.JFrame {
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Cliente"));
 
-        jTextField14.addActionListener(new java.awt.event.ActionListener() {
+        ufCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField14ActionPerformed(evt);
+                ufClienteActionPerformed(evt);
             }
         });
 
         try {
-            contatoFun4.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) # #### - ####")));
+            clienteContato.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) # #### - ####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-
-        nomeFun4.addActionListener(new java.awt.event.ActionListener() {
+        clienteContato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomeFun4ActionPerformed(evt);
+                clienteContatoActionPerformed(evt);
+            }
+        });
+
+        clienteNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clienteNomeActionPerformed(evt);
             }
         });
 
@@ -276,7 +343,7 @@ public class Locacao extends javax.swing.JFrame {
         jLabel39.setText("CEP");
 
         try {
-            jFormattedTextField5.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
+            cepCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -284,7 +351,7 @@ public class Locacao extends javax.swing.JFrame {
         jLabel40.setText("Contato");
 
         try {
-            cpfFun4.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+            cpfCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -309,42 +376,43 @@ public class Locacao extends javax.swing.JFrame {
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addComponent(jLabel41)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(nomeFun4))
+                            .addComponent(clienteNome))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cpfCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(94, 94, 94)
                                 .addComponent(jLabel40)
-                                .addGap(69, 69, 69))
-                            .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addComponent(cpfFun4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(contatoFun4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())))
+                                .addGap(96, 96, 96))
+                            .addComponent(clienteContato)))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(endFun4, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(endCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel44))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel42)
-                            .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(4, 4, 4)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel38))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField14)
                             .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addComponent(jLabel43)
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jLabel42)
+                                .addGap(0, 184, Short.MAX_VALUE))
+                            .addComponent(bairroCliente))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addComponent(jLabel38)
+                                .addGap(116, 116, 116))
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addComponent(cidadeCliente)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ufCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel43))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel39)
-                            .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+                            .addComponent(cepCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel39))))
+                .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -355,9 +423,9 @@ public class Locacao extends javax.swing.JFrame {
                     .addComponent(jLabel40))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomeFun4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cpfFun4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(contatoFun4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(clienteNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cpfCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clienteContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel44)
@@ -367,20 +435,20 @@ public class Locacao extends javax.swing.JFrame {
                     .addComponent(jLabel43))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(endFun4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(endCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bairroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cidadeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cepCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ufCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52))
         );
 
         jButton1.setText("Voltar");
 
-        jButton2.setText("Salvar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btSalvar.setText("Salvar");
+        btSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btSalvarActionPerformed(evt);
             }
         });
 
@@ -397,20 +465,18 @@ public class Locacao extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addComponent(btSalvar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4)))
                 .addContainerGap())
@@ -427,7 +493,7 @@ public class Locacao extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
+                    .addComponent(btSalvar)
                     .addComponent(jButton4)
                     .addComponent(jButton3))
                 .addContainerGap())
@@ -463,21 +529,65 @@ public class Locacao extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_modeloCarroActionPerformed
 
-    private void jTextField14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField14ActionPerformed
+    private void ufClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ufClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField14ActionPerformed
+    }//GEN-LAST:event_ufClienteActionPerformed
 
-    private void nomeFun4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeFun4ActionPerformed
+    private void clienteNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteNomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nomeFun4ActionPerformed
+    }//GEN-LAST:event_clienteNomeActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
 
+        loc.getCliente().setId(idCl);
+        loc.getCarro().setId(idCarro);
+        loc.getFun().setId(idFun);
+
+       // loc.setDataDevolucao(dataDevoLoca.getText());
+       // loc.setDataRetirada(dataRetirLoca.getText());
+        loc.setValor(calcularValor());
+
+        Fachada coreFachada = new Fachada();
+        coreFachada.salvarLoca(loc);
+
+    }//GEN-LAST:event_btSalvarActionPerformed
+
+    public double calcularValor() {
+        return 0;
+    }
+
+    public void alimentarFild() {
+
+        try {
+
+            statement = con.prepareStatement(SqlUtil.SELECT_CLIENTE);
+            statement.execute();
+            result = statement.executeQuery();
+
+            while (result.next()) {
+
+                result.getString("cl.id");
+                result.getString("cl.nome");
+                result.getString("cl.cpf");
+                result.getString("cl.contato");
+                result.getString("end.rua");
+                result.getString("end.bairro");
+                result.getString("end.cidade");
+                result.getString("end.uf");
+                result.getString("end.cep");
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("o erro foi " + ex);
+        }
+    }
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void clienteContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteContatoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_clienteContatoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -496,38 +606,42 @@ public class Locacao extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Locacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LocacaoCRUD2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Locacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LocacaoCRUD2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Locacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LocacaoCRUD2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Locacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LocacaoCRUD2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Locacao().setVisible(true);
+                new LocacaoCRUD2("").setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFormattedTextField contatoFun4;
+    private javax.swing.JTextField bairroCliente;
+    private javax.swing.JButton btSalvar;
+    private javax.swing.JFormattedTextField cepCliente;
+    private javax.swing.JTextField cidadeCliente;
+    private javax.swing.JFormattedTextField clienteContato;
+    private javax.swing.JTextField clienteNome;
     private javax.swing.JTextField corCarro;
-    private javax.swing.JFormattedTextField cpfFun4;
-    private javax.swing.JFormattedTextField dataDevoLoca1;
-    private javax.swing.JFormattedTextField dataRetirLoca1;
+    private javax.swing.JFormattedTextField cpfCliente;
+    private javax.swing.JFormattedTextField dataDevoLoca;
+    private javax.swing.JFormattedTextField dataRetirLoca;
     private javax.swing.JTextField diariaCarro;
-    private javax.swing.JTextField endFun4;
+    private javax.swing.JTextField endCliente;
     private javax.swing.JTextField funLoca1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JFormattedTextField jFormattedTextField5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -552,14 +666,11 @@ public class Locacao extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField marcaCarro;
     private javax.swing.JTextField modeloCarro;
-    private javax.swing.JTextField nomeFun4;
     private javax.swing.JTextField placaCarro;
     private javax.swing.JTextField statusLocCarro;
-    private javax.swing.JTextField valorLoca1;
+    private javax.swing.JTextField ufCliente;
+    private javax.swing.JTextField valorLoca;
     // End of variables declaration//GEN-END:variables
 }

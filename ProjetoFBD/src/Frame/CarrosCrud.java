@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -525,6 +526,55 @@ public class CarrosCrud extends javax.swing.JFrame {
             }
         });
     }
+
+    public JTextField getModeloCarro() {
+        return modeloCarro;
+    }
+
+    public void setModeloCarro(JTextField modeloCarro) {
+        this.modeloCarro = modeloCarro;
+    }
+
+    public JTextField getMarcaCarro() {
+        return marcaCarro;
+    }
+
+    public void setMarcaCarro(JTextField marcaCarro) {
+        this.marcaCarro = marcaCarro;
+    }
+
+    public JTextField getPlacaCarro() {
+        return placaCarro;
+    }
+
+    public void setPlacaCarro(JTextField placaCarro) {
+        this.placaCarro = placaCarro;
+    }
+
+    public JTextField getStatusLocCarro() {
+        return statusLocCarro;
+    }
+
+    public void setStatusLocCarro(JTextField statusLocCarro) {
+        this.statusLocCarro = statusLocCarro;
+    }
+
+    public JTextField getTaxaCarro() {
+        return taxaCarro;
+    }
+
+    public void setTaxaCarro(JTextField taxaCarro) {
+        this.taxaCarro = taxaCarro;
+    }
+
+    public JTextField getCorCarro() {
+        return corCarro;
+    }
+
+    public void setCorCarro(JTextField corCarro) {
+        this.corCarro = corCarro;
+    }
+    
     
     
 

@@ -42,7 +42,7 @@ public class LocaDao {
             statement.setInt(1, loc.getId());
             statement.setInt(2, loc.getCliente().getId());
             statement.setInt(3, loc.getFun().getId());
-            statement.setInt(4, loc.getCarro().getId() );            
+            statement.setInt(4, loc.getCarro().getId());            
             statement.setDate(5, loc.getDataRetirada());
             statement.setDate(6, loc.getDataDevolucao());
             statement.setDouble(7, loc.getValor());
