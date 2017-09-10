@@ -11,10 +11,13 @@ import br.com.model.Locacao;
 import br.com.util.ConnectionFactory;
 import br.com.util.SqlUtil;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -561,6 +564,18 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
     }//GEN-LAST:event_btSalvarActionPerformed
 
     public double calcularValor() {
+        
+        Date dataSaida = Date.valueOf(dataRetirLoca.getText());
+        Date dataDevolucao = Date.valueOf(dataDevoLoca.getText());
+        
+        
+        /*
+        try {
+            statement = con.prepareStatement("SELECT dataSaida from locacao where dataSaida ='"+ dataSaida+"'");
+            statement2 = con.prepareStatement("");
+        } catch (SQLException ex) {
+            Logger.getLogger(LocacaoCRUD2.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
         return 0;
     }
 
