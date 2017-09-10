@@ -58,6 +58,22 @@ public class LocacaoCRUDAlterar extends javax.swing.JFrame {
         try {
             statement = con.prepareStatement("SELECT loc.id, loc.idCliente, loc.idFuncionario, loc.idCarro, loc.dataSaida, loc.dataVolta, loc.valorPagamento, loc.statusLocacao FROM locacao as loc inner join cliente AS cli ON cli.id = loc.idCliente inner join funcionario AS fun ON fun.id = loc.idFuncionario inner join carro AS car ON car.id = loc.idCarro WHERE loc.id = '"+idLOcacao+"'");
             statement.execute();
+            result = statement.executeQuery();
+            
+            while (result.next()) {
+
+                idCl = Integer.parseInt((result.getString("loc.idCliente"))); 
+                idFun = Integer.parseInt((result.getString("loc.idFuncionario")));
+                idCarro = Integer.parseInt((result.getString("loc.idCarro")));
+                
+                dataRetirLoca.setText(result.getString("loc.dataSaida"));
+                dataDevoLoca.setText(result.getString("loc.dataVolta"));
+                valorLoca.setText(result.getString("loc.valorPagamento"));
+                jTextField10.setText(result.getString("loc.statusLocacao"));
+                
+            }
+            
+            
             
         } catch (SQLException ex) {
             Logger.getLogger(LocacaoCRUDAlterar.class.getName()).log(Level.SEVERE, null, ex);
@@ -65,7 +81,7 @@ public class LocacaoCRUDAlterar extends javax.swing.JFrame {
     }
     
     
-    
+    /*
     public LocacaoCRUDAlterar(String cpf,String nomeFun) {
         initComponents();
         setLocationRelativeTo(null);
@@ -135,7 +151,7 @@ public class LocacaoCRUDAlterar extends javax.swing.JFrame {
         PopularJTable(SqlUtil.SELECT_CARROS);
 
     }
-
+*/
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

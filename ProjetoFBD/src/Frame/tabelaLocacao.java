@@ -40,6 +40,7 @@ public class tabelaLocacao extends javax.swing.JFrame {
     LocacaoCRUD2 lcrud = new LocacaoCRUD2();
     
     String nomeFun;
+    int idLoca;
 
     public tabelaLocacao(String nomeFunc) {
         initComponents();
@@ -280,12 +281,14 @@ public class tabelaLocacao extends javax.swing.JFrame {
         dataDevoLoca.setText(jTable1.getValueAt(linha, 5).toString()); // retorna o valor da celula linha X 2
         valorLoca.setText(jTable1.getValueAt(linha, 6).toString()); // retorna o valor da celula linha X 2
         */
+        
+        int idLoca;
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
 
         setVisible(false);
-        new LocacaoCRUDAlterar(int idLoca).setVisible(true);
+        new LocacaoCRUDAlterar(idLoca).setVisible(true);
     }//GEN-LAST:event_btAlterarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
