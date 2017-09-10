@@ -14,7 +14,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -634,8 +637,24 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btSalvarActionPerformed
 
-    public double calcularValor() {
-        return 0;
+    public double calcularValor() throws ParseException{
+        
+        String taxaCarro = diariaCarro.getText();
+        
+        String saida = dataRetirLoca.getText();
+        String devolucao = dataDevoLoca.getText();
+        
+        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+        
+        Date carroSaida = formatador.parse(saida);
+        Date carroDevolucao = formatador.parse(devolucao);
+        
+        long dias = (carroDevolucao.getTime()-carroSaida.getTime())/(1000*60*60*24);
+        double taxa = Double.parseDouble(taxaCarro);
+        
+        double valorTotal = taxa*dias;
+        return valorTotal;
+
     }
     
    
