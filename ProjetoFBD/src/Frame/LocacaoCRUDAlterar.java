@@ -56,7 +56,9 @@ public class LocacaoCRUDAlterar extends javax.swing.JFrame {
         }
         
         try {
-            statement = con.prepareStatement("SELECT loc.id, loc.idCliente, loc.idFuncionario, loc.idCarro, loc.dataSaida, loc.dataVolta, loc.valorPagamento, loc.statusLocacao FROM locacao as loc inner join cliente AS cli ON cli.id = loc.idClient inner join funcionario AS fun ON fun.id = loc.idFuncionario inner join carro AS car ON car.id = loc.idCarro WHERE loc.id = '"+idLOcacao+"'");
+            statement = con.prepareStatement("SELECT loc.id, loc.idCliente, loc.idFuncionario, loc.idCarro, loc.dataSaida, loc.dataVolta, loc.valorPagamento, loc.statusLocacao FROM locacao as loc inner join cliente AS cli ON cli.id = loc.idCliente inner join funcionario AS fun ON fun.id = loc.idFuncionario inner join carro AS car ON car.id = loc.idCarro WHERE loc.id = '"+idLOcacao+"'");
+            statement.execute();
+            
         } catch (SQLException ex) {
             Logger.getLogger(LocacaoCRUDAlterar.class.getName()).log(Level.SEVERE, null, ex);
         }
