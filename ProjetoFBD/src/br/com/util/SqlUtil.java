@@ -19,17 +19,17 @@ public class SqlUtil {
     public static final String SQL_INSERT_FUNCIONARIO_ALL = "INSERT INTO funcionario(id ,idEndereco ,nome ,cpf ,cargo ,contato ,loginUser ,loginSenha) values(?,?,?,?,?,?,?,?)";
     public static final String SELECT_FUNCIONARIO = "SELECT fun.id,fun.nome, fun.cpf, fun.cargo, fun.contato, fun.loginUser, fun.loginSenha, fun.idEndereco, end.rua, end.bairro, end.cidade, end.cep, end.uf FROM funcionario AS fun inner join endereco AS end ON end.id = fun.idEndereco";
     public static final String UPDATE_FUNCIONARIO = "update funcionario set nome = ?, cargo = ?, cpf = ?, contato = ?, loginUser = ?, loginSenha = ?  where id = ?";
-    
-    //public static final String SQL_INSERT_FUNCIONARIO_ALL = "INSERT INTO funcionário(id ,idEndereco ,nome ,cpf ,cargo ,contato ,loginUser ,loginSenha) values(?,?,?,?,?,?,?,?)";
-    //public static final String SELECT_FUNCIONARIO = "SELECT fun.id, end.rua, end.bairro, end.cidade, fun.nome, fun.cpf, fun.contato, fun.cargo, fun.loginUser, fun.loginSenha, fun.idEndereco FROM funcionário AS fun inner join endereco AS end ON end.id = fun.idEndereco";
-    //public static final String UPDATE_FUNCIONARIO = "update funcionário set nome = ?, cargo = ?, cpf = ?, contato = ?, loginUser = ?, loginSenha = ?  where id = ?";
 
     public static final String SQL_INSERT_CARRO_ALL = "INSERT INTO carro(id,modelo,marca,placa,cor,valorDiaria,statusLocacao) values(?,?,?,?,?,?,?)";
     public static final String SELECT_CARROS = "SELECT id,modelo,marca,placa,cor,valorDiaria,statusLocacao FROM carro ";
     public static final String UPDATE_CARROS = "update carro set modelo = ?, marca = ?, placa = ?, cor = ? , valorDiaria = ?, statusLocacao = ? where id = ?";
     
-    public static final String SQL_INSERT_LOCACAO_ALL = "INSERT INTO locacao(id, cliente, carro, funcionario, dataRetirada,dataDevo,valor) values(?,?,?,?,?,?,?)";
-    public static final String SELECT_LOCACAO = "SELECT id, cliente, carro, funcionario, dataRetirada,dataDevo,valor FROM locacao";
+    public static final String SQL_INSERT_LOCACAO_ALL = "INSERT INTO locacao(id,idCliente,idFuncionario,idCarro,dataSaida,dataVolta,valorPagamento,statusLocacao ) values(?,?,?,?,?,?,?,?)";
+    public static final String SELECT_LOCACAO = "SELECT loc.id,loc.idCliente,loc.idFuncionario,loc.idCarro,loc.dataSaida,loc.dataDevo,  loc.valorPagamento,loc.statusLocacao FROM locacao AS loc "
+            + "INNER JOIN cliente AS cl ON cl.id = loc.idCliente "
+            + "INNER JOIN funcionario AS fun ON fun.id = loc.idFuncionario "
+            + "INNER JOIN carro AS cr ON cr.id = loc.idCarro";
+
     public static final String UPDATE_LOCACAO = "update locacao set cliente = ?, carro = ?,funcionario=?, dataRetirada = ?,dataDevo = ?,valor = ? where id = ?";
     
     public static final String SQL_INSERT_ENDERECO_ALL ="INSERT INTO endereco(id ,rua ,bairro ,cep ,cidade ,uf) values(?,?,?,?,?,?)";

@@ -127,7 +127,7 @@
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jTextField10" alignment="0" max="32767" attributes="0"/>
+                          <Component id="statusLocacao" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -149,7 +149,7 @@
                           <Component id="dataDevoLoca" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="dataRetirLoca" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="valorLoca" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField10" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="statusLocacao" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -173,8 +173,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="valorLoca">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="funLoca1">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="funLoca1ActionPerformed"/>
               </Events>
@@ -186,9 +192,11 @@
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="dataDevoLoca">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
                   <Format format="##/##/##" subtype="-1" type="5"/>
                 </Property>
+                <Property name="text" type="java.lang.String" value="  00/00 /00  "/>
               </Properties>
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="dataRetirLoca">
@@ -203,7 +211,10 @@
                 <Property name="text" type="java.lang.String" value="Status da Loca&#xe7;&#xe3;o"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField10">
+            <Component class="javax.swing.JTextField" name="statusLocacao">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -307,13 +318,22 @@
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JTextField" name="marcaCarro">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="marcaCarroActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="diariaCarro">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="placaCarro">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="placaCarroActionPerformed"/>
               </Events>
@@ -329,8 +349,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="statusLocCarro">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="corCarro">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
@@ -338,6 +364,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="modeloCarro">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modeloCarroActionPerformed"/>
               </Events>
@@ -518,14 +547,21 @@
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JTextField" name="bairroCliente">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="ufCliente">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ufClienteActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="clienteContato">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
                   <Format format="(##) # #### - ####" subtype="-1" type="5"/>
                 </Property>
@@ -535,6 +571,9 @@
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="clienteNome">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clienteNomeActionPerformed"/>
               </Events>
@@ -545,8 +584,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="endCliente">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="cidadeCliente">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
@@ -560,6 +605,7 @@
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="cepCliente">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
                   <Format format="#####-###" subtype="-1" type="5"/>
                 </Property>
@@ -572,6 +618,7 @@
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="cpfCliente">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
                   <Format format="###.###.###-##" subtype="-1" type="5"/>
                 </Property>

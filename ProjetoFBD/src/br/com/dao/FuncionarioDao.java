@@ -46,6 +46,7 @@ public class FuncionarioDao{
             Long idEnd = salvarEndereco(fun.getEndereco());
             
             statement = con.prepareStatement(SqlUtil.SQL_INSERT_FUNCIONARIO_ALL);
+            
             statement.setInt(1, fun.getId());
             statement.setLong(2, idEnd);         
             statement.setString(3, fun.getNome());

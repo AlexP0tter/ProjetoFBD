@@ -7,6 +7,10 @@ package br.com.model;
 
 import java.sql.Date;
 
+
+
+
+
 /**
  *
  * @author Alexp0tter

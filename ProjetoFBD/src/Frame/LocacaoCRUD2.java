@@ -6,7 +6,6 @@
 package Frame;
 
 import br.com.fachada.Fachada;
-import br.com.model.Cliente;
 import br.com.model.LocacaoModel;
 import br.com.util.ConnectionFactory;
 import br.com.util.SqlUtil;
@@ -14,7 +13,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,9 +28,11 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
     ResultSet resultCL,resultCarro,resultFun;
     Connection conCliente,conCarro,conFun;
     LocacaoModel loc = new LocacaoModel();
-    private int idCl;
-    private int idCarro;
-    private int idFun;
+    
+    int idCl;
+    int idCarro;
+    int idFun;
+    
     
     
     
@@ -37,6 +40,11 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         
+        valorLoca.setText("0");
+        statusLocacao.setText("true");
+        dataDevoLoca.setText(null);
+        
+        //status locação (finalizada em )
         
 
         try {
@@ -72,7 +80,8 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
                 ufCliente.setText(resultCL.getString("end.uf"));
                 cepCliente.setText(resultCL.getString("end.cep"));
                 
-                idCl = Integer.parseInt((resultCL.getString("cl.id"))); 
+                this.idCl = Integer.parseInt((resultCL.getString("cl.id"))); 
+                System.out.println(idCl);
             }
             
 
@@ -89,7 +98,7 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
             while(resultFun.next()){
                 
                                
-                idFun = Integer.parseInt((resultFun.getString("fun.id")));
+                this.idFun = Integer.parseInt((resultFun.getString("fun.id")));
                 funLoca1.setText(resultFun.getString("fun.nome"));
             }
             
@@ -123,7 +132,7 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
         dataDevoLoca = new javax.swing.JFormattedTextField();
         dataRetirLoca = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
+        statusLocacao = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         marcaCarro = new javax.swing.JTextField();
         diariaCarro = new javax.swing.JTextField();
@@ -175,6 +184,9 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
 
         jLabel34.setText("Valor");
 
+        valorLoca.setEditable(false);
+
+        funLoca1.setEditable(false);
         funLoca1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 funLoca1ActionPerformed(evt);
@@ -183,11 +195,13 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
 
         jLabel36.setText("Funcionário");
 
+        dataDevoLoca.setEditable(false);
         try {
             dataDevoLoca.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        dataDevoLoca.setText("  00/00 /00  ");
 
         try {
             dataRetirLoca.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/##")));
@@ -196,6 +210,8 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
         }
 
         jLabel1.setText("Status da Locação");
+
+        statusLocacao.setEditable(false);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -225,7 +241,7 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jTextField10))
+                    .addComponent(statusLocacao))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -243,19 +259,23 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
                     .addComponent(dataDevoLoca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dataRetirLoca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(valorLoca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(statusLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Carro"));
 
+        marcaCarro.setEditable(false);
         marcaCarro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 marcaCarroActionPerformed(evt);
             }
         });
 
+        diariaCarro.setEditable(false);
+
+        placaCarro.setEditable(false);
         placaCarro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 placaCarroActionPerformed(evt);
@@ -266,8 +286,13 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
 
         jLabel2.setText("Cor");
 
+        statusLocCarro.setEditable(false);
+
+        corCarro.setEditable(false);
+
         jLabel3.setText("Modelo");
 
+        modeloCarro.setEditable(false);
         modeloCarro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modeloCarroActionPerformed(evt);
@@ -395,12 +420,16 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Cliente"));
 
+        bairroCliente.setEditable(false);
+
+        ufCliente.setEditable(false);
         ufCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ufClienteActionPerformed(evt);
             }
         });
 
+        clienteContato.setEditable(false);
         try {
             clienteContato.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) # #### - ####")));
         } catch (java.text.ParseException ex) {
@@ -412,6 +441,7 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
             }
         });
 
+        clienteNome.setEditable(false);
         clienteNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clienteNomeActionPerformed(evt);
@@ -420,10 +450,15 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
 
         jLabel38.setText("Cidade");
 
+        endCliente.setEditable(false);
+
+        cidadeCliente.setEditable(false);
+
         jLabel5.setText("CPF");
 
         jLabel39.setText("CEP");
 
+        cepCliente.setEditable(false);
         try {
             cepCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
         } catch (java.text.ParseException ex) {
@@ -432,6 +467,7 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
 
         jLabel40.setText("Contato");
 
+        cpfCliente.setEditable(false);
         try {
             cpfCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
@@ -624,23 +660,59 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
         loc.getCliente().setId(idCl);
         loc.getCarro().setId(idCarro);
         loc.getFun().setId(idFun);
+        
+        loc.setStatusLocacao(Boolean.parseBoolean(statusLocacao.getText()));
+        loc.setValor(Double.parseDouble(valorLoca.getText()));
+        loc.setDataDevolucao(null);
+        
+        String saida = dataRetirLoca.getText();
+        //String devolucao = dataDevoLoca.getText();        
 
-       // loc.setDataDevolucao(dataDevoLoca.getText());
-       // loc.setDataRetirada(dataRetirLoca.getText());
-        loc.setValor(calcularValor());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/YYYY");
+
+        try {
+           // Date dateDevo = sdf.parse(devolucao);
+            Date dateRetir = sdf.parse(saida);
+
+           // java.sql.Date sqlDateDevo = new java.sql.Date(dateDevo.getTime());
+            java.sql.Date sqlDateReti = new java.sql.Date(dateRetir.getTime());
+            
+           // loc.setDataDevolucao(sqlDateDevo);
+            loc.setDataRetirada(sqlDateReti);
+            
+            
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         Fachada coreFachada = new Fachada();
         coreFachada.salvarLoca(loc);
 
     }//GEN-LAST:event_btSalvarActionPerformed
 
-    public double calcularValor() {
-        return 0;
+    public double calcularValor() throws ParseException  {
+        String taxaCarro = diariaCarro.getText();
+        
+        String saida = dataRetirLoca.getText();
+        String devolucao = dataDevoLoca.getText();
+        
+        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+        
+        Date carroSaida = formatador.parse(saida);
+        Date carroDevolucao = formatador.parse(devolucao);
+        
+        long dias = (carroDevolucao.getTime()-carroSaida.getTime())/(1000*60*60*24);
+        double taxa = Double.parseDouble(taxaCarro);
+        
+        double valorTotal = taxa*dias;
+        return valorTotal;
+
     }
     
    
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void clienteContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteContatoActionPerformed
@@ -661,7 +733,8 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
         diariaCarro.setText(jTable1.getValueAt(linha, 5).toString());
         statusLocCarro.setText(jTable1.getValueAt(linha, 6).toString());
         
-        idCarro = Integer.parseInt(jTable1.getValueAt(linha,0).toString());
+        this.idCarro = Integer.parseInt(jTable1.getValueAt(linha,0).toString());
+        
        
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -827,11 +900,11 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField marcaCarro;
     private javax.swing.JTextField modeloCarro;
     private javax.swing.JTextField placaCarro;
     private javax.swing.JTextField statusLocCarro;
+    private javax.swing.JTextField statusLocacao;
     private javax.swing.JTextField ufCliente;
     private javax.swing.JTextField valorLoca;
     // End of variables declaration//GEN-END:variables
