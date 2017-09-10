@@ -351,7 +351,7 @@ public class EscolhaCarro extends javax.swing.JFrame {
             }
         });
     }
-
+/*
     public JTable getjTable1() {
         return jTable1;
     }
@@ -359,7 +359,7 @@ public class EscolhaCarro extends javax.swing.JFrame {
     public void setjTable1(JTable jTable1) {
         this.jTable1 = jTable1;
     }
-    
+    */
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
