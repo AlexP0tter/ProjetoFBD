@@ -5,14 +5,16 @@
  */
 package Frame;
 
+
+
 import br.com.model.Carro;
+
 import br.com.util.ConnectionFactory;
 import br.com.util.SqlUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,8 +28,7 @@ public class EscolhaCarro extends javax.swing.JFrame {
     Connection con;
     Carro carro = new Carro();
     CarrosCrud carrosCrud = new CarrosCrud();
-    //Locacao locacao = new Locacao();
-    
+    //LocacaoCRUD2 locacao = new LocacaoCRUD2();
     
     public EscolhaCarro() {
         initComponents();
@@ -228,8 +229,23 @@ public class EscolhaCarro extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         setVisible(false);
-        TelaInicial inicial = new TelaInicial();
-        inicial.setVisible(true);
+        
+        
+        try {
+            con = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            try {
+                con.rollback();
+            } catch (SQLException ex1) {
+                ex.printStackTrace();
+            }
+        }
+
+        PopularJTable(SqlUtil.SELECT_CARROS);
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed

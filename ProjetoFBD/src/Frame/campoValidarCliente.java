@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -23,10 +24,11 @@ public class campoValidarCliente extends javax.swing.JFrame {
     PreparedStatement statement;
     ResultSet result;
     Connection con;
-    
+
     public campoValidarCliente() {
         initComponents();
-        
+        setLocationRelativeTo(null);
+
         try {
             con = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
 
@@ -52,8 +54,8 @@ public class campoValidarCliente extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         cpfFild = new javax.swing.JFormattedTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btOK = new javax.swing.JButton();
+        btCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,17 +92,17 @@ public class campoValidarCliente extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setText("OK");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btOK.setText("OK");
+        btOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btOKActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btCancelar.setText("Cancelar");
+        btCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btCancelarActionPerformed(evt);
             }
         });
 
@@ -114,9 +116,9 @@ public class campoValidarCliente extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 128, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addComponent(btOK)
                         .addGap(5, 5, 5)
-                        .addComponent(jButton2)))
+                        .addComponent(btCancelar)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -126,8 +128,8 @@ public class campoValidarCliente extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btOK)
+                    .addComponent(btCancelar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -149,33 +151,46 @@ public class campoValidarCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cpfFildActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
+        setVisible(false);
+        locacaoCRUD loccrud = new locacaoCRUD();
+        loccrud.setVisible(true);
+    }//GEN-LAST:event_btCancelarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+    private void btOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOKActionPerformed
+
         String sql1 = "select cl.cpf FROM cliente as cl inner join endereco AS end ON end.id = cl.idEndereco WHERE cl.cpf LIKE '%"
                 + cpfFild.getText() + "%'";
-        
+
         try {
             statement = con.prepareStatement(sql1);
             statement.execute();
             result = statement.executeQuery();
-           
-            if(result!=null && result.next()){
-                
-                
-            }
-            
-            else{
-                
-                JOptionPane.showMessageDialog(null, "cpf não existe!");
+
+            if (result != null && result.next()) {
+                setVisible(false);
+                new LocacaoCRUD2(cpfFild.getText()).setVisible(true);
+
+            } else {
+                int resposta;
+                //JOptionPane.showMessageDialog(null, "cpf não existe!");
+                resposta = JOptionPane.showConfirmDialog(null, "Este cpf não existe em nosso banco de dados deseja cadastrar um novo cliente?");
+
+                if (resposta == JOptionPane.YES_OPTION) {
+
+                    setVisible(false);
+                    new ClientesCRUD().setVisible(true);
+                } else {
+                    
+                    setVisible(false);
+                    locacaoCRUD loccrud = new locacaoCRUD();
+                    loccrud.setVisible(true);
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(ClientesCRUD.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btOKActionPerformed
 
     /**
      * @param args the command line arguments
@@ -213,9 +228,9 @@ public class campoValidarCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btCancelar;
+    private javax.swing.JButton btOK;
     private javax.swing.JFormattedTextField cpfFild;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables

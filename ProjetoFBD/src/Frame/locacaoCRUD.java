@@ -41,6 +41,7 @@ public class locacaoCRUD extends javax.swing.JFrame {
     public locacaoCRUD() {
         initComponents();
         setVisible(true);
+        setLocationRelativeTo(null);
 
         try {
             con = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
@@ -143,8 +144,8 @@ public class locacaoCRUD extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -214,8 +215,8 @@ public class locacaoCRUD extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btCadastrar)
                     .addComponent(btAlterar)
@@ -239,23 +240,10 @@ public class locacaoCRUD extends javax.swing.JFrame {
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
 
-        loc.setCliente(clienteLocacao.getText());
-        loc.setCarro(carroLoca.getText());
-        loc.setFun(funLoca.getText());
-        loc.setDataRetirada(dataRetirLoca.getText());
-        loc.setDataDevolucao(dataDevoLoca.getText());
-
-        loc.setValor(Integer.parseInt(valorLoca.getText()));
-
-        Fachada coreFachada = new Fachada();
-        coreFachada.salvarLoca(loc);
-
-        clienteLocacao.setText("");
-        carroLoca.setText("");
-        funLoca.setText("");
-        dataRetirLoca.setText("");
-        dataDevoLoca.setText("");
-        valorLoca.setText("");
+        setVisible(false);
+        campoValidarCliente cvcl = new campoValidarCliente();
+        cvcl.setVisible(true);
+        
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void btBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscaActionPerformed
@@ -267,12 +255,7 @@ public class locacaoCRUD extends javax.swing.JFrame {
 
         this.PopularJTable(sql);// TODO add your handling code here:
 
-        clienteLocacao.setText("");
-        carroLoca.setText("");
-        funLoca.setText("");
-        dataRetirLoca.setText("");
-        dataDevoLoca.setText("");
-        valorLoca.setText("");
+        
     }//GEN-LAST:event_btBuscaActionPerformed
 
     private void fieldBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldBuscaActionPerformed
@@ -282,40 +265,20 @@ public class locacaoCRUD extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
         int linha = jTable1.getSelectedRow(); // retorna a linfildCarroada pelo usuario
+        
+        /*
         clienteLocacao.setText(jTable1.getValueAt(linha, 1).toString()); // retorna o valor da celula linha X 0
         carroLoca.setText(jTable1.getValueAt(linha, 2).toString()); // retorna o valor da celula linha X 1
         funLoca.setText(jTable1.getValueAt(linha, 3).toString()); // retorna o valor da celula linha X 2
         dataRetirLoca.setText(jTable1.getValueAt(linha, 4).toString()); // retorna o valor da celula linha X 2
         dataDevoLoca.setText(jTable1.getValueAt(linha, 5).toString()); // retorna o valor da celula linha X 2
         valorLoca.setText(jTable1.getValueAt(linha, 6).toString()); // retorna o valor da celula linha X 2
+        */
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
 
-        int linha = jTable1.getSelectedRow();
-        String cliente = jTable1.getValueAt(linha, 1).toString();
-        String carro = jTable1.getValueAt(linha, 2).toString();
-
-        int id = Integer.parseInt(jTable1.getValueAt(linha, 0).toString());
-
-        loc.setId(id);
-        loc.setCliente(clienteLocacao.getText());
-        loc.setCarro(carroLoca.getText());
-        loc.setFun(funLoca.getText());
-        loc.setDataRetirada(dataRetirLoca.getText());
-        loc.setDataDevolucao(dataDevoLoca.getText());
-
-        loc.setValor(Integer.parseInt(valorLoca.getText()));
-
-        Fachada coreFachada = new Fachada();
-        coreFachada.alterarLoca(loc);
-
-        clienteLocacao.setText("");
-        carroLoca.setText("");
-        funLoca.setText("");
-        dataRetirLoca.setText("");
-        dataDevoLoca.setText("");
-        valorLoca.setText("");
+        
     }//GEN-LAST:event_btAlterarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -349,6 +312,39 @@ public class locacaoCRUD extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.out.println("o erro foi " + ex);
         }
+    }
+    
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(EscolhaCarro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(EscolhaCarro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(EscolhaCarro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(EscolhaCarro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new locacaoCRUD().setVisible(true);
+            }
+        });
     }
 
 
