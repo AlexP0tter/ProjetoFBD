@@ -271,14 +271,14 @@ public class tabelaLocacao extends javax.swing.JFrame {
 
         int linha = jTable1.getSelectedRow(); // retorna a linfildCarroada pelo usuario
         
-        /*
+        
         clienteLocacao.setText(jTable1.getValueAt(linha, 1).toString()); // retorna o valor da celula linha X 0
         carroLoca.setText(jTable1.getValueAt(linha, 2).toString()); // retorna o valor da celula linha X 1
         funLoca.setText(jTable1.getValueAt(linha, 3).toString()); // retorna o valor da celula linha X 2
         dataRetirLoca.setText(jTable1.getValueAt(linha, 4).toString()); // retorna o valor da celula linha X 2
         dataDevoLoca.setText(jTable1.getValueAt(linha, 5).toString()); // retorna o valor da celula linha X 2
         valorLoca.setText(jTable1.getValueAt(linha, 6).toString()); // retorna o valor da celula linha X 2
-        */
+        
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed

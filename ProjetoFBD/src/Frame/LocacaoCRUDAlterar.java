@@ -19,6 +19,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFormattedTextField;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -888,6 +890,65 @@ public class LocacaoCRUDAlterar extends javax.swing.JFrame {
     public void setIdCarro(int idCarro) {
         this.idCarro = idCarro;
     }
+
+    public JFormattedTextField getCpfCliente() {
+        return cpfCliente;
+    }
+
+    public void setCpfCliente(JFormattedTextField cpfCliente) {
+        this.cpfCliente = cpfCliente;
+    }
+    
+
+    public JTextField getFunLoca1() {
+        return funLoca1;
+    }
+
+    public void setFunLoca1(JTextField funLoca1) {
+        this.funLoca1 = funLoca1;
+    }
+
+    public JTextField getModeloCarro() {
+        return modeloCarro;
+    }
+
+    public void setModeloCarro(JTextField modeloCarro) {
+        this.modeloCarro = modeloCarro;
+    }
+
+    public JFormattedTextField getDataRetirLoca() {
+        return dataRetirLoca;
+    }
+
+    public void setDataRetirLoca(JFormattedTextField dataRetirLoca) {
+        this.dataRetirLoca = dataRetirLoca;
+    }
+
+    public JFormattedTextField getDataDevoLoca() {
+        return dataDevoLoca;
+    }
+
+    public void setDataDevoLoca(JFormattedTextField dataDevoLoca) {
+        this.dataDevoLoca = dataDevoLoca;
+    }
+
+    public JTextField getValorLoca() {
+        return valorLoca;
+    }
+
+    public void setValorLoca(JTextField valorLoca) {
+        this.valorLoca = valorLoca;
+    }
+
+    public JTextField getStatusLocacao() {
+        return statusLocacao;
+    }
+
+    public void setStatusLocacao(JTextField statusLocacao) {
+        this.statusLocacao = statusLocacao;
+    }
+    
+    
     
     public void PopularJTable(String sql) {
         
