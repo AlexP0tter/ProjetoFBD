@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTextField;
 
 /**
  *
@@ -215,6 +216,24 @@ public class LoginFuncionario extends javax.swing.JFrame {
             }
         });
     }
+
+    public JTextField getLoginF() {
+        return loginF;
+    }
+
+    public void setLoginF(JTextField loginF) {
+        this.loginF = loginF;
+    }
+
+    public JTextField getSenhaF() {
+        return senhaF;
+    }
+
+    public void setSenhaF(JTextField senhaF) {
+        this.senhaF = senhaF;
+    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
