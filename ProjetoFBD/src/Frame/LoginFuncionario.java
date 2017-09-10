@@ -29,7 +29,6 @@ public class LoginFuncionario extends javax.swing.JFrame {
     public LoginFuncionario() {
         initComponents();
         
-        setVisible(true);
 
         try {
             con = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);

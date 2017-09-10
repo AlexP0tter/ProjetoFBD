@@ -23,13 +23,15 @@ import javax.swing.table.DefaultTableModel;
  */
 public class LocacaoCRUD2 extends javax.swing.JFrame {
 
-    PreparedStatement statement;
-    ResultSet result;
+    PreparedStatement statement, statement2;
+    ResultSet result, result2;
     Connection con;
     Locacao loc = new Locacao();
     int idCl;
     int idCarro;
     int idFun;
+    
+    LoginFuncionario loginFuncionario = new LoginFuncionario();
 
     ArrayList<Cliente> cliente = new ArrayList<Cliente>();
 
@@ -53,6 +55,10 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
             statement = con.prepareStatement("select cl.id, cl.nome, cl.cpf, cl.contato, cl.idEndereco, end.rua, end.bairro, end.cidade, end.cep, end.uf from cliente as cl inner join endereco AS end ON end.id = cl.idEndereco where cl.cpf ='"+cpf+"'");
             statement.execute();
             result = statement.executeQuery();
+            
+            statement2 = con.prepareStatement("select fun.id,fun.nome, fun.cpf, fun.cargo, fun.contato, fun.loginUser, fun.loginSenha, fun.idEndereco, end.rua, end.bairro, end.cidade, end.cep, end.uf from funcionario as fun inner join endereco AS end ON end.id = fun.idEndereco where fun.loginUser ='"+loginFuncionario.getLoginF()+"'");
+            statement2.execute();
+            result2 = statement2.executeQuery();
 
             while (result.next()) {
 
