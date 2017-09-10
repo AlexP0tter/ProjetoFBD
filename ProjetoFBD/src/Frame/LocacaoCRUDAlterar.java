@@ -29,132 +29,67 @@ import javax.swing.table.DefaultTableModel;
  */
 public class LocacaoCRUDAlterar extends javax.swing.JFrame {
 
-    PreparedStatement statementCL,statCarro,statFun, statloc;
-    ResultSet resultCL,resultCarro,resultFun, resultloc;
-    Connection conCliente,conCarro,conFun, conloc;
+    PreparedStatement statementCL, statCarro, statFun, statloc;
+    ResultSet resultCL, resultCarro, resultFun, resultloc;
+    Connection conCliente, conCarro, conFun, conloc;
     LocacaoModel loc = new LocacaoModel();
-    
+
     int idCl;
     int idCarro;
     int idFun;
     String nomeFun;
 
-    public LocacaoCRUDAlterar() throws HeadlessException {
-    }
-    
-    
+    //public LocacaoCRUDAlterar() throws HeadlessException {
+    //}
+    public LocacaoCRUDAlterar(int idLoc) throws HeadlessException {
 
-    public LocacaoCRUDAlterar(int idLoc){
-        
         initComponents();
         setLocationRelativeTo(null);
-        
+
         try {
             conloc = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
+            conCarro = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
         } catch (Exception ex) {
             Logger.getLogger(LocacaoCRUDAlterar.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         try {
-            statloc = conloc.prepareStatement("SELECT loc.id, loc.idCliente, loc.idFuncionario, loc.idCarro, loc.dataSaida, loc.dataVolta, loc.valorPagamento, loc.statusLocacao FROM locacao AS loc inner join cliente AS cli ON cli.id = loc.idCliente inner join funcionario AS fun ON fun.id = loc.idFuncionario inner join carro AS car ON car.id = loc.idCarro WHERE loc.id ='"+idLoc+"'");
+            statloc = conloc.prepareStatement("SELECT cl.nome,cl.cpf,cl.contato, ende.rua, ende.bairro, ende.cidade,ende.cep,ende.uf, cr.modelo, cr.marca,cr.placa, cr.cor, cr.valorDiaria,cr.statusLocacao,\n"
+                    + "		fun.nome, loc.dataSaida,loc.dataVolta,loc.valorPagamento, loc.StatusLocacao FROM locacao AS loc INNER JOIN cliente AS cl ON cl.id = loc.idCliente\n"
+                    + "            INNER join endereco as ende on ende.id = cl.idEndereco INNER JOIN funcionario AS fun ON fun.id = loc.idFuncionario\n"
+                    + "            INNER JOIN carro AS cr ON cr.id = loc.idCarro where loc.id = '" + idLoc + "'");
             statloc.execute();
             resultloc = statloc.executeQuery();
-            
-            while(resultloc.next()){
-                
-                this.idCl = Integer.parseInt((resultloc.getString("loc.idCliente")));
-                this.idFun = Integer.parseInt((resultloc.getString("loc.idFuncionario")));
-                this.idCarro = Integer.parseInt((resultloc.getString("loc.idCarro")));
-                
+
+            while (resultloc.next()) {
+
+                clienteNome.setText(resultloc.getString("cl.nome"));
+                cpfCliente.setText(resultloc.getString("cl.cpf"));
+                clienteContato.setText(resultloc.getString("cl.contato"));
+                endCliente.setText(resultloc.getString("ende.rua"));
+                bairroCliente.setText(resultloc.getString("ende.bairro"));
+                cidadeCliente.setText(resultloc.getString("ende.cidade"));
+                ufCliente.setText(resultloc.getString("ende.uf"));
+                cepCliente.setText(resultloc.getString("ende.cep"));
+
+                modeloCarro.setText(resultloc.getString("cr.modelo"));
+                marcaCarro.setText(resultloc.getString("cr.marca"));
+                placaCarro.setText(resultloc.getString("cr.placa"));
+                corCarro.setText(resultloc.getString("cr.cor"));
+                diariaCarro.setText(resultloc.getString("cr.valorDiaria"));
+                statusLocCarro.setText(resultloc.getString("cr.statusLocacao"));
+
+                funLoca1.setText(resultloc.getString("fun.nome"));
                 dataRetirLoca.setText(resultloc.getString("loc.dataSaida"));
                 dataDevoLoca.setText(resultloc.getString("loc.dataVolta"));
                 valorLoca.setText(resultloc.getString("loc.valorPagamento"));
                 statusLocacao.setText(resultloc.getString("loc.statusLocacao"));
-                
-                
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(LocacaoCRUDAlterar.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    }
-    
-    
-    
-    
-    public LocacaoCRUDAlterar(String cpf,String nomeFun) {
-        initComponents();
-        setLocationRelativeTo(null);
-        
-        valorLoca.setText("0");
-        statusLocacao.setText("true");
-        dataDevoLoca.setText(null);
-        this.nomeFun = nomeFun;
-        
-        //status locação (finalizada em )
-        
 
-        try {
-            conCliente = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
-            conCarro = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
-            conFun = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            try {
-                conCliente.rollback();
-                conCarro.rollback();
-            } catch (SQLException ex1) {
-                ex.printStackTrace();
-            }
-        }
-
-        try {
-
-            statementCL = conCliente.prepareStatement("select cl.id, cl.nome, cl.cpf, cl.contato, cl.idEndereco, end.rua, end.bairro, end.cidade, end.cep, end.uf from cliente as cl inner join endereco AS end ON end.id = cl.idEndereco where cl.cpf ='"+cpf+"'");
-            statementCL.execute();
-            resultCL = statementCL.executeQuery();   
-           
-
-            while (resultCL.next()) {
-
-                clienteNome.setText(resultCL.getString("cl.nome"));
-                cpfCliente.setText(resultCL.getString("cl.cpf"));
-                clienteContato.setText(resultCL.getString("cl.contato"));
-                endCliente.setText(resultCL.getString("end.rua"));
-                bairroCliente.setText(resultCL.getString("end.bairro"));
-                cidadeCliente.setText(resultCL.getString("end.cidade"));
-                ufCliente.setText(resultCL.getString("end.uf"));
-                cepCliente.setText(resultCL.getString("end.cep"));
-                
-                this.idCl = Integer.parseInt((resultCL.getString("cl.id"))); 
-                System.out.println(idCl);
-            }
-            
-
-        } catch (SQLException ex) {
-            System.out.println("o erro foi " + ex);
-        }
-        
-        try{
-            
-            statFun = conFun.prepareStatement("SELECT fun.id,fun.nome, fun.cpf, fun.cargo, fun.contato, fun.loginUser, fun.loginSenha, fun.idEndereco, end.rua, end.bairro, end.cidade, end.cep, end.uf FROM funcionario AS fun inner join endereco AS end ON end.id = fun.idEndereco where fun.cpf = '"+nomeFun+"'");
-            statFun.execute();
-            resultFun = statFun.executeQuery();
-            
-            while(resultFun.next()){
-                
-                               
-                this.idFun = Integer.parseInt((resultFun.getString("fun.id")));
-                funLoca1.setText(resultFun.getString("fun.nome"));
-            }
-            
-        }
-        
-        catch(SQLException ex) {
-            System.out.println("o erro foi " + ex);
-        }
-        
         PopularJTable(SqlUtil.SELECT_CARROS);
 
     }
@@ -241,7 +176,6 @@ public class LocacaoCRUDAlterar extends javax.swing.JFrame {
 
         jLabel36.setText("Funcionário");
 
-        dataDevoLoca.setEditable(false);
         try {
             dataDevoLoca.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/##")));
         } catch (java.text.ParseException ex) {
@@ -256,8 +190,6 @@ public class LocacaoCRUDAlterar extends javax.swing.JFrame {
         }
 
         jLabel1.setText("Status da Locação");
-
-        statusLocacao.setEditable(false);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -696,61 +628,37 @@ public class LocacaoCRUDAlterar extends javax.swing.JFrame {
         loc.getCliente().setId(idCl);
         loc.getCarro().setId(idCarro);
         loc.getFun().setId(idFun);
-        
+
         loc.setStatusLocacao(Boolean.parseBoolean(statusLocacao.getText()));
         loc.setValor(Double.parseDouble(valorLoca.getText()));
         loc.setDataDevolucao(dataDevoLoca.getText());
         loc.setDataRetirada(dataRetirLoca.getText());
-     
-        
-        /*
-        String saida = dataRetirLoca.getText();
-        String devolucao = dataDevoLoca.getText();        
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/YYYY");
-
-        try {
-            Date dateDevo = sdf.parse(devolucao);
-            Date dateRetir = sdf.parse(saida);
-
-           java.sql.Date sqlDateDevo = new java.sql.Date(dateDevo.getTime());
-            java.sql.Date sqlDateReti = new java.sql.Date(dateRetir.getTime());
-            
-           loc.setDataDevolucao(sqlDateDevo);
-            loc.setDataRetirada(sqlDateReti);
-            
-            
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        */
 
         Fachada coreFachada = new Fachada();
         coreFachada.salvarLoca(loc);
 
     }//GEN-LAST:event_btSalvarActionPerformed
 
-    public double calcularValor() throws ParseException  {
+    public double calcularValor() throws ParseException {
         String taxaCarro = diariaCarro.getText();
-        
+
         String saida = dataRetirLoca.getText();
         String devolucao = dataDevoLoca.getText();
-        
+
         SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
-        
+
         Date carroSaida = formatador.parse(saida);
         Date carroDevolucao = formatador.parse(devolucao);
-        
-        long dias = (carroDevolucao.getTime()-carroSaida.getTime())/(1000*60*60*24);
+
+        long dias = (carroDevolucao.getTime() - carroSaida.getTime()) / (1000 * 60 * 60 * 24);
         double taxa = Double.parseDouble(taxaCarro);
-        
-        double valorTotal = taxa*dias;
+
+        double valorTotal = taxa * dias;
         return valorTotal;
 
     }
-    
-   
+
+
     private void clienteContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteContatoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_clienteContatoActionPerformed
@@ -761,7 +669,7 @@ public class LocacaoCRUDAlterar extends javax.swing.JFrame {
     }//GEN-LAST:event_btVoltarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-            
+
         int linha = jTable1.getSelectedRow(); // retorna a linha selecionada pelo usuario
         modeloCarro.setText(jTable1.getValueAt(linha, 1).toString()); // retorna o valor da celula linha X 0
         marcaCarro.setText(jTable1.getValueAt(linha, 2).toString()); // retorna o valor da celula linha X 1
@@ -769,26 +677,24 @@ public class LocacaoCRUDAlterar extends javax.swing.JFrame {
         corCarro.setText(jTable1.getValueAt(linha, 4).toString()); // retorna o valor da celula linha X 2
         diariaCarro.setText(jTable1.getValueAt(linha, 5).toString());
         statusLocCarro.setText(jTable1.getValueAt(linha, 6).toString());
-        
-        this.idCarro = Integer.parseInt(jTable1.getValueAt(linha,0).toString());
-        
-       
-    }//GEN-LAST:event_jTable1MouseClicked
 
-    private void fieldBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldBuscaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fieldBuscaActionPerformed
+        this.idCarro = Integer.parseInt(jTable1.getValueAt(linha, 0).toString());
+
+    }//GEN-LAST:event_jTable1MouseClicked
 
     private void btBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscaActionPerformed
 
         String sql = "SELECT * FROM carro WHERE modelo LIKE '%"
-        + fieldBusca.getText() + "%' OR marca LIKE '%"
-        + fieldBusca.getText() + "%'"
-        + " ORDER BY id";
+                + fieldBusca.getText() + "%' OR marca LIKE '%"
+                + fieldBusca.getText() + "%'"
+                + " ORDER BY id";
 
         this.PopularJTable(sql);// TODO add your handling code here:
-
     }//GEN-LAST:event_btBuscaActionPerformed
+
+    private void fieldBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldBuscaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldBuscaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -883,80 +789,13 @@ public class LocacaoCRUDAlterar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LocacaoCRUDAlterar("","").setVisible(true);
+                new LocacaoCRUDAlterar(0).setVisible(true);
             }
         });
     }
 
-    public int getIdCarro() {
-        return idCarro;
-    }
-
-    public void setIdCarro(int idCarro) {
-        this.idCarro = idCarro;
-    }
-
-    public JFormattedTextField getCpfCliente() {
-        return cpfCliente;
-    }
-
-    public void setCpfCliente(JFormattedTextField cpfCliente) {
-        this.cpfCliente = cpfCliente;
-    }
-    
-
-    public JTextField getFunLoca1() {
-        return funLoca1;
-    }
-
-    public void setFunLoca1(JTextField funLoca1) {
-        this.funLoca1 = funLoca1;
-    }
-
-    public JTextField getModeloCarro() {
-        return modeloCarro;
-    }
-
-    public void setModeloCarro(JTextField modeloCarro) {
-        this.modeloCarro = modeloCarro;
-    }
-
-    public JFormattedTextField getDataRetirLoca() {
-        return dataRetirLoca;
-    }
-
-    public void setDataRetirLoca(JFormattedTextField dataRetirLoca) {
-        this.dataRetirLoca = dataRetirLoca;
-    }
-
-    public JFormattedTextField getDataDevoLoca() {
-        return dataDevoLoca;
-    }
-
-    public void setDataDevoLoca(JFormattedTextField dataDevoLoca) {
-        this.dataDevoLoca = dataDevoLoca;
-    }
-
-    public JTextField getValorLoca() {
-        return valorLoca;
-    }
-
-    public void setValorLoca(JTextField valorLoca) {
-        this.valorLoca = valorLoca;
-    }
-
-    public JTextField getStatusLocacao() {
-        return statusLocacao;
-    }
-
-    public void setStatusLocacao(JTextField statusLocacao) {
-        this.statusLocacao = statusLocacao;
-    }
-    
-    
-    
     public void PopularJTable(String sql) {
-        
+
         try {
 
             statCarro = conCarro.prepareStatement(sql);
@@ -982,8 +821,7 @@ public class LocacaoCRUDAlterar extends javax.swing.JFrame {
             System.out.println("o erro foi " + ex);
         }
     }
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField bairroCliente;
