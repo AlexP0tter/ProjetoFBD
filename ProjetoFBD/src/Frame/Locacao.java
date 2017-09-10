@@ -5,6 +5,8 @@
  */
 package Frame;
 
+import javax.swing.JTextField;
+
 /**
  *
  * @author Alexp0tter
@@ -41,7 +43,7 @@ public class Locacao extends javax.swing.JFrame {
         jTextField10 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         marcaCarro = new javax.swing.JTextField();
-        diariaCarro = new javax.swing.JTextField();
+        taxaCarro = new javax.swing.JTextField();
         placaCarro = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -220,7 +222,7 @@ public class Locacao extends javax.swing.JFrame {
                 .addGap(8, 8, 8)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel35)
-                    .addComponent(diariaCarro, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(taxaCarro, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
@@ -243,7 +245,7 @@ public class Locacao extends javax.swing.JFrame {
                     .addComponent(marcaCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(corCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(placaCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(diariaCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(taxaCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(statusLocCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -513,6 +515,54 @@ public class Locacao extends javax.swing.JFrame {
             }
         });
     }
+    
+     public JTextField getModeloCarro() {
+        return modeloCarro;
+    }
+
+    public void setModeloCarro(JTextField modeloCarro) {
+        this.modeloCarro = modeloCarro;
+    }
+
+    public JTextField getMarcaCarro() {
+        return marcaCarro;
+    }
+
+    public void setMarcaCarro(JTextField marcaCarro) {
+        this.marcaCarro = marcaCarro;
+    }
+
+    public JTextField getPlacaCarro() {
+        return placaCarro;
+    }
+
+    public void setPlacaCarro(JTextField placaCarro) {
+        this.placaCarro = placaCarro;
+    }
+
+    public JTextField getStatusLocCarro() {
+        return statusLocCarro;
+    }
+
+    public void setStatusLocCarro(JTextField statusLocCarro) {
+        this.statusLocCarro = statusLocCarro;
+    }
+
+    public JTextField getTaxaCarro() {
+        return taxaCarro;
+    }
+
+    public void setTaxaCarro(JTextField taxaCarro) {
+        this.taxaCarro = taxaCarro;
+    }
+
+    public JTextField getCorCarro() {
+        return corCarro;
+    }
+
+    public void setCorCarro(JTextField corCarro) {
+        this.corCarro = corCarro;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField contatoFun4;
@@ -520,7 +570,6 @@ public class Locacao extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField cpfFun4;
     private javax.swing.JFormattedTextField dataDevoLoca1;
     private javax.swing.JFormattedTextField dataRetirLoca1;
-    private javax.swing.JTextField diariaCarro;
     private javax.swing.JTextField endFun4;
     private javax.swing.JTextField funLoca1;
     private javax.swing.JButton jButton1;
@@ -560,6 +609,7 @@ public class Locacao extends javax.swing.JFrame {
     private javax.swing.JTextField nomeFun4;
     private javax.swing.JTextField placaCarro;
     private javax.swing.JTextField statusLocCarro;
+    private javax.swing.JTextField taxaCarro;
     private javax.swing.JTextField valorLoca1;
     // End of variables declaration//GEN-END:variables
 }

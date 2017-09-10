@@ -25,6 +25,7 @@ public class EscolhaCarro extends javax.swing.JFrame {
     Connection con;
     Carro carro = new Carro();
     CarrosCrud carrosCrud = new CarrosCrud();
+    Locacao locacao = new Locacao();
     
     
     public EscolhaCarro() {
@@ -241,12 +242,12 @@ public class EscolhaCarro extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
         int linha = jTable1.getSelectedRow(); // retorna a linha selecionada pelo usuario
-        carrosCrud.getModeloCarro().setText(jTable1.getValueAt(linha, 1).toString()); // retorna o valor da celula linha X 0
-        carrosCrud.getMarcaCarro().setText(jTable1.getValueAt(linha, 2).toString()); // retorna o valor da celula linha X 1
-        carrosCrud.getPlacaCarro().setText(jTable1.getValueAt(linha, 3).toString()); // retorna o valor da celula linha X 2
-        carrosCrud.getCorCarro().setText(jTable1.getValueAt(linha, 4).toString()); // retorna o valor da celula linha X 2
-        carrosCrud.getTaxaCarro().setText(jTable1.getValueAt(linha, 5).toString());
-        carrosCrud.getStatusLocCarro().setText(jTable1.getValueAt(linha, 6).toString());
+        locacao.getModeloCarro().setText(jTable1.getValueAt(linha, 1).toString()); // retorna o valor da celula linha X 0
+        locacao.getMarcaCarro().setText(jTable1.getValueAt(linha, 2).toString()); // retorna o valor da celula linha X 1
+        locacao.getPlacaCarro().setText(jTable1.getValueAt(linha, 3).toString()); // retorna o valor da celula linha X 2
+        locacao.getCorCarro().setText(jTable1.getValueAt(linha, 4).toString()); // retorna o valor da celula linha X 2
+        locacao.getTaxaCarro().setText(jTable1.getValueAt(linha, 5).toString());
+        locacao.getStatusLocCarro().setText(jTable1.getValueAt(linha, 6).toString());
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void fieldBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldBuscaActionPerformed
