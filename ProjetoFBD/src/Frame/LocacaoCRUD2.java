@@ -32,9 +32,11 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
     private int idFun;
     
     
-    public LocacaoCRUD2(String cpf) {
+    
+    public LocacaoCRUD2(String cpf,String nomeFun) {
         initComponents();
         setLocationRelativeTo(null);
+        
         
 
         try {
@@ -80,14 +82,15 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
         
         try{
             
-            statFun = conFun.prepareStatement("");
+            statFun = conFun.prepareStatement("SELECT fun.id,fun.nome, fun.cpf, fun.cargo, fun.contato, fun.loginUser, fun.loginSenha, fun.idEndereco, end.rua, end.bairro, end.cidade, end.cep, end.uf FROM funcionario AS fun inner join endereco AS end ON end.id = fun.idEndereco where fun.cpf = '"+nomeFun+"'");
             statFun.execute();
             resultFun = statFun.executeQuery();
             
             while(resultFun.next()){
                 
-                funLoca1.setText(resultFun.getString("fun.nome"));                
+                               
                 idFun = Integer.parseInt((resultFun.getString("fun.id")));
+                funLoca1.setText(resultFun.getString("fun.nome"));
             }
             
         }
@@ -95,6 +98,7 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
         catch(SQLException ex) {
             System.out.println("o erro foi " + ex);
         }
+        
         PopularJTable(SqlUtil.SELECT_CARROS);
 
     }
@@ -656,6 +660,8 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
         corCarro.setText(jTable1.getValueAt(linha, 4).toString()); // retorna o valor da celula linha X 2
         diariaCarro.setText(jTable1.getValueAt(linha, 5).toString());
         statusLocCarro.setText(jTable1.getValueAt(linha, 6).toString());
+        
+        idCarro = Integer.parseInt(jTable1.getValueAt(linha,0).toString());
        
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -735,7 +741,7 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LocacaoCRUD2("").setVisible(true);
+                new LocacaoCRUD2("","").setVisible(true);
             }
         });
     }

@@ -151,7 +151,7 @@ public class LoginFuncionario extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        String sql1 = "SELECT fun.loginUser FROM funcionario AS fun inner join endereco AS end ON end.id = fun.idEndereco WHERE fun.loginUser LIKE '%"
+        String sql1 = "SELECT fun.cpf,fun.loginUser FROM funcionario AS fun inner join endereco AS end ON end.id = fun.idEndereco WHERE fun.loginUser LIKE '%"
                 + loginF.getText() + "%'";
         
         String sql2 = "SELECT fun.loginSenha FROM funcionario AS fun inner join endereco AS end ON end.id = fun.idEndereco WHERE fun.loginSenha LIKE '%"
@@ -168,7 +168,8 @@ public class LoginFuncionario extends javax.swing.JFrame {
                
             if(result!=null && result2!=null && result.next() && result2.next()){
                  setVisible(false);
-                 new TelaInicial("").setVisible(true);
+                 
+                 new TelaInicial(result.getString("fun.cpf").toString()).setVisible(true);
              }
             else{
                  setVisible(false);

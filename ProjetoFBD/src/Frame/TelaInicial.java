@@ -19,13 +19,14 @@ import java.util.logging.Logger;
  */
 public class TelaInicial extends javax.swing.JFrame {
     
-    /**
-     * Creates new form TelaInicial
-     */
-    public TelaInicial(String CPFfun){ 
+    public String nomeFun;
+    
+    public TelaInicial(String nomeFun){ 
         
         super("TELA INICIAL");
         initComponents();
+        
+        this.nomeFun = nomeFun;
     }
 
     /**
@@ -159,7 +160,8 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void btAlugaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlugaActionPerformed
         setVisible(false);
-        tabelaLocacao lcrud = new tabelaLocacao();
+        tabelaLocacao lcrud = new tabelaLocacao(nomeFun);
+        System.out.println(nomeFun);
         lcrud.setVisible(true);
     }//GEN-LAST:event_btAlugaActionPerformed
 

@@ -37,11 +37,15 @@ public class tabelaLocacao extends javax.swing.JFrame {
     ResultSet result;
     Connection con;
     LocacaoModel loc = new LocacaoModel();
+    
+    String nomeFun;
 
-    public tabelaLocacao() {
+    public tabelaLocacao(String nomeFunc) {
         initComponents();
         setVisible(true);
         setLocationRelativeTo(null);
+        this.nomeFun = nomeFunc;
+        
 
         try {
             con = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
@@ -241,7 +245,8 @@ public class tabelaLocacao extends javax.swing.JFrame {
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
 
         setVisible(false);
-        campoValidarCliente cvcl = new campoValidarCliente();
+        campoValidarCliente cvcl = new campoValidarCliente(nomeFun);
+        System.out.println(nomeFun);
         cvcl.setVisible(true);
         
     }//GEN-LAST:event_btCadastrarActionPerformed
@@ -318,7 +323,7 @@ public class tabelaLocacao extends javax.swing.JFrame {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new tabelaLocacao().setVisible(true);
+                new tabelaLocacao("").setVisible(true);
             }
         });
     }

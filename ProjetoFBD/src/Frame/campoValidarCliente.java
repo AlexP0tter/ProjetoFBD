@@ -24,10 +24,12 @@ public class campoValidarCliente extends javax.swing.JFrame {
     PreparedStatement statement;
     ResultSet result;
     Connection con;
+    String nomeFun;
 
-    public campoValidarCliente() {
+    public campoValidarCliente(String nomeFunc) {
         initComponents();
         setLocationRelativeTo(null);
+        this.nomeFun = nomeFunc;
 
         try {
             con = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
@@ -153,7 +155,7 @@ public class campoValidarCliente extends javax.swing.JFrame {
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
         setVisible(false);
-        tabelaLocacao loccrud = new tabelaLocacao();
+        tabelaLocacao loccrud = new tabelaLocacao("");
         loccrud.setVisible(true);
     }//GEN-LAST:event_btCancelarActionPerformed
 
@@ -169,7 +171,8 @@ public class campoValidarCliente extends javax.swing.JFrame {
 
             if (result != null && result.next()) {
                 setVisible(false);
-                new LocacaoCRUD2(cpfFild.getText()).setVisible(true);
+                new LocacaoCRUD2(cpfFild.getText(),nomeFun).setVisible(true);
+                System.out.println(nomeFun);
 
             } else {
                 int resposta;
@@ -183,7 +186,7 @@ public class campoValidarCliente extends javax.swing.JFrame {
                 } else {
                     
                     setVisible(false);
-                    tabelaLocacao loccrud = new tabelaLocacao();
+                    tabelaLocacao loccrud = new tabelaLocacao(nomeFun);
                     loccrud.setVisible(true);
                 }
             }
@@ -222,7 +225,7 @@ public class campoValidarCliente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new campoValidarCliente().setVisible(true);
+                new campoValidarCliente("").setVisible(true);
             }
         });
     }
