@@ -57,7 +57,7 @@ public class LocacaoCRUDAlterar extends javax.swing.JFrame {
 
         try {
             statloc = conloc.prepareStatement("SELECT cl.nome,cl.cpf,cl.contato, ende.rua, ende.bairro, ende.cidade,ende.cep,ende.uf, cr.modelo, cr.marca,cr.placa, cr.cor, cr.valorDiaria,cr.statusLocacao,\n"
-                    + "		fun.nome, loc.dataSaida,loc.dataVolta,loc.valorPagamento, loc.StatusLocacao FROM locacao AS loc INNER JOIN cliente AS cl ON cl.id = loc.idCliente\n"
+                    + "		fun.nome, loc.id,loc.dataSaida,loc.dataVolta,loc.valorPagamento, loc.StatusLocacao FROM locacao AS loc INNER JOIN cliente AS cl ON cl.id = loc.idCliente\n"
                     + "            INNER join endereco as ende on ende.id = cl.idEndereco INNER JOIN funcionario AS fun ON fun.id = loc.idFuncionario\n"
                     + "            INNER JOIN carro AS cr ON cr.id = loc.idCarro where loc.id = '" + idLoc + "'");
             statloc.execute();
@@ -658,7 +658,7 @@ public class LocacaoCRUDAlterar extends javax.swing.JFrame {
         String saida = dataRetirLoca.getText();
         String devolucao = dataDevoLoca.getText();
 
-        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yy");
 
         Date carroSaida = formatador.parse(saida);
         Date carroDevolucao = formatador.parse(devolucao);
