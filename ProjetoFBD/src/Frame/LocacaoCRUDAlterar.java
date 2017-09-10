@@ -39,6 +39,11 @@ public class LocacaoCRUDAlterar extends javax.swing.JFrame {
     int idFun;
     String nomeFun;
 
+    public LocacaoCRUDAlterar() throws HeadlessException {
+    }
+    
+    
+
     public LocacaoCRUDAlterar(int idLoc){
         
         initComponents();
