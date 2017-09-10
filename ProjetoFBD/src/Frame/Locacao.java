@@ -5,6 +5,12 @@
  */
 package Frame;
 
+import br.com.model.Carro;
+import br.com.util.ConnectionFactory;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JTextField;
 
 /**
@@ -13,11 +19,25 @@ import javax.swing.JTextField;
  */
 public class Locacao extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Locacao
-     */
+    PreparedStatement statement;
+    ResultSet result;
+    Connection con;
+    Carro carro = new Carro();
+    
     public Locacao() {
         initComponents();
+        
+        try {
+            con = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            try {
+                con.rollback();
+            } catch (SQLException ex1) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     /**
