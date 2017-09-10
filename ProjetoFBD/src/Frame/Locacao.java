@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,6 +24,7 @@ public class Locacao extends javax.swing.JFrame {
     ResultSet result;
     Connection con;
     Carro carro = new Carro();
+    
     
     public Locacao() {
         initComponents();
@@ -38,6 +40,7 @@ public class Locacao extends javax.swing.JFrame {
                 ex.printStackTrace();
             }
         }
+        
     }
 
     /**

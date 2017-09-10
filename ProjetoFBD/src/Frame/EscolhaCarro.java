@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,8 +25,8 @@ public class EscolhaCarro extends javax.swing.JFrame {
     ResultSet result;
     Connection con;
     Carro carro = new Carro();
-    CarrosCrud carrosCrud = new CarrosCrud();
-    //Locacao locacao = new Locacao();
+    //CarrosCrud carrosCrud = new CarrosCrud();
+    Locacao locacao = new Locacao();
     
     
     public EscolhaCarro() {
@@ -242,20 +243,21 @@ public class EscolhaCarro extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
         int linha = jTable1.getSelectedRow(); 
-        /*
+        
         locacao.getModeloCarro().setText(jTable1.getValueAt(linha, 1).toString()); // retorna o valor da celula linha X 0
         locacao.getMarcaCarro().setText(jTable1.getValueAt(linha, 2).toString()); // retorna o valor da celula linha X 1
         locacao.getPlacaCarro().setText(jTable1.getValueAt(linha, 3).toString()); // retorna o valor da celula linha X 2
         locacao.getCorCarro().setText(jTable1.getValueAt(linha, 4).toString()); // retorna o valor da celula linha X 2
         locacao.getTaxaCarro().setText(jTable1.getValueAt(linha, 5).toString());
         locacao.getStatusLocCarro().setText(jTable1.getValueAt(linha, 6).toString());
-        */
+        /*
         carrosCrud.getModeloCarro().setText(jTable1.getValueAt(linha, 1).toString()); // retorna o valor da celula linha X 0
         carrosCrud.getMarcaCarro().setText(jTable1.getValueAt(linha, 2).toString()); // retorna o valor da celula linha X 1
         carrosCrud.getPlacaCarro().setText(jTable1.getValueAt(linha, 3).toString()); // retorna o valor da celula linha X 2
         carrosCrud.getCorCarro().setText(jTable1.getValueAt(linha, 4).toString()); // retorna o valor da celula linha X 2
         carrosCrud.getTaxaCarro().setText(jTable1.getValueAt(linha, 5).toString());
         carrosCrud.getStatusLocCarro().setText(jTable1.getValueAt(linha, 6).toString());
+        */
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void fieldBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldBuscaActionPerformed
@@ -271,20 +273,21 @@ public class EscolhaCarro extends javax.swing.JFrame {
 
         this.PopularJTable(sql);// TODO add your handling code here:
 
-        /*
+        
         locacao.getModeloCarro().setText("");
         locacao.getMarcaCarro().setText("");
         locacao.getPlacaCarro().setText("");
         locacao.getCorCarro().setText("");
         locacao.getTaxaCarro().setText("");
         locacao.getStatusLocCarro().setText("");
-        */
+        /*
         carrosCrud.getModeloCarro().setText("");
         carrosCrud.getMarcaCarro().setText("");
         carrosCrud.getPlacaCarro().setText("");
         carrosCrud.getCorCarro().setText("");
         carrosCrud.getTaxaCarro().setText("");
         carrosCrud.getStatusLocCarro().setText("");
+        */
     }//GEN-LAST:event_btBuscaActionPerformed
 
     public void PopularJTable(String sql) {
@@ -348,6 +351,16 @@ public class EscolhaCarro extends javax.swing.JFrame {
             }
         });
     }
+
+    public JTable getjTable1() {
+        return jTable1;
+    }
+
+    public void setjTable1(JTable jTable1) {
+        this.jTable1 = jTable1;
+    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAlterar;
