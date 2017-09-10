@@ -44,6 +44,10 @@ public class LocacaoModel {
     
     public LocacaoModel(){
         
+        cliente = new Cliente();
+        carro = new Carro();
+        fun = new Funcionario();
+        
     } 
 
     public Cliente getCliente() {

@@ -663,21 +663,21 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
         
         loc.setStatusLocacao(Boolean.parseBoolean(statusLocacao.getText()));
         loc.setValor(Double.parseDouble(valorLoca.getText()));
-        loc.setDataDevolucao(null);
+        //loc.setDataDevolucao();
         
         String saida = dataRetirLoca.getText();
-        //String devolucao = dataDevoLoca.getText();        
+        String devolucao = dataDevoLoca.getText();        
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/YYYY");
 
         try {
-           // Date dateDevo = sdf.parse(devolucao);
+            Date dateDevo = sdf.parse(devolucao);
             Date dateRetir = sdf.parse(saida);
 
-           // java.sql.Date sqlDateDevo = new java.sql.Date(dateDevo.getTime());
+           java.sql.Date sqlDateDevo = new java.sql.Date(dateDevo.getTime());
             java.sql.Date sqlDateReti = new java.sql.Date(dateRetir.getTime());
             
-           // loc.setDataDevolucao(sqlDateDevo);
+           loc.setDataDevolucao(sqlDateDevo);
             loc.setDataRetirada(sqlDateReti);
             
             
