@@ -634,6 +634,10 @@ public class LocacaoCRUDAlterar extends javax.swing.JFrame {
         
         try {
             loc.setId(idLocacao);
+            
+            loc.getCliente().setId(idCl);
+            loc.getCarro().setId(idCarro);
+            loc.getFun().setId(idFun);
         
             loc.setStatusLocacao(Boolean.parseBoolean(statusLocacao.getText()));
             loc.setDataDevolucao(dataDevoLoca.getText());
