@@ -643,7 +643,9 @@ public class LocacaoCRUDAlterar extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Logger.getLogger(LocacaoCRUDAlterar.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+        setVisible(false);
+        new tabelaLocacao(nomeFun);
+        
     }//GEN-LAST:event_btSalvarActionPerformed
 
     public double calcularValor() throws ParseException {

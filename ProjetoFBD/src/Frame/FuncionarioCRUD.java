@@ -20,23 +20,30 @@ import javax.swing.table.DefaultTableModel;
 
 public class FuncionarioCRUD extends javax.swing.JFrame {
 
-    PreparedStatement statement;
-    ResultSet result;
-    Connection con;
+    PreparedStatement statement,statementFun;
+    ResultSet result,resultFun;
+    Connection con,conFun;
     Funcionario fun = new Funcionario();
     Endereco endereco = new Endereco();
+    int idFunci;
+    String nomeFunc;
 
-    public FuncionarioCRUD() {
+    public FuncionarioCRUD(String nomeFun) {
+        this.idFunci = 0;
         initComponents();
         setVisible(true);
+        setLocationRelativeTo(null);
+        this.nomeFunc = nomeFun;
 
         try {
             con = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
+            conFun = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
 
         } catch (Exception ex) {
             ex.printStackTrace();
             try {
                 con.rollback();
+                conFun.rollback();
             } catch (SQLException ex1) {
                 ex.printStackTrace();
             }
@@ -276,14 +283,14 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "NOME", "CARGO", "CPF", "CONTATO", "Usuario", "senha", "ENDEREÇO", "bairro", "cidade", "uf", "cep"
+                "ID", "NOME", "CARGO", "CPF", "CONTATO", "ENDEREÇO"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -406,7 +413,7 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         setVisible(false);
-        TelaInicial inicial = new TelaInicial("");
+        TelaInicial inicial = new TelaInicial(nomeFunc);
         inicial.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -510,10 +517,46 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
 
         int linha = jTable1.getSelectedRow(); // retorna a linha selecionada pelo usuario
         
+        
+        idFunci = Integer.parseInt(jTable1.getValueAt(linha,0).toString());
+        
+        
+        
+        try {
+            
+            statementFun = con.prepareStatement("SELECT fun.id,fun.nome, fun.cpf, fun.cargo, fun.contato, fun.loginUser, fun.loginSenha, fun.idEndereco, end.rua, end.bairro, end.cidade, end.cep, end.uf FROM funcionario AS fun inner join endereco AS end ON end.id = fun.idEndereco where fun.id ='"+Integer.parseInt(jTable1.getValueAt(linha,0).toString())+"'");
+           
+        statementFun.execute();
+            resultFun = statementFun.executeQuery();
+            
+            while (resultFun.next()) {                
+                    //retorna os dados da tabela do BD, cada campo e um coluna.
+                    nomeFun.setText(resultFun.getString("fun.nome"));
+                    cargoFun.setText(resultFun.getString("fun.cargo"));
+                    cpfFun.setText(resultFun.getString("fun.cpf"));
+                    contatoFun.setText(resultFun.getString("fun.contato"));
+                    userLogin.setText(resultFun.getString("fun.loginUser"));
+                    userSenha.setText(resultFun.getString("fun.loginSenha"));
+                    endFild.setText(resultFun.getString("end.rua"));
+                    bairroFild.setText(resultFun.getString("end.bairro"));
+                    cidadeFild.setText(resultFun.getString("end.cidade"));
+                    ufFild.setText(resultFun.getString("end.uf"));
+                    cepFild.setText(resultFun.getString("end.cep"));
+                    }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(FuncionarioCRUD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+            
+        
+        
+        /*
         nomeFun.setText(jTable1.getValueAt(linha, 1).toString());
         cargoFun.setText(jTable1.getValueAt(linha, 2).toString());
         cpfFun.setText(jTable1.getValueAt(linha, 3).toString());
         contatoFun.setText(jTable1.getValueAt(linha, 4).toString());
+        
         userLogin.setText(jTable1.getValueAt(linha, 5).toString());
         userSenha.setText(jTable1.getValueAt(linha, 6).toString());
         
@@ -522,6 +565,8 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
         cidadeFild.setText(jTable1.getValueAt(linha, 9).toString());
         ufFild.setText(jTable1.getValueAt(linha, 10).toString());
         cepFild.setText(jTable1.getValueAt(linha, 11).toString());
+        */
+        
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void fieldBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldBuscaActionPerformed
@@ -548,6 +593,7 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
         contatoFun.setText("");
         userLogin.setText("");
         userSenha.setText("");
+        idFunci = 0;
     }//GEN-LAST:event_btBuscaActionPerformed
 
     private void ufFildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ufFildActionPerformed
@@ -572,13 +618,8 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
                     result.getString("fun.cargo"),
                     result.getString("fun.cpf"),
                     result.getString("fun.contato"),
-                    result.getString("fun.loginUser"),
-                    result.getString("fun.loginSenha"),
-                    result.getString("end.rua"),
-                    result.getString("end.bairro"),
-                    result.getString("end.cidade"),
-                    result.getString("end.uf"),
-                    result.getString("end.cep"),});
+                    result.getString("end.rua")
+                   });
             }
 
         } catch (SQLException ex) {

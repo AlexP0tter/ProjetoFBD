@@ -658,6 +658,8 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
 
         Fachada coreFachada = new Fachada();
         coreFachada.salvarLoca(loc);
+        setVisible(false);
+        new tabelaLocacao(nomeFun);
 
     }//GEN-LAST:event_btSalvarActionPerformed
 
@@ -701,6 +703,7 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
         statusLocCarro.setText(jTable1.getValueAt(linha, 6).toString());
         
         this.idCarro = Integer.parseInt(jTable1.getValueAt(linha,0).toString());
+        System.out.println(idCarro);
         
        
     }//GEN-LAST:event_jTable1MouseClicked

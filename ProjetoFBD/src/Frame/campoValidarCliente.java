@@ -155,7 +155,7 @@ public class campoValidarCliente extends javax.swing.JFrame {
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
         setVisible(false);
-        tabelaLocacao loccrud = new tabelaLocacao("");
+        tabelaLocacao loccrud = new tabelaLocacao(nomeFun);
         loccrud.setVisible(true);
     }//GEN-LAST:event_btCancelarActionPerformed
 
@@ -176,13 +176,12 @@ public class campoValidarCliente extends javax.swing.JFrame {
 
             } else {
                 int resposta;
-                //JOptionPane.showMessageDialog(null, "cpf não existe!");
                 resposta = JOptionPane.showConfirmDialog(null, "Este cpf não existe em nosso banco de dados deseja cadastrar um novo cliente?");
 
                 if (resposta == JOptionPane.YES_OPTION) {
 
                     setVisible(false);
-                    new ClientesCRUD().setVisible(true);
+                    new ClientesCRUD(nomeFun).setVisible(true);
                 } else {
                     
                     setVisible(false);

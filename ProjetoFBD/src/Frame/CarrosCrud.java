@@ -18,17 +18,19 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
-
 public class CarrosCrud extends javax.swing.JFrame {
 
     PreparedStatement statement;
     ResultSet result;
     Connection con;
     Carro carro = new Carro();
+    String nomeFun;
 
-    public CarrosCrud() {
+    public CarrosCrud(String nomeFun) {
         initComponents();
         setVisible(true);
+        setLocationRelativeTo(null);
+        this.nomeFun = nomeFun;
 
         try {
             con = ConnectionFactory.getInstance(ConnectionFactory.NOME_DATABASE_MYSQL);
@@ -42,7 +44,7 @@ public class CarrosCrud extends javax.swing.JFrame {
             }
         }
 
-        PopularJTable(SqlUtil.SELECT_CARROS);     
+        PopularJTable(SqlUtil.SELECT_CARROS);
 
     }
 
@@ -332,27 +334,25 @@ public class CarrosCrud extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         setVisible(false);
-        TelaInicial inicial = new TelaInicial("");
+        TelaInicial inicial = new TelaInicial(nomeFun);
         inicial.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
-     
 
         String sql1 = "SELECT placa FROM carro WHERE placa LIKE '%"
                 + placaCarro.getText() + "%'";
-        
+
         try {
             statement = con.prepareStatement(sql1);
             statement.execute();
             result = statement.executeQuery();
-            
-            if(result!=null && result.next()){
-                
+
+            if (result != null && result.next()) {
+
                 JOptionPane.showMessageDialog(null, "Placa existente!");
-            }
-            else{
-                
+            } else {
+
                 carro.setModelo(modeloCarro.getText());
                 carro.setMarca(marcaCarro.getText());
                 carro.setPlaca(placaCarro.getText());
@@ -373,26 +373,8 @@ public class CarrosCrud extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(CarrosCrud.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        /*
-        carro.setModelo(modeloCarro.getText());
-        carro.setMarca(marcaCarro.getText());
-        carro.setPlaca(placaCarro.getText());
-        carro.setCor(corCarro.getText());
-        carro.setValorDiaria(Double.parseDouble(taxaCarro.getText()));
-        carro.setStatus(Boolean.parseBoolean(statusLocCarro.getText()));
 
-        Fachada coreFachada = new Fachada();
-        coreFachada.salvarCarro(carro);
 
-        modeloCarro.setText("");
-        marcaCarro.setText("");
-        placaCarro.setText("");
-        corCarro.setText("");
-        taxaCarro.setText("");
-        statusLocCarro.setText("");
-        
-        */
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
@@ -400,9 +382,9 @@ public class CarrosCrud extends javax.swing.JFrame {
         int linha = jTable1.getSelectedRow();
         String modelo = jTable1.getValueAt(linha, 1).toString();
         String marca = jTable1.getValueAt(linha, 2).toString();
-        
+
         int id = Integer.parseInt(jTable1.getValueAt(linha, 0).toString());
-        
+
         carro.setId(id);
         carro.setModelo(modeloCarro.getText());
         carro.setMarca(marcaCarro.getText());
@@ -424,7 +406,7 @@ public class CarrosCrud extends javax.swing.JFrame {
 
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        
+
         int linha = jTable1.getSelectedRow(); // retorna a linha selecionada pelo usuario
         modeloCarro.setText(jTable1.getValueAt(linha, 1).toString()); // retorna o valor da celula linha X 0
         marcaCarro.setText(jTable1.getValueAt(linha, 2).toString()); // retorna o valor da celula linha X 1
@@ -444,9 +426,9 @@ public class CarrosCrud extends javax.swing.JFrame {
                 + fieldBusca.getText() + "%' OR marca LIKE '%"
                 + fieldBusca.getText() + "%'"
                 + " ORDER BY id";
-        
+
         this.PopularJTable(sql);// TODO add your handling code here:
-        
+
         modeloCarro.setText("");
         marcaCarro.setText("");
         placaCarro.setText("");
@@ -493,7 +475,7 @@ public class CarrosCrud extends javax.swing.JFrame {
             System.out.println("o erro foi " + ex);
         }
     }
-    
+
     public JTextField getModeloCarro() {
         return modeloCarro;
     }
@@ -541,9 +523,7 @@ public class CarrosCrud extends javax.swing.JFrame {
     public void setCorCarro(JTextField corCarro) {
         this.corCarro = corCarro;
     }
-    
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAlterar;
