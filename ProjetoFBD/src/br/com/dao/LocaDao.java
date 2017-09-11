@@ -66,14 +66,12 @@ public class LocaDao {
         try {
             statement = con.prepareStatement(SqlUtil.UPDATE_LOCACAO);            
             
-            statement.setInt(1, loc.getCliente().getId());
-            statement.setInt(2, loc.getFun().getId());
-            statement.setInt(3, loc.getCarro().getId() );            
-            statement.setString(4, loc.getDataRetirada());
-            statement.setString(5, loc.getDataDevolucao());
-            statement.setDouble(6, loc.getValor());
-            statement.setBoolean(7, loc.isStatusLocacao()); 
-            statement.setInt(8, loc.getId());
+                      
+            statement.setString(1, loc.getDataRetirada());
+            statement.setString(2, loc.getDataDevolucao());
+            statement.setDouble(3, loc.getValor());
+            statement.setBoolean(4, loc.isStatusLocacao()); 
+            statement.setInt(5, loc.getId());
             
             statement.execute();
                     
