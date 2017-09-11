@@ -87,12 +87,14 @@ public class LocacaoCRUDAlterar extends javax.swing.JFrame {
                 valorLoca.setText(resultloc.getString("loc.valorPagamento"));
                 statusLocacao.setText(resultloc.getString("loc.statusLocacao"));
                 
-                idLocacao = Integer.parseInt(resultloc.getString("loc.id"));
+                //this.idLocacao = Integer.parseInt(resultloc.getString("loc.id"));
 
             }
         } catch (SQLException ex) {
             Logger.getLogger(LocacaoCRUDAlterar.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        this.idLocacao = idLoc; 
 
         PopularJTable(SqlUtil.SELECT_CARROS);
 
