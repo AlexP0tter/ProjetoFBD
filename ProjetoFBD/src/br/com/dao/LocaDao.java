@@ -65,8 +65,7 @@ public class LocaDao {
     public LocacaoModel alterar(LocacaoModel loc)throws Exception {
         try {
             statement = con.prepareStatement(SqlUtil.UPDATE_LOCACAO);            
-            
-                        
+          
             statement.setString(1, loc.getDataRetirada());
             statement.setString(2, loc.getDataDevolucao());
             statement.setDouble(3, loc.getValor());
