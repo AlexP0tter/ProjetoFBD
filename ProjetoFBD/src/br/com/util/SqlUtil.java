@@ -31,7 +31,7 @@ public class SqlUtil {
             + "INNER JOIN carro AS cr ON cr.id = loc.idCarro";
    public static final String SELECT_TABELA_LOC = "select loc.id, cl.cpf,cr.modelo,fun.nome, loc.dataSaida,loc.dataVolta,loc.valorPagamento, loc.StatusLocacao from locacao as loc INNER JOIN cliente AS cl ON cl.id = loc.idCliente INNER JOIN funcionario AS fun ON fun.id = loc.idFuncionario INNER JOIN carro AS cr ON cr.id = loc.idCarro"; 
 
-    public static final String UPDATE_LOCACAO = "update locacao set idCliente = ?, idFuncionario = ?, idCarro = ?, dataSaida = ?, dataVolta = ?, valorPagamento = ?, statusLocacao = ? where id = ?";
+    public static final String UPDATE_LOCACAO = "update locacao set dataSaida = ?, dataVolta = ?, valorPagamento = ?, statusLocacao = ? where id = ?";
     
     public static final String SQL_INSERT_ENDERECO_ALL ="INSERT INTO endereco(id ,rua ,bairro ,cep ,cidade ,uf) values(?,?,?,?,?,?)";
     public static final String SELECT_ENDERECO ="SELECT id ,rua ,bairro ,cep ,cidade ,uf FROM endereco";
