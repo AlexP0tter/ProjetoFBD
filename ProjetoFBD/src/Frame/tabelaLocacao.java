@@ -274,17 +274,7 @@ public class tabelaLocacao extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
         int linha = jTable1.getSelectedRow(); // retorna a linfildCarroada pelo usuario
-        
-        /*
-        alterar.getCpfCliente().setText(jTable1.getValueAt(linha, 1).toString()); // retorna o valor da celula linha X 0
-        alterar.getModeloCarro().setText(jTable1.getValueAt(linha, 2).toString()); // retorna o valor da celula linha X 1
-        alterar.getFunLoca1().setText(jTable1.getValueAt(linha, 3).toString()); // retorna o valor da celula linha X 2
-        alterar.getDataRetirLoca().setText(jTable1.getValueAt(linha, 4).toString()); // retorna o valor da celula linha X 2
-        alterar.getDataDevoLoca().setText(jTable1.getValueAt(linha, 5).toString()); // retorna o valor da celula linha X 2
-        alterar.getValorLoca().setText(jTable1.getValueAt(linha, 6).toString()); // retorna o valor da celula linha X 2
-        alterar.getStatusLocacao().setText(jTable1.getValueAt(linha, 7).toString());
-        */
-        
+                
         this.idLoca = Integer.parseInt(jTable1.getValueAt(linha,0).toString());
         
     }//GEN-LAST:event_jTable1MouseClicked
@@ -333,16 +323,7 @@ public class tabelaLocacao extends javax.swing.JFrame {
         }
     }
     
-    public static void main(String args[]) {
-        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new tabelaLocacao("").setVisible(true);
-            }
-        });
-    }
-
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAlterar;
     private javax.swing.JButton btBusca;

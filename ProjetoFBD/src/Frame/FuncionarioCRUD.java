@@ -459,37 +459,7 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(FuncionarioCRUD.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-        /*
-        fun.getEndereco().setRua(endFild.getText());
-        fun.getEndereco().setBairro(bairroFild.getText());
-        fun.getEndereco().setCidade(cidadeFild.getText());
-        fun.getEndereco().setUf(ufFild.getText());
-        fun.getEndereco().setCep(cepFild.getText());
         
-        fun.setNome(nomeFun.getText());
-        fun.setCpf(cpfFun.getText());
-        fun.setCargo(cargoFun.getText());
-        fun.setContato(contatoFun.getText());
-        fun.setLogin(userLogin.getText());
-        fun.setSenha(userSenha.getText());
-
-        Fachada coreFachada = new Fachada();
-        coreFachada.salvarFuncionario(fun);
-        
-        endFild.setText("");
-        bairroFild.setText("");
-        cepFild.setText("");
-        cidadeFild.setText("");
-        ufFild.setText("");
-        
-        nomeFun.setText("");
-        cargoFun.setText("");
-        cpfFun.setText("");
-        contatoFun.setText("");
-        userLogin.setText("");
-        userSenha.setText("");
-        */
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void nomeFunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeFunActionPerformed
@@ -614,42 +584,8 @@ public class FuncionarioCRUD extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.out.println("o erro foi " + ex);
         }
-    }
-
-    
-      public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new FuncionarioCRUD().setVisible(true);
-            }
-        });
-    }
-
+    }    
+     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField bairroFild;
     private javax.swing.JButton btAlterar;

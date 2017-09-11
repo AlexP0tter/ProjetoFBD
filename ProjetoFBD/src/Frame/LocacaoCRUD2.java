@@ -45,8 +45,7 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
         statusLocacao.setText("true");
         dataDevoLoca.setText(null);
         this.nomeFun = nomeFun;
-        
-        //status locação (finalizada em )
+      
         
 
         try {
@@ -656,30 +655,6 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
         loc.setValor(Double.parseDouble(valorLoca.getText()));
         loc.setDataDevolucao(dataDevoLoca.getText());
         loc.setDataRetirada(dataRetirLoca.getText());
-     
-        
-        /*
-        String saida = dataRetirLoca.getText();
-        String devolucao = dataDevoLoca.getText();        
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/YYYY");
-
-        try {
-            Date dateDevo = sdf.parse(devolucao);
-            Date dateRetir = sdf.parse(saida);
-
-           java.sql.Date sqlDateDevo = new java.sql.Date(dateDevo.getTime());
-            java.sql.Date sqlDateReti = new java.sql.Date(dateRetir.getTime());
-            
-           loc.setDataDevolucao(sqlDateDevo);
-            loc.setDataRetirada(sqlDateReti);
-            
-            
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        */
 
         Fachada coreFachada = new Fachada();
         coreFachada.salvarLoca(loc);
@@ -745,71 +720,8 @@ public class LocacaoCRUD2 extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btBuscaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LocacaoCRUD2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LocacaoCRUD2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LocacaoCRUD2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LocacaoCRUD2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LocacaoCRUD2("","").setVisible(true);
-            }
-        });
-    }
+    
+    
 
     public int getIdCarro() {
         return idCarro;
